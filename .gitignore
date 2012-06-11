@@ -13,3 +13,14 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+log/*.log
+
+tmp/**/*
+*.swp
+*.sw*
+*~
+doc/
+webrat.log
+*spec.rb.log
+
