@@ -2,13 +2,14 @@
 
 
 $skyblue: #1a8bcb;
+$navBarHeight: 60px;
 
 html {
   overflow-y: scroll;
 }
 
 body {
-  padding-top: 60px;
+  padding-top: $navBarHeight;
 }
 
 section {
@@ -29,7 +30,7 @@ textarea {
 }
 
 .navbar-inner {
-  height: 60px;
+  height: $navBarHeight; 
 }
 
 
@@ -53,7 +54,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #999;
+  color: $grayLight;
 }
 
 p {
@@ -79,4 +80,17 @@ p {
 #logo:hover {
   text-decoration: none;
   color: $skyblue;
+}
+
+/* footer */
+
+footer ul {
+  list-style: none;
+  float: right;
+
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
 }
