@@ -1,5 +1,6 @@
 @import "bootstrap";
 
+@import "_desc";
 
 $skyblue: #1a8bcb;
 $navBarHeight: 60px;
@@ -9,7 +10,8 @@ html {
 }
 
 body {
-  padding-top: $navBarHeight;
+  padding-top: $navBarHeight + 15px;
+  background: whitesmoke;
 }
 
 section {
@@ -29,7 +31,22 @@ textarea {
   margin-bottom: 10px;
 }
 
+.nav.mini-nav {
+  list-style: none;
+  // bottom: -20px;
+  // right: 20px;
+  // position: static;
+  // bottom: 10%;
+  //margin-right: auto;
+  float: none; 
+  margin: auto;
+  width: 90%;
+}
 
+.sherwintest {
+  margin: auto;
+  width: 30px;
+}
 
 
 
@@ -38,7 +55,6 @@ textarea {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
-
 
 h1 {
   font-size: 3em;
@@ -56,10 +72,24 @@ h2 {
   color: $grayLight;
 }
 
+h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 p {
-  font-size: 1.1em;
+   font-size: 1.1em;
+}
+
+.hero-unit > p {
+  text-indent: 50px;
   line-height: 1.7em;
 }
+
+blockquote > p {
+   font-size: small; 
+}
+
 
 
 /* header */
@@ -80,6 +110,7 @@ p {
   color: $skyblue;
   font-weight: bold;
   height: 100%;
+  height: 60px;
   max-width: none;
 
 }

@@ -1,0 +1,119 @@
+@import "bootstrap";
+
+// $goldenLight: ($grayLight + #554)*.85 + $orange*.25;
+$goldenLight: #f1d570;
+
+@mixin rounded($radius: 10px) {
+  @include rounded-side(top, $radius);
+  @include rounded-side(right, $radius);
+  @include rounded-side(bottom, $radius);
+  @include rounded-side(left, $radius);
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+}
+
+@mixin rounded-side($side, $radius: 10px) {
+  border-#{$side}-radius: $radius;
+  -moz-border-radius-#{$side}: $radius;
+  -webkit-border-#{$side}-radius: $radius;
+}
+
+
+.overlay {
+  position: absolute;
+  z-index: 200;
+  // width: 100%;
+  // height: 100%;
+}
+
+h1#project-banner {
+
+  // TODO(syu): font-family
+  color: white;
+  text-align: right;
+  /*bottom: 10%;*/
+  /*right: 10%;*/
+  width:300px;
+  bottom: 8%;
+  right: 5%;
+  font-size: 80px;
+}
+
+
+.group {
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.project-banner {
+  width: 100%;
+  //height: 100%;
+   height: 450px;
+  // width: 679px;
+  // height: 452px;
+}
+
+
+.black {
+  // background: $black;
+}
+
+
+@mixin color-mask($opacity: .5, $color: black) {
+  // background: url('../images/mask57x57.png') repeat left top;
+  background: $color;
+  opacity: $opacity;
+}
+
+.mask{
+  @include color-mask(.14);
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  // width: 100%;
+  // height: 100%;
+}
+
+.hero-unit {
+  padding: 15px;
+  position: relative;
+  // width: 960px;
+  // height: 425px;
+  margin: 0 0 30px 0;
+  background: white;
+}
+
+
+
+              .rewards-bar {
+
+}
+
+.reward {
+  @include rounded(10px);
+  // border: 1px black solid;
+  background: $goldenLight;
+  padding: 15px; margin-bottom: 5px;
+}
+
+.reward:hover {
+  background: $blue;
+}
+
+.reward > .reward-tag {
+  margin-bottom: 10px;
+}
+
+.reward > .reward-button {
+  margin-bottom: 10px;
+  display: block;
+
+}
+
+

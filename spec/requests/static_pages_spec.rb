@@ -12,7 +12,7 @@ describe "Static pages" do
     it "should have the title 'Home'" do
       visit root_path
       page.should have_selector('title',
-                        :text => "Communificiency")
+                                :text => "Communificiency")
     end
 
     it "should not have a custom title" do
@@ -31,7 +31,7 @@ describe "Static pages" do
     it "should have the title 'Help'" do
       visit help_path
       page.should have_selector('title',
-                        :text => "Communificiency | Help")
+                                :text => "Communificiency | Help")
     end
   end
 
@@ -45,7 +45,7 @@ describe "Static pages" do
     it "should have the title 'About'" do
       visit about_path 
       page.should have_selector('title',
-                    :text => "Communificiency | About")
+                                :text => "Communificiency | About")
     end
   end
 
@@ -58,7 +58,7 @@ describe "Static pages" do
     it "should have the title 'Contact'" do
       visit contact_path
       page.should have_selector('title',
-                    :text => "Communificiency | Contact")
+                                :text => "Communificiency | Contact")
     end
   end
 end
