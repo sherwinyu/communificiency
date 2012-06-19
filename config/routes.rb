@@ -6,6 +6,7 @@ Communificiency::Application.routes.draw do
   match '/about', to: "static_pages#about"
   match '/contact', to: "static_pages#contact"
   match '/projects/1', to: "static_pages#desc"
+  match '/projects/1/pay', to: "static_pages#pay"
 
 
   # The priority is based upon order of creation:
