@@ -1,7 +1,7 @@
-@import "bootstrap";
+@import "bootstrap/mixins";
+@import "bootstrap/variables";
 
-@import "desc.css.scss";
-
+// import "pay.css.scss";
 $skyblue: #1a8bcb;
 $navBarHeight: 60px;
 

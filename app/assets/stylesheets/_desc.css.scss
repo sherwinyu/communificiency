@@ -1,7 +1,7 @@
 @import "bootstrap";
-
 // $goldenLight: ($grayLight + #554)*.85 + $orange*.25;
 $goldenLight: #f1d570;
+$skyblue: #1a8bcb;
 
 @mixin rounded($radius: 10px) {
   @include rounded-side(top, $radius);
@@ -23,8 +23,6 @@ $goldenLight: #f1d570;
 .overlay {
   position: absolute;
   z-index: 200;
-  // width: 100%;
-  // height: 100%;
 }
 
 h1#project-banner {
@@ -32,8 +30,6 @@ h1#project-banner {
   // TODO(syu): font-family
   color: white;
   text-align: right;
-  /*bottom: 10%;*/
-  /*right: 10%;*/
   width:300px;
   bottom: 8%;
   right: 5%;
@@ -41,6 +37,7 @@ h1#project-banner {
 }
 
 
+/* Used to group the overlay and image together */
 .group {
   padding: 0px;
   margin: 0px;
@@ -51,26 +48,16 @@ h1#project-banner {
 
 .project-banner {
   width: 100%;
-  //height: 100%;
-   height: 450px;
-  // width: 679px;
-  // height: 452px;
 }
-
-
-.black {
-  // background: $black;
-}
-
 
 @mixin color-mask($opacity: .5, $color: black) {
-  // background: url('../images/mask57x57.png') repeat left top;
   background: $color;
   opacity: $opacity;
 }
 
-.mask{
-  @include color-mask(.14);
+.black-mask{
+  @extend overlay;
+  @include color-mask(.14, black);
   display: block;
   position: absolute;
   left: 0;
@@ -91,7 +78,19 @@ h1#project-banner {
 
 
 
-              .rewards-bar {
+.rewards-bar {
+  // background: black;
+  // background: $skyblue;
+  position: relative;
+  top: -30px;
+  background: #F4EAC6;
+
+}
+.rewards-container {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative;
 
 }
 
@@ -99,18 +98,20 @@ h1#project-banner {
   @include rounded(10px);
   // border: 1px black solid;
   background: $goldenLight;
-  padding: 15px; margin-bottom: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+
 }
 
 .reward:hover {
-  background: $blue;
+  background: $skyblue;
 }
 
 .reward > .reward-tag {
   margin-bottom: 10px;
 }
 
-.reward > .reward-button {
+.reward > .reward-btn {
   margin-bottom: 10px;
   display: block;
 

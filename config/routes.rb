@@ -1,4 +1,6 @@
 Communificiency::Application.routes.draw do
+  resources :payments
+
   root :to => 'static_pages#home'
 
   match '/home', to:"static_pages#home"
