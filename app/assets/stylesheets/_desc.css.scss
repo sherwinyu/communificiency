@@ -32,8 +32,9 @@ h1#project-banner {
   text-align: right;
   width:300px;
   bottom: 8%;
-  right: 5%;
-  font-size: 80px;
+  left: 9%;
+  font-size: 90px;
+  // color: $skyblue + #808080;
 }
 
 
@@ -72,8 +73,13 @@ h1#project-banner {
   position: relative;
   // width: 960px;
   // height: 425px;
-  margin: 0 0 30px 0;
+  margin: 0px 0px 30px 0px;
   background: white;
+}
+
+.content-header{
+  margin: 20px 0px 12px;
+  color: $skyblue;
 }
 
 
@@ -87,7 +93,7 @@ h1#project-banner {
 
 }
 .rewards-container {
-  padding-top: 15px;
+  padding-top: 20px;
   padding-left: 15px;
   padding-right: 15px;
   position: relative;
@@ -101,6 +107,12 @@ h1#project-banner {
   padding: 15px;
   margin-bottom: 15px;
 
+}
+
+h3.reward-header  {
+  font-size:1.8em;
+  text-align:center;
+  // color: $skyblue;
 }
 
 .reward:hover {
