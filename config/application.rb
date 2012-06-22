@@ -59,5 +59,9 @@ module Communificiency
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Custom Configs
+    config.aws_access_key = "AKIAI5RRHRFM2GH67ORA"
+    config.aws_secret_key = "PYaUWUyTPk5w8WN55/7Jh71Xgqcu9UxKRyi++sKq"
   end
 end

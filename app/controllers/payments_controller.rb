@@ -49,25 +49,26 @@ class PaymentsController < ApplicationController
     
 
     cbui_params = {}
-    cbui_params["callerkey"] = @@access_key
+    cbui_params["callerkey"] = config.aws_access_key
     cbui_params["transactionamount"] = @payment.amount
     cbui_params["pipelinename"] = "SingleUse"
-    cbui_params["returnurl"] = "#{HOST}/confirm_payment_cbui"
-    cbui_params["version"] = @@cbui_version
+    cbui_params["returnurl"] = "#{config.host_address}/confirm_payment_cbui"
+    cbui_params["version"] = AmazonFPSUtils.cbui_version
+    #binding.pry
     cbui_params["callerReference"] = "ref#{Time.now.to_i}" # caller_reference unless caller_reference.nil?
     cbui_params["paymentReason"] = 'Communificiency' # payment_reason unless payment_reason.nil?
     cbui_params[SignatureUtils::SIGNATURE_VERSION_KEYNAME] = '2'
     cbui_params[SignatureUtils::SIGNATURE_METHOD_KEYNAME] = SignatureUtils::HMAC_SHA256_ALGORITHM
-    uri = URI.parse(@@cbui_endpoint)
+    uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
 
 
     signature = SignatureUtils.sign_parameters({:parameters => cbui_params, 
-                                                             :aws_secret_key => @@secret_key,
+                                                             :aws_secret_key => AmazonFPSUtils.secret_key,
                                                              :host => uri.host,
-                                                             :verb => @@http_method,
+                                                             :verb => AmazonFPSUtils.http_method,
                                                              :uri  => uri.path })
     cbui_params[SignatureUtils::SIGNATURE_KEYNAME] = signature
-    @cbui_url = get_cbui_url(cbui_params)
+    @cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
 
     puts "\n\n\nCBUI!", @cbui_url
 
