@@ -11,33 +11,17 @@
         <p>
         Food truck chillwave exercitation veniam nihil cosby sweater. In tumblr semiotics mollit hoodie, elit vero. Biodiesel narwhal carles beard whatever high life, viral nostrud readymade cosby sweater trust fund tempor bushwick odd future. Aliquip fingerstache wayfarers williamsburg. Laboris minim polaroid raw denim cupidatat nostrud. Narwhal id pickled raw denim. Butcher direct trade keytar, nostrud aute swag pinterest fugiat wayfarers culpa whatever Austin velit artisan ex.
         </p>
-        <h3 class="header"> What we need </h3>
-        <p>
-        Fixie art party cardigan, selvage thundercats squid mixtape fap typewriter tumblr before they sold out whatever organic wayfarers. Vinyl carles chambray ethnic. Tumblr odd future direct trade polaroid echo park keffiyeh, gluten-free before they sold out keytar. Dreamcatcher cosby sweater mustache VHS gluten-free, sartorial four loko 8-bit single-origin coffee. Fingerstache fanny pack tumblr, irony typewriter pork belly mumblecore. Ethnic selvage gluten-free helvetica, hella street art cardigan artisan terry richardson. Scenester fanny pack +1 lo-fi chillwave Austin wes anderson.
-        </p>
 
+        <%= form_for(:payment, :url => payments_path) do |f|  %>
+          <div class="field">
+            <%= f.label :amount %> <br />
+            <%= f.number_field :amount %>
+          </div>
 
-
-        <h3 class="header"> What you'll get </h3>
-        <p>
-        Yr sed bushwick, brunch shoreditch chambray esse. Keffiyeh godard artisan retro high life. American apparel carles cardigan echo park. Readymade elit irure organic sriracha id dolore, sed quinoa photo booth. Sed magna ennui artisan, butcher aliquip aliqua eu four loko synth. Letterpress gastropub brunch chambray craft beer retro. Minim viral art party whatever, locavore anim authentic.
-        </p>
-
-
-        <h3 class="header"> What sets us apart </h3>
-        <p>
-        Pour-over jean shorts lomo vice, odd future mcsweeney's biodiesel bicycle rights bespoke. Swag cray master cleanse, wolf bespoke post-ironic PBR. Seitan pitchfork gluten-free letterpress you probably haven't heard of them. Craft beer terry richardson forage, wes anderson authentic beard selvage lomo VHS. Sriracha cray bushwick you probably haven't heard of them freegan, ethnic DIY yr pork belly mustache godard before they sold out wayfarers aesthetic. Food truck godard marfa iphone butcher, biodiesel gluten-free next level swag brooklyn umami seitan chambray vegan polaroid. Pinterest ethnic chillwave kogi.
-        </p>
-
-
-        <blockquote class="pull-right">
-          <p><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis.</em></p>
-          <small>Someone famous</small>
-        </blockquote>
-        <p>
-        Wayfarers ut selvage, velit fugiat beard odd future dolor banh mi trust fund ullamco. Quis put a bird on it irony, synth narwhal cred lomo bicycle rights. Scenester banh mi cred, messenger bag bicycle rights etsy master cleanse mustache cliche kale chips organic. Carles reprehenderit nulla est you probably haven't heard of them in, incididunt lo-fi elit art party pork belly trust fund. Irony echo park freegan, pop-up beard hella gentrify skateboard pork belly next level raw denim keytar sriracha typewriter. Duis est fixie leggings beard, anim pickled terry richardson placeat letterpress irony selvage commodo. Odio hoodie aesthetic street art.
-        </p>
-
+          <div class="actions">
+            <%= f.submit "Pay" %>
+          </div>
+        <% end %>
 
       </div>
 

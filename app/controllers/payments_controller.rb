@@ -1,3 +1,5 @@
+#require 'signature_utils.rb'
+#require 'signature_utils.rb'
 
 class PaymentsController < ApplicationController
   # GET /payments
@@ -42,16 +44,48 @@ class PaymentsController < ApplicationController
   # POST /payments.json
   def create
     @payment = Payment.new(params[:payment])
+    @payment.save
 
-    respond_to do |format|
-      if @payment.save
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
-        format.json { render json: @payment, status: :created, location: @payment }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
-      end
-    end
+    
+
+    cbui_params = {}
+    cbui_params["callerkey"] = @@access_key
+    cbui_params["transactionamount"] = @payment.amount
+    cbui_params["pipelinename"] = "SingleUse"
+    cbui_params["returnurl"] = "#{HOST}/confirm_payment_cbui"
+    cbui_params["version"] = @@cbui_version
+    cbui_params["callerReference"] = "ref#{Time.now.to_i}" # caller_reference unless caller_reference.nil?
+    cbui_params["paymentReason"] = 'Communificiency' # payment_reason unless payment_reason.nil?
+    cbui_params[SignatureUtils::SIGNATURE_VERSION_KEYNAME] = '2'
+    cbui_params[SignatureUtils::SIGNATURE_METHOD_KEYNAME] = SignatureUtils::HMAC_SHA256_ALGORITHM
+    uri = URI.parse(@@cbui_endpoint)
+
+
+    signature = SignatureUtils.sign_parameters({:parameters => cbui_params, 
+                                                             :aws_secret_key => @@secret_key,
+                                                             :host => uri.host,
+                                                             :verb => @@http_method,
+                                                             :uri  => uri.path })
+    cbui_params[SignatureUtils::SIGNATURE_KEYNAME] = signature
+    @cbui_url = get_cbui_url(cbui_params)
+
+    puts "\n\n\nCBUI!", @cbui_url
+
+    redirect_to @cbui_url
+
+
+
+
+
+    #respond_to do |format|
+      #if @payment.save
+        #format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
+        #format.json { render json: @payment, status: :created, location: @payment }
+      #else
+        #format.html { render action: "new" }
+        #format.json { render json: @payment.errors, status: :unprocessable_entity }
+      #end
+    #end
   end
 
   # PUT /payments/1
