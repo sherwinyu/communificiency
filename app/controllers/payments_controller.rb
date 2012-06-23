@@ -96,7 +96,6 @@ class PaymentsController < ApplicationController
       status = pay_result_hash["TransactionStatus"]
       while status == "Pending"
         fps_status_url = AmazonFPSUtils.get_fps_get_transaction_status_url(@payment.caller_reference, @payment.transaction_id)
-        binding.pry
         response = RestClient.get fps_status_url
         status_result_hash = Hash.from_xml(response)["GetTransactionStatusResponse"]["GetTransactionStatusResult"]
         status = status_result_hash["TransactionStatus"]
@@ -106,28 +105,26 @@ class PaymentsController < ApplicationController
 
       if status == "Success"
         @payment.transaction_status = Payment::STATUS_SUCCESS
-      else
+        @payment.save
+        flash.notice = "Your payment was successfully received! Look out for an email from us."
+        render 'static_pages/desc/'
+      elsif status == "Cancelled"
         @payment.transaction_status = Payment::STATUS_CANCELLED
+        @payment.save
+        flash.notice = "Looks like you changed your mind. Won't you please reconsider?"
+        render 'static_pages/desc/'
+      else
+        @payment.transaction_status = Payment::STATUS_FAILURE
+        @payment.save
+        flash.notice = "Something went wrong. Please try again or contact support@communificiency.com"
+        render 'static_pages/desc/'
       end
-      @payment.save
-
-      render text: 'success'
-    else
+    else 
       @payment.transaction_status = Payment::STATUS_CANCELLED
       @payment.save
-      render text: 'fail'
+      flash.notice = "Something went wrong. Please try again or contact support@communificiency.com"
+      render 'static_pages/desc/'
     end
-
-    #tokenID"=>"667X81MSJ48CP31DJB6X5DPJ3ABWDKEED94P9NBFCVZV6XB22LHVSFPWKJHKT3G4",
-    #"signatureMethod"=>"RSA-SHA1",
-    #"status"=>"SC",
-    #"signatureVersion"=>"2",
-    #"signature"=>"L+tzg0X8QNaBanZ1uleR4kxRAKe3+1RNY2ytOKm8OAfOWp84YQ1n89bcYNEwbM/Z+kPh+Gc26str\nFtvpoFlqroV5Fo6EEj2jJBN07GVxIMTypOqnqU6vDgFTpCtmRBASh+jYR1QxcYSNCSPSeZKVXYo8\nfxl5q20yDF7JQgFvy1g=",
-    #"certificateUrl"=>"https://fps.sandbox.amazonaws.com/certs/090911/PKICert.pem?requestId=1mkknc07lsywu0r27zwpwysz51zpdu7zvmxgabe6t5i3eqmqlu",
-    #"expiry"=>"11/2012",
-    #"callerReference"=>"ref#todo"}
-
-
   end
 
   # PUT /payments/1
