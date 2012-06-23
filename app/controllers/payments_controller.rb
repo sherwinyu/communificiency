@@ -50,7 +50,7 @@ class PaymentsController < ApplicationController
 
     cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount"=>@payment.amount,
                                                    "returnurl" => "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
-                                                   "callerReference" => "ref#todo",
+                                                   "callerReference" => "#{@payment.id}",
                                                    "paymentReason" => "Communificiency contribution" } )
 
     #cbui_params["callerkey"] = config.aws_access_key
@@ -60,11 +60,10 @@ class PaymentsController < ApplicationController
     #cbui_params["version"] = AmazonFPSUtils.cbui_version
     #cbui_params["callerReference"] = "ref#{Time.now.to_i}" # caller_reference unless caller_reference.nil?
     #cbui_params["paymentReason"] = 'Communificiency' # payment_reason unless payment_reason.nil?
-    #
+    
     cbui_params[SignatureUtils::SIGNATURE_VERSION_KEYNAME] = '2'
     cbui_params[SignatureUtils::SIGNATURE_METHOD_KEYNAME] = SignatureUtils::HMAC_SHA256_ALGORITHM
     uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
-
 
     signature = SignatureUtils.sign_parameters({:parameters => cbui_params, 
                                                              :aws_secret_key => Communificiency::Application.config.aws_secret_key,
@@ -75,23 +74,34 @@ class PaymentsController < ApplicationController
     @cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
 
     puts "\n\n\nCBUI!", @cbui_url
+    @payment.transaction_status = Payment::STATUS_WAITING_CBUI
+    @payment.save
 
     redirect_to @cbui_url
-
-
-
-
-
-    #respond_to do |format|
-      #if @payment.save
-        #format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
-        #format.json { render json: @payment, status: :created, location: @payment }
-      #else
-        #format.html { render action: "new" }
-        #format.json { render json: @payment.errors, status: :unprocessable_entity }
-      #end
-    #end
   end
+
+def confirm_payment_cbui
+  @payment = Payment.find params[:callerReference]
+
+  if params[:status] == "SC" # if success
+    @payment.token_id = params[:tokenID]
+    @payment.transaction_status = Payment::STATUS_CREATED
+    render text: 'success'
+  else
+    render text: 'fail'
+  end
+
+#tokenID"=>"667X81MSJ48CP31DJB6X5DPJ3ABWDKEED94P9NBFCVZV6XB22LHVSFPWKJHKT3G4",
+ #"signatureMethod"=>"RSA-SHA1",
+ #"status"=>"SC",
+ #"signatureVersion"=>"2",
+ #"signature"=>"L+tzg0X8QNaBanZ1uleR4kxRAKe3+1RNY2ytOKm8OAfOWp84YQ1n89bcYNEwbM/Z+kPh+Gc26str\nFtvpoFlqroV5Fo6EEj2jJBN07GVxIMTypOqnqU6vDgFTpCtmRBASh+jYR1QxcYSNCSPSeZKVXYo8\nfxl5q20yDF7JQgFvy1g=",
+ #"certificateUrl"=>"https://fps.sandbox.amazonaws.com/certs/090911/PKICert.pem?requestId=1mkknc07lsywu0r27zwpwysz51zpdu7zvmxgabe6t5i3eqmqlu",
+ #"expiry"=>"11/2012",
+ #"callerReference"=>"ref#todo"}
+
+   
+end
 
   # PUT /payments/1
   # PUT /payments/1.json

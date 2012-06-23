@@ -10,6 +10,8 @@ Communificiency::Application.routes.draw do
   match '/projects/1', to: "static_pages#desc"
   match '/projects/1/pay', to: "static_pages#pay"
 
+  match '/confirm_payment_cbui', to: "payments#confirm_payment_cbui"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
