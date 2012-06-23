@@ -45,8 +45,9 @@ class PaymentsController < ApplicationController
   def create
     @payment = Payment.new(params[:payment])
     @payment.save
+    @payment.caller_reference = @payment.id
 
-    
+
 
     cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount"=>@payment.amount,
                                                    "returnurl" => "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
@@ -60,16 +61,16 @@ class PaymentsController < ApplicationController
     #cbui_params["version"] = AmazonFPSUtils.cbui_version
     #cbui_params["callerReference"] = "ref#{Time.now.to_i}" # caller_reference unless caller_reference.nil?
     #cbui_params["paymentReason"] = 'Communificiency' # payment_reason unless payment_reason.nil?
-    
+
     cbui_params[SignatureUtils::SIGNATURE_VERSION_KEYNAME] = '2'
     cbui_params[SignatureUtils::SIGNATURE_METHOD_KEYNAME] = SignatureUtils::HMAC_SHA256_ALGORITHM
     uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
 
     signature = SignatureUtils.sign_parameters({:parameters => cbui_params, 
-                                                             :aws_secret_key => Communificiency::Application.config.aws_secret_key,
-                                                             :host => uri.host,
-                                                             :verb => AmazonFPSUtils.http_method,
-                                                             :uri  => uri.path })
+                                                :aws_secret_key => Communificiency::Application.config.aws_secret_key,
+                                                :host => uri.host,
+                                                :verb => AmazonFPSUtils.http_method,
+                                                :uri  => uri.path })
     cbui_params[SignatureUtils::SIGNATURE_KEYNAME] = signature
     @cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
 
@@ -80,28 +81,54 @@ class PaymentsController < ApplicationController
     redirect_to @cbui_url
   end
 
-def confirm_payment_cbui
-  @payment = Payment.find params[:callerReference]
+  def confirm_payment_cbui
+    @payment = Payment.find params[:callerReference]
 
-  if params[:status] == "SC" # if success
-    @payment.token_id = params[:tokenID]
-    @payment.transaction_status = Payment::STATUS_CREATED
-    render text: 'success'
-  else
-    render text: 'fail'
+    if params[:status] == "SC" # if success
+      @payment.token_id = params[:tokenID]
+      @payment.transaction_status = Payment::STATUS_CONFIRMED
+
+      fps_pay_url = AmazonFPSUtils.get_fps_pay_url(@payment.caller_reference, @payment.amount, @payment.token_id)
+      response = RestClient.get fps_pay_url
+      pay_result_hash = Hash.from_xml(response)["PayResponse"]["PayResult"]
+      @payment.transaction_id = pay_result_hash["TransactionId"]
+
+      status = pay_result_hash["TransactionStatus"]
+      while status == "Pending"
+        fps_status_url = AmazonFPSUtils.get_fps_get_transaction_status_url(@payment.caller_reference, @payment.transaction_id)
+        binding.pry
+        response = RestClient.get fps_status_url
+        status_result_hash = Hash.from_xml(response)["GetTransactionStatusResponse"]["GetTransactionStatusResult"]
+        status = status_result_hash["TransactionStatus"]
+        p "status is #{status}"
+        # status = Hash.from_xml(RestClient.get fps_pay_url)["PayResponse"]["PayResult"]
+      end
+
+      if status == "Success"
+        @payment.transaction_status = Payment::STATUS_SUCCESS
+      else
+        @payment.transaction_status = Payment::STATUS_CANCELLED
+      end
+      @payment.save
+
+      render text: 'success'
+    else
+      @payment.transaction_status = Payment::STATUS_CANCELLED
+      @payment.save
+      render text: 'fail'
+    end
+
+    #tokenID"=>"667X81MSJ48CP31DJB6X5DPJ3ABWDKEED94P9NBFCVZV6XB22LHVSFPWKJHKT3G4",
+    #"signatureMethod"=>"RSA-SHA1",
+    #"status"=>"SC",
+    #"signatureVersion"=>"2",
+    #"signature"=>"L+tzg0X8QNaBanZ1uleR4kxRAKe3+1RNY2ytOKm8OAfOWp84YQ1n89bcYNEwbM/Z+kPh+Gc26str\nFtvpoFlqroV5Fo6EEj2jJBN07GVxIMTypOqnqU6vDgFTpCtmRBASh+jYR1QxcYSNCSPSeZKVXYo8\nfxl5q20yDF7JQgFvy1g=",
+    #"certificateUrl"=>"https://fps.sandbox.amazonaws.com/certs/090911/PKICert.pem?requestId=1mkknc07lsywu0r27zwpwysz51zpdu7zvmxgabe6t5i3eqmqlu",
+    #"expiry"=>"11/2012",
+    #"callerReference"=>"ref#todo"}
+
+
   end
-
-#tokenID"=>"667X81MSJ48CP31DJB6X5DPJ3ABWDKEED94P9NBFCVZV6XB22LHVSFPWKJHKT3G4",
- #"signatureMethod"=>"RSA-SHA1",
- #"status"=>"SC",
- #"signatureVersion"=>"2",
- #"signature"=>"L+tzg0X8QNaBanZ1uleR4kxRAKe3+1RNY2ytOKm8OAfOWp84YQ1n89bcYNEwbM/Z+kPh+Gc26str\nFtvpoFlqroV5Fo6EEj2jJBN07GVxIMTypOqnqU6vDgFTpCtmRBASh+jYR1QxcYSNCSPSeZKVXYo8\nfxl5q20yDF7JQgFvy1g=",
- #"certificateUrl"=>"https://fps.sandbox.amazonaws.com/certs/090911/PKICert.pem?requestId=1mkknc07lsywu0r27zwpwysz51zpdu7zvmxgabe6t5i3eqmqlu",
- #"expiry"=>"11/2012",
- #"callerReference"=>"ref#todo"}
-
-   
-end
 
   # PUT /payments/1
   # PUT /payments/1.json
