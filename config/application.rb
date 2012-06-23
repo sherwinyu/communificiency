@@ -63,5 +63,6 @@ module Communificiency
     # Custom Configs
     config.aws_access_key = "AKIAI5RRHRFM2GH67ORA"
     config.aws_secret_key = "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"
+    config.host_address = "http://localhost:3000"
   end
 end
