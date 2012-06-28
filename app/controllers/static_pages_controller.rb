@@ -10,4 +10,15 @@ class StaticPagesController < ApplicationController
   def about
     @title = 'About'
   end
+
+  def desc
+  end
+
+  def sign_up
+    @title = 'Sign up'
+  end
+
+  def pay
+    @title = 'Confirm contribution'
+  end
 end
