@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120623010727) do
+ActiveRecord::Schema.define(:version => 20120628202925) do
 
   create_table "payments", :force => true do |t|
     t.float    "amount"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(:version => 20120623010727) do
     t.string   "caller_reference"
     t.string   "transaction_status"
     t.string   "token_id"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
