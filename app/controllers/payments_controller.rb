@@ -120,7 +120,7 @@ class PaymentsController < ApplicationController
         render 'static_pages/desc/'
       end
     else 
-      @payment.transaction_status = Payment::STATUS_CANCELLED
+      @payment.transaction_status = Payment::STATUS_FAILURE
       @payment.save
       flash.notice = "Something went wrong. Please try again or contact support@communificiency.com"
       render 'static_pages/desc/'
