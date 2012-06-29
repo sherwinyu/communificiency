@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate submitted_email, submitted_password
     u = User.find_by_email submitted_email
-    if u.nil? || u.matches_password?(submitted_email) 
+    if u.nil? || !u.matches_password?(submitted_password) 
       return nil
     end
     return u
@@ -32,8 +32,12 @@ class User < ActiveRecord::Base
 
   private
   def generate_encrypted_password
-    self.salt = Time.now if self.new_record?
+    puts "Generating salt for #{self.inspect}"
+    self.salt = Time.now.to_s if self.new_record?
+    puts "salt #{self.salt}"
     self.encrypted_password = User.encrypt(self.password, self.salt)
+    puts "password =  #{self.password}"
+    puts "encrypted =  #{self.encrypted_password}"
   end
 
   def self.encrypt password_string, salt_string 

@@ -103,7 +103,7 @@ describe User do
       end
 
       it 'should return nil for an invalid email/password combination' do
-        u = User.authenticate @user_attr[:email], @user_attr[:password] + "derp"
+        u = User.authenticate( @user_attr[:email], @user_attr[:password] + "derp" )
         u.should be_nil
       end
 
