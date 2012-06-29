@@ -1,11 +1,11 @@
 require 'digest'
 class User < ActiveRecord::Base
+  attr_accessor :password 
   ## TODO(SYU): understand where "password" is getting stored!
   # Notes: setting attr_accessor :email overrides the default :email attributes from the Rails model
   # Creating a class-level local variable is is just a local variable in the class scope -- not recognizable in any of the methods
-  
-  attr_accessible :email, :name
-  attr_accessor :password 
+  #
+  attr_accessible :email, :name, :password, :password_confirmation
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates_presence_of :email 

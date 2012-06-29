@@ -1,5 +1,6 @@
 <% if @user.errors.any? %>
   <div class="alert alert-error">
+    <p> <%= "Please fix the following #{pluralize(@user.errors.size, 'error')}."%>
     <a class="close" data-dismiss="alert">&#215;</a>
     <ul>
       <% @user.errors.full_messages.each do |msg| %>
