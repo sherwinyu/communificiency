@@ -8,13 +8,15 @@ class UsersController < ApplicationController
   end
 
   def create
+    redirect_to "/sign_up", layout: "main_with_flash" and return if params[:user].nil?
+
     u = User.new params[:user]
     if u.save
       flash.notice = "User successfully created!"
-      redirect_to "/", layout: "main_with_flash"
+      redirect_to "/projects/1", layout: "main_with_flash"
     else
       flash.alert = "There were #{u.errors.size} #{'errors'.pluralize(u.errors.size)}"
-      render "/users/sign_up", layout: "main_with_flash"
+      render 'sign_up', layout: "main_with_flash"
     end
   end
 

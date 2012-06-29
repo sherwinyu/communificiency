@@ -1,5 +1,6 @@
 Communificiency::Application.routes.draw do
   resources :payments
+  resources :users
 
   root :to => 'static_pages#home'
 

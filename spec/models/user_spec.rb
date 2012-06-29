@@ -79,27 +79,41 @@ describe User do
 
     it 'should have an encrypted password' do
       @user.should respond_to(:encrypted_password)
-      #@user.encrypted_password.should_not be_blank
     end
 
     it 'should set the encrypted password' do
       @user.encrypted_password.should_not be_blank
     end
-    
-  end
 
-  describe "matches_password" do
-    before :each do
-      @user = User.create! @user_attr
+    describe "matches_password method" do
+
+      it 'should return true on a correct match' do
+        @user.matches_password?(@user_attr[:password]).should be_true
+      end
+
+      it 'should return false on an incorrect match' do
+        @user.matches_password?(@user_attr[:password] + "wrong password").should be_false
+      end
     end
 
-    it 'should return true on a correct match' do
-      @user.matches_password?(@user_attr[:password]).should be_true
+    describe "authentication" do
+      it 'should return nil when no user exists'  do
+        u = User.authenticate "nonexistentemail@darkness.com", @user_attr[:password]
+        u.should be_nil
+      end
+
+      it 'should return nil for an invalid email/password combination' do
+        u = User.authenticate @user_attr[:email], @user_attr[:password] + "derp"
+        u.should be_nil
+      end
+
+      it 'should return the correct user for a valid email/password combination' do
+        u = User.authenticate @user_attr[:email], @user_attr[:password]
+        u.should  == @user
+      end
     end
 
-    it 'should return false on an incorrect match' do
-      @user.matches_password?(@user_attr[:password] + "wrong password").should be_false
-    end
+
   end
 
 end
