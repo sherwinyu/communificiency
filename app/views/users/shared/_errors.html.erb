@@ -1,0 +1,10 @@
+<% if @user.errors.any? %>
+  <div class="alert alert-error">
+    <a class="close" data-dismiss="alert">&#215;</a>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li> <%= msg %> </li>
+      <% end%>
+    </ul>
+  </div>
+<% end%>

@@ -8,7 +8,8 @@
         <h2>Sign up for a Communificiency Account</h2>
 
 
-        <%= form_for(:user, url: '/users/create') do |f|  %>
+        <%= form_for(@user, url: '/users/create') do |f|  %>
+          <%= render 'users/shared/errors' %>
           <div class="field">
             <%= f.label :email %> <br /> <%= f.text_field :email %>
 

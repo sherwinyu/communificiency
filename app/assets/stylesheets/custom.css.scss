@@ -32,6 +32,33 @@ textarea {
   margin-bottom: 10px;
 }
 
+.field_with_errors > label {
+  color: #B94A48;
+
+}
+
+.field_with_errors > input {
+  // @extend .alert;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #F2DEDE;
+  // border: 1px solid #FBEED5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  // color: #C09853;
+
+  // background: #F2DEDE;
+  // border: #EED3D7;
+  /*background-color: #F2DEDE;*/
+  /*border-color: #EED3D7;*/
+  // color: #B94A48
+}
+
+.field_with_errors > input:focus {
+  @extend input:focus;
+  border-color: rgba(236, 50, 50, 0.8);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 50, 50, 0.6)
+}
 .nav.mini-nav {
   list-style: none;
   // bottom: -20px;
@@ -80,7 +107,7 @@ h3 {
 }
 
 p {
-   font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 .hero-unit > p {
@@ -89,7 +116,7 @@ p {
 }
 
 blockquote > p {
-   font-size: small; 
+  font-size: small; 
 }
 
 
@@ -101,7 +128,7 @@ blockquote > p {
 
   .container {
     height: $navBarHeight; 
-  }
+}
 }
 
 #logo {
