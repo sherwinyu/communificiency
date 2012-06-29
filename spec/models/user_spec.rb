@@ -2,12 +2,16 @@ require 'spec_helper'
 
 describe User do
   before :each do
-    @user_attr = { name: 'Namey User', email: 'namey.user@email.com' }
+    @user_attr = { name: 'Namey User',
+                   email: 'namey.user@email.com',
+                   password: 'p4ssw0rd',
+                   password_confirmation: 'p4ssw0rd',
+    }
   end
 
   it "should accept a valid User" do
-    valid_user = User.new @user_attr
-    valid_user.should be_valid
+    u = User.new @user_attr
+    u.should be_valid
   end
 
   it "should accept a nameless user a name" do
@@ -27,7 +31,7 @@ describe User do
       valid_user.should be_valid
     end
   end
-  
+
   it "should reject an user with an invalid email" do
     invalid_emails = %w[4sherwinyugoogle.com arf @@ a.b.c @a.b.c]
     invalid_emails.each do |e|
@@ -41,12 +45,61 @@ describe User do
     duplicate_email_user = User.new @user_attr.merge({ name: "Bob" })
     duplicate_email_user.should_not be_valid
   end
-  
+
   it "should reject an user with a duplicate email up to case" do
     u = User.create! @user_attr
     upcase_email_user = User.new @user_attr.merge({ name: "Bob",
                                                     email: u.email.upcase })
     upcase_email_user.should_not be_valid
   end
-  
+
+  describe 'password validations' do
+    it 'should require a password' do
+      u = User.new @user_attr.merge({ password: '',
+                                      password_confirmation: '' })
+      u.should_not be_valid
+    end
+
+    it 'should reject an incorrect password_confirmation' do
+      u = User.new @user_attr.merge({ password_confirmation: '' })
+      u.should_not be_valid
+    end
+
+    it 'should reject short passwords' do
+      u = User.new @user_attr.merge({ password: 'short',
+                                      password_confirmation: 'short' })
+      u.should_not be_valid
+    end
+  end
+
+  describe "password encryption" do
+    before :each do
+      @user = User.create! @user_attr
+    end
+
+    it 'should have an encrypted password' do
+      @user.should respond_to(:encrypted_password)
+      #@user.encrypted_password.should_not be_blank
+    end
+
+    it 'should set the encrypted password' do
+      @user.encrypted_password.should_not be_blank
+    end
+    
+  end
+
+  describe "matches_password" do
+    before :each do
+      @user = User.create! @user_attr
+    end
+
+    it 'should return true on a correct match' do
+      @user.matches_password?(@user_attr[:password]).should be_true
+    end
+
+    it 'should return false on an incorrect match' do
+      @user.matches_password?(@user_attr[:password] + "wrong password").should be_false
+    end
+  end
+
 end
