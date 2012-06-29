@@ -8,14 +8,15 @@
         <h2>Sign up for a Communificiency Account</h2>
 
 
-        <%= form_for(:payment, :url => payments_path) do |f|  %>
+        <%= form_for(:user, url: '/users/create') do |f|  %>
           <div class="field">
-            <%= f.label :amount %> <br />
-            <%= f.number_field :amount %>
+            <%= f.label :email %> <br /> <%= f.text_field :email %>
+
+            <%= f.label :name %> <br /> <%= f.text_field :name %>
           </div>
 
           <div class="actions">
-            <%= f.submit "Pay" %>
+            <%= f.submit "Create account" %>
           </div>
         <% end %>
 

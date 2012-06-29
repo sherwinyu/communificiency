@@ -10,9 +10,9 @@ describe User do
     valid_user.should be_valid
   end
 
-  it "should require a name" do
+  it "should accept a nameless user a name" do
     nameless_user = User.new @user_attr.merge({ name: "" })
-    nameless_user.should_not be_valid
+    nameless_user.should be_valid
   end
 
   it "should require an email" do

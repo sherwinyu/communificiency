@@ -7,7 +7,11 @@ Communificiency::Application.routes.draw do
   match '/help', to: "static_pages#help"
   match '/about', to: "static_pages#about"
   match '/contact', to: "static_pages#contact"
-  match "/sign_up", to: "static_pages#sign_up"
+
+  match "/sign_up", to: "users#sign_up"
+  match "/users/create", to: "users#create"
+
+  match "/projects/:id", to: "static_pages#desc", params: :id
 
   match '/projects/1', to: "static_pages#desc"
   match '/projects/1/pay', to: "static_pages#pay"
