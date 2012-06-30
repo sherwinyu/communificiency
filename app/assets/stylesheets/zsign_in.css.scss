@@ -1,0 +1,26 @@
+// @import "bootstrap";
+// $goldenLight: ($grayLight + #554)*.85 + $orange*.25;
+//
+
+.center-group {
+  margin-left: auto;
+  margin-right: auto;
+  display: table; // this causes 1) centering 2) the div to shrink to the width of its contents
+  text-align: right;
+}
+
+form.sign-in {
+  background: black;
+}
+
+input {
+  display: inline;
+}
+
+label {
+  display: inline;
+}
+
+.groupblock {
+  display: inline;
+}

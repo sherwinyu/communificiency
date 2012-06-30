@@ -3,8 +3,12 @@ Communificiency::Application.routes.draw do
 
   resources :payments
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   root :to => 'static_pages#home'
+
+  match 'sign_in', to: "sessions#new"
+  match 'sign_out', to: "sessions#destroy"
 
   match '/home', to:"static_pages#home"
   match '/help', to: "static_pages#help"
