@@ -1,4 +1,6 @@
 Communificiency::Application.routes.draw do
+  get "sessions/new"
+
   resources :payments
   resources :users
 
