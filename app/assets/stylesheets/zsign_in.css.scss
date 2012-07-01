@@ -13,6 +13,10 @@ form.sign-in {
   background: black;
 }
 
+form > .form-actions {
+  background: none;
+}
+
 input {
   display: inline;
 }
