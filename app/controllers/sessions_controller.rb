@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   def new
   end
 
+  # "/sign_in"
   def create
     @user = User.authenticate(*params[:session].collect{ |k,v| v })
     if @user.nil?
@@ -15,6 +16,13 @@ class SessionsController < ApplicationController
       #
     end
 
+  end
+
+  # "/sign_out"
+  def destroy
+    flash.notice = 'Signed out'
+    sign_out
+    redirect_to root_path 
   end
 
 end

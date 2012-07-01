@@ -16,7 +16,7 @@ Communificiency::Application.routes.draw do
   match '/contact', to: "static_pages#contact"
 
   match "/sign_up", to: "users#sign_up"
-  match "/users/create", to: "users#create"
+  match "/users", to: "users#create"
 
   match "/projects/:id", to: "static_pages#desc", params: :id
 

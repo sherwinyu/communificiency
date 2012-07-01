@@ -57,7 +57,22 @@ describe SessionsController do
 
   describe 'authentication' do
     it 'should fuckin authenticate'
+  end
 
+  describe 'DELETE destroy (sign out)' do
+    describe 'when already signed in' do
+
+      it 'should clear the cookie'
+      it 'should redirect to the home page' do
+        delete :destroy
+        response.should redirect_to root_path
+      end
+
+    end
+
+    describe 'when not signed in' do
+      it 'should redirect to the sign in page'
+    end
   end
 
 end
