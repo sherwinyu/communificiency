@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe SessionsController do
   render_views
+    before :each do 
+      @session_params = {email: 'abcd@def.g', password: 'password'}
+      @user_params = @session_params.merge name: 'whatever', password_confirmation: 'password'
+      @user = User.create! @user_params
+    end
 
   describe "GET 'new'" do
     it "should be successful" do
@@ -17,11 +22,6 @@ describe SessionsController do
   end
 
   describe "POST 'create'" do
-    before :each do 
-      @session_params = {email: 'abcd@def.g', password: 'password'}
-      @user_params = @session_params.merge name: 'whatever', password_confirmation: 'password'
-      User.create! @user_params
-    end
 
     describe 'failure' do
       before :each do
@@ -62,7 +62,13 @@ describe SessionsController do
   describe 'DELETE destroy (sign out)' do
     describe 'when already signed in' do
 
-      it 'should clear the cookie'
+      it 'should no longer be signed in' do
+        test_sign_in(@user)
+        controller.should be_current_user_signed_in
+        delete :destroy
+        controller.current_user_signed_in?.should == false
+      end
+
       it 'should redirect to the home page' do
         delete :destroy
         response.should redirect_to root_path
