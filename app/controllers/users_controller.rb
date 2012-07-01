@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash.notice = "Your profile was successfully created. Welcome to Communificiency!"
+      sign_in @user
       redirect_to @user, layout: "main_with_flash"
     else
       render 'sign_up', layout: "main_with_flash"

@@ -2,22 +2,19 @@
 <div class="navbar-inner">
   <div class="container">
     <div class="row-fluid">
-      <div class="span9">
         <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), :root %>
-      </div>
         <nav> 
-      <div class="span3">
-        <div class="nav-group"> 
+        <div class="nav-group pull-right"> 
 
-        <ul class="nav mini-nav">
-          <li><%= link_to 'Home', '#' %><li>
-          <li><%= link_to 'About', '#' %><li>
-          <li><%= link_to 'Help', '#' %><li>
-        </ul>
-          </div>
-      </div>
+          <ul class="nav mini-nav">
+            <li><%= link_to 'Home', '#' %><li>
+            <li><%= link_to 'About', '#' %><li>
+            <li><%= link_to 'Help', '#' %><li>
+            <li><%= current_user_signed_in? ? link_to( current_user ) : link_to( 'Sign in', sign_in_path) %></li>
+          </ul>
+        </div>
         </nav>
+      </div>
     </div>
   </div>
-</div>
-</header>
+  </header>

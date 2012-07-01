@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
 
   before_save :generate_encrypted_password
 
+  def to_s
+    self.name
+  end
+
   def matches_password? submitted_password
     return User.encrypt(submitted_password, self.salt) == self.encrypted_password
   end
@@ -32,7 +36,8 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate_with_salt submitted_id, submitted_salt
-    user = User.find submitted_id
+    # Note: need find_by_id because find() on a nil throws an error where as find_by_id on nil returns nil
+    user = User.find_by_id submitted_id
     (user && user.salt == submitted_salt) ? user : nil
     #if user.nil? || !user.salt == submitted_salt
       #return nil
