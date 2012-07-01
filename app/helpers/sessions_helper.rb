@@ -25,7 +25,6 @@ module SessionsHelper
   def user_from_remember_token 
     remember_token = cookies.signed[:remember_token]
     remember_token ||= [nil, nil]
-    binding.pry
     User.authenticate_with_salt(*remember_token)
   end
 
