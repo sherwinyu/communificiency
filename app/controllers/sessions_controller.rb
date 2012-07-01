@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
     if @user.nil?
       flash.now.alert = 'You entered an invalid email or password. Please try again'
       render 'new', layout: 'main_with_flash'
-      # failure
     else
       flash.notice = 'Successfully logged in!' if Rails.env.development?
       sign_in @user

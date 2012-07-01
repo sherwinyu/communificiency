@@ -23,21 +23,27 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate submitted_email, submitted_password
-    u = User.find_by_email submitted_email
-    if u.nil? || !u.matches_password?(submitted_password) 
-      return nil
-    end
-    return u
+    user = User.find_by_email submitted_email
+    (user && user.matches_password?(submitted_password)) ? user: nil 
+    # if u.nil? || !u.matches_password?(submitted_password) 
+      # return nil
+    # end
+    # return u
+  end
+
+  def self.authenticate_with_salt submitted_id, submitted_salt
+    user = User.find submitted_id
+    (user && user.salt == submitted_salt) ? user : nil
+    #if user.nil? || !user.salt == submitted_salt
+      #return nil
+    #end
+    #return u
   end
 
   private
   def generate_encrypted_password
-    puts "Generating salt for #{self.inspect}"
     self.salt = Time.now.to_s if self.new_record?
-    puts "salt #{self.salt}"
     self.encrypted_password = User.encrypt(self.password, self.salt)
-    puts "password =  #{self.password}"
-    puts "encrypted =  #{self.encrypted_password}"
   end
 
   def self.encrypt password_string, salt_string 

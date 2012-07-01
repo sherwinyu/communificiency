@@ -17,14 +17,20 @@ describe SessionsController do
   end
 
   describe "POST 'create'" do
+    before :each do 
+      @session_params = {email: 'abcd@def.g', password: 'password'}
+      @user_params = @session_params.merge name: 'whatever', password_confirmation: 'password'
+      User.create! @user_params
+    end
+
     describe 'failure' do
       before :each do
-        @session_params = {email: 'invalidemail', password: 'wrongpassword'}
+        @session_params.merge!  email: 'invalidemail', password: 'wrongpassword' 
       end
 
-      it 'should have a flash showing the error' do
+      it 'should havea flash.now showing the error' do
         post :create, session: @session_params
-        flash.notice.should =~ /'invalid.+email.+.+password/i
+        flash.alert.should =~ /.+invalid.+email.+password/i
       end
 
       it 'should render the sign_in page' do
@@ -35,9 +41,22 @@ describe SessionsController do
     end
 
     describe 'with a valid email/password' do
-      it 'should redirect to the user profile'
-      it 'should create a new session for the user'
+      before :each do 
+      end
+
+      it 'should redirect to the user profile' do
+        post :create, session: @session_params
+      end
+
+      it 'should create a new session for the user' do
+        post :create, session: @session_params
+      end
     end
+
+  end
+
+  describe 'authentication' do
+    it 'should fuckin authenticate'
 
   end
 
