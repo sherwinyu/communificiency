@@ -1,22 +1,45 @@
 <header class="navbar navbar-fixed-top">
 <div class="navbar-inner">
-    <div class="container">
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li class="active">  <a href="index.html"><i class="icon-home icon-white"></i> Home</a></li>
-          <li><a href="setup-notes.html">Setup Notes</a></li>
-          <li><a href="navbar-examples.html">Navbar Examples</a></li>              
-          <li class="divider-vertical"></li>
-        </ul>
+  <div class="container">
 
-        <ul class="nav pull-right">
-          <li class="active">  <a href="index.html"><i class="icon-home icon-white"></i> Home</a></li>
-          <li><a href="setup-notes.html">Setup Notes</a></li>
-          <li><a href="navbar-examples.html">Navbar Examples</a></li>              
-        </ul>
+    <div class="nav-collapse">
+      <ul class="nav">
+        <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), :root %>
+        <%= nav_li_tag(:root) { '<i class="icon-home icon-white"></i> Home'} %>
+        <%= nav_li_tag('Projects', about_path) { 'Projects'} %>
+        <%= nav_li_tag('About', about_path) { 'About'} %>
+      </ul>
+
+      <ul class="nav nav-pills pull-right">
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-user icon-white"></i>
+          Arf <%= current_user_signed_in? ? current_user.name : 'Your account'.html_safe %>
+          <b class="caret"></b>
+        </a>
+
+          <ul class="dropdown-menu">
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+
+
+
+
+
+
+      <% if false -%>
         <a class="btn btn-primary pull-right" href="http://twitter.github.com/bootstrap/">Twitter Bootstrap Home</a>
-      </div><!--/.nav-collapse -->
-  <% if false -%>
+      <% end %>
+    </div><!--/.nav-collapse -->
+
+
+    <% if false -%>
       <div class="row-fluid">
         <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), :root %>
         <nav> 
@@ -28,6 +51,7 @@
               <li><%= link_to 'Projects', about_path %><li>
             </ul>
             <ul class="nav mini-nav user-nav">
+              <li><%= link_to current_user %> </li>
               <li><%= current_user_signed_in? ? link_to( current_user ) : link_to( 'Sign in', sign_in_path) %></li>
               <li><%= current_user_signed_in? ? link_to('Sign out', sign_out_path) : '' %></li>
             </ul>
@@ -35,7 +59,7 @@
         </div>
         </nav>
       </div>
-    </div>
-  <% end -%>
+    <% end %>
+  </div>
 </div>
 </header>

@@ -13,12 +13,6 @@ describe SessionsController do
       get 'new'
       response.should be_success
     end
-
-    # TODO(syu) why does this fail?
-    it 'should have the right title' do
-      get 'new'
-      # response.should have_selector('title', content: 'Sign in')
-    end
   end
 
   describe "POST 'create'" do
