@@ -60,24 +60,20 @@ textarea {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 50, 50, 0.6)
 }
 
-.nav.mini-nav {
-  list-style: none;
-  // bottom: -20px;
-  // right: 20px;
-  // position: static;
-  // bottom: 10%;
-  //margin-right: auto;
-  float: none; 
-  margin: auto;
-  width: 90%;
+
+.navbar .nav > li > a , .navbar .nav > li > p {
+   float: none;
+   padding: 9px 10px 11px;
+   line-height: 19px;
+   color: #999;
+   text-decoration: none;
+   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
-.nav-group {
-  width: 100%;
-  position: relative;
-  top:20px;
-  // margin: auto;
-  // width:80%;
+.navbar .nav .active > p, .navbar .nav .active > p.navbar-text:hover {
+color: white;
+text-decoration: none;
+background-color: #222;
 }
 
 
@@ -108,9 +104,6 @@ h3 {
   margin-bottom: 10px;
 }
 
-p {
-  font-size: 1.1em;
-}
 
 .hero-unit > p {
   text-indent: 50px;
@@ -133,13 +126,13 @@ blockquote > p {
 }
 }
 .nav .mini-nav {
-    height: $navBarHeight; 
+  height: $navBarHeight; 
 }
 
 .user-nav {
-    display: inline-block;
-    height: $navBarHeight; 
-    float: right;
+  display: inline-block;
+  height: $navBarHeight; 
+  float: right;
 }
 
 #logo {

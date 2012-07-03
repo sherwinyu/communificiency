@@ -1,22 +1,26 @@
 <header class="navbar navbar-fixed-top">
 <div class="navbar-inner">
     <div class="container">
+
       <div class="nav-collapse">
         <ul class="nav">
-          <li class="active">  <a href="index.html"><i class="icon-home icon-white"></i> Home</a></li>
-          <li><a href="setup-notes.html">Setup Notes</a></li>
-          <li><a href="navbar-examples.html">Navbar Examples</a></li>              
-          <li class="divider-vertical"></li>
+          <%= nav_li_tag(:root) { '<i class="icon-home icon-white"></i> Home'} %>
+          <%= nav_li_tag('About', about_path) { 'About'} %>
+          <%= nav_li_tag(current_user.name, current_user) if current_user_signed_in? %>
         </ul>
 
         <ul class="nav pull-right">
           <li class="active">  <a href="index.html"><i class="icon-home icon-white"></i> Home</a></li>
+          <li>  <a href="index.html"><i class="icon-home icon-white"></i> Home</a></li>
+          <li>  <p class="navbar-text"><i class="icon-home icon-white"></i> Home</p></li>
+
           <li><a href="setup-notes.html">Setup Notes</a></li>
           <li><a href="navbar-examples.html">Navbar Examples</a></li>              
         </ul>
         <a class="btn btn-primary pull-right" href="http://twitter.github.com/bootstrap/">Twitter Bootstrap Home</a>
       </div><!--/.nav-collapse -->
-  <% if false -%>
+
+
       <div class="row-fluid">
         <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), :root %>
         <nav> 
@@ -28,6 +32,7 @@
               <li><%= link_to 'Projects', about_path %><li>
             </ul>
             <ul class="nav mini-nav user-nav">
+              <li><%= link_to current_user %> </li>
               <li><%= current_user_signed_in? ? link_to( current_user ) : link_to( 'Sign in', sign_in_path) %></li>
               <li><%= current_user_signed_in? ? link_to('Sign out', sign_out_path) : '' %></li>
             </ul>
@@ -36,6 +41,5 @@
         </nav>
       </div>
     </div>
-  <% end -%>
 </div>
 </header>
