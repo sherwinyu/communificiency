@@ -7,6 +7,8 @@ Communificiency::Application.routes.draw do
 
   root :to => 'static_pages#home'
 
+  match '/projects', to: 'static_pages#desc'
+
   match '/sign_in', to: "sessions#new"
   match '/sign_out', to: "sessions#destroy"
 
