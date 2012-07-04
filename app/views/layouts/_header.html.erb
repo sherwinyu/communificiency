@@ -6,7 +6,7 @@
       <ul class="nav">
         <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), :root %>
         <%= nav_li_tag(:root) { '<i class="icon-home icon-white"></i> Home'} %>
-        <%= nav_li_tag('Projects', about_path)  %>
+        <%= nav_li_tag('Projects', :projects)  %>
         <%= nav_li_tag('About', about_path)  %>
       </ul>
 
