@@ -19,14 +19,19 @@
       <%= generic_form_field(@project, f, column) %>
     </div>
   <% end %>
-  <% @project.rewards.each do |r| %>
-    <%= fields_for(r) do |rewards_form| %>
-      <% r.class.columns.each do |rewards_column| %>
+
+  <div class="project-edit-rewards">
+    <h3> Project edit rewards </h3>
+    <%= f.fields_for :rewards do |rewards_form| %>
+      <% rewards_form.object.class.columns.each do |rewards_column| %>
         <%= rewards_form.label "#{rewards_column.name}".to_sym %> 
-        <%= generic_form_field(r, rewards_form, rewards_column) %>
+        <%= generic_form_field(rewards_form.object, rewards_form, rewards_column) %>
+        <br>
       <% end %>
+        <%= rewards_form.label :_destroy, "Remove question" %>
+        <%= rewards_form.check_box :_destroy %>
     <% end %>
-  <% end %>
+  </div>
 
 
 
