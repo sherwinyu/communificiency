@@ -37,7 +37,7 @@ module ApplicationHelper
 
   end
 
-  def generic_form_field(f, column, options = {})
+  def generic_form_field(object, f, column, options = {})
     options[:exclude] ||= [:id, :created_at, :updated_at]
     return if options[:exclude] && options[:exclude].include?(column.name.to_sym)
 

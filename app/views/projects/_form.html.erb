@@ -15,31 +15,13 @@
       <div class="field">
         <%= f.label "#{column.name}".to_sym %> 
       </div>
-      <%= generic_form_field(f, column) %>
+      <%= generic_form_field(@project, f, column) %>
+    </div>
+  <% end %>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
   </div>
-<% end %>
-
-<% if false -%> 
-  <% for column in object.class.columns %>  <% if column.name != "id" %>  <div class="field">  <div class="label">  <%= f.label "#{column.name}".to_sym  %>  </div>  
-        <% if column.type == :integer || column.type == :float || column.type == :string %>  
-          <% if column.name =~ /_id$/ # is this a id/foreign key field %>  
-            <% column_class = column.name.gsub(/_id$/, '').classify.constantize %>    
-            <% if column_class %>  
-              <%= collection_select(object.class.name.underscore.to_sym, column.name.to_sym, column_class.all, :id, :name, :prompt => true) %>  
-            <% else %>  
-              <%= f.text_field column.name.to_sym  %>  
-            <% end %>  
-          <% else %>  
-            <%= f.text_field column.name.to_sym  %>  
-          <% end %>  
-        <% elsif column.type == :text %>  <%= f.text_area column.name.to_sym  %>  <% elsif column.type == :datetime %>  <%= f.datetime_select column.name.to_sym  %>    <% elsif column.type == :boolean %>  <%= f.check_box column.name.to_sym  %>        <% else %>  
-          <% # Unknown Column Type %>  
-        <% end %>       
-      </div>  
-<% end %>   <% end %>  <% end %>  
-
-
-<div class="actions">
-  <%= f.submit %>
-</div>
 <% end %>
