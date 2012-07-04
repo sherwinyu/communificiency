@@ -1,0 +1,42 @@
+
+
+Users
+  has_many contributions
+  has_many projects through contributions
+  has_many payments through contributions
+  has_many payments through contributions
+
+Contributions
+  user_id
+  project_id
+  reward_id
+
+  belongs_to :user
+  belongs_to :project
+  belongs_to :reward
+
+
+Payments
+  information about the provider
+  amount
+  belongs_to contribution
+
+Projects
+  short_description
+  video
+  Business_information
+    Business name
+    address
+  funding needed
+  current funding
+    ==
+  comments, updates
+
+Reward
+  name
+  short_description
+  status
+
+  
+rails generate scaffold -p 
+
