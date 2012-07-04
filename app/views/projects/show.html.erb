@@ -5,10 +5,11 @@
         <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
       <div class="hero-unit">
         <div class="group">
-          <%= image_tag("lss.jpg", alt: "LittleSaladShop", class: "project-banner") %>
+          <%= image_tag(@project.picture, alt: @project.name, class: "project-banner") %>
           <div class="black-mask project-banner"></div>
-          <h1 class="overlay" id="project-banner">Little Salad Shop</h1>
+          <h1 class="overlay" id="project-banner">@project.name</h1>
         </div>
+
 
 <%#==========================MAIN TEXT============================%>
         <h3 class="content-header">The Project</h3>
@@ -33,17 +34,8 @@ You may contribute either online through Communificiency or in person at the Lit
 All contributions will go toward work in multiple areas of building efficiency including: HVAC, lighting, and insulation. The work will all be done by certified professionals to ensure that we get the most out of your contribution.
         </p>
 
-
-        <%#<blockquote class="pull-right">%>
-          <%#<p><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis.</em></p>%>
-          <%#<small>Someone famous</small>%>
-        <%#</blockquote>%>
-        <%#<p>%>
-        <%#Wayfarers ut selvage, velit fugiat beard odd future dolor banh mi trust fund ullamco. Quis put a bird on it irony, synth narwhal cred lomo bicycle rights. Scenester banh mi cred, messenger bag bicycle rights etsy master cleanse mustache cliche kale chips organic. Carles reprehenderit nulla est you probably haven't heard of them in, incididunt lo-fi elit art party pork belly trust fund. Irony echo park freegan, pop-up beard hella gentrify skateboard pork belly next level raw denim keytar sriracha typewriter. Duis est fixie leggings beard, anim pickled terry richardson placeat letterpress irony selvage commodo. Odio hoodie aesthetic street art.%>
-        <%#</p>%>
-
-
-      </div>
+        <h3 class="content-header">The Project</h3> <p> The Little Salad Shop’s mission is to offer average Americans healthy and affordable eating options. We also want our business and building to reflect this same goal by being as efficient and healthy as possible. An investment in basic efficiency retrofits will reduce our energy consumption by up to 40%. The cost of such retrofits will be paid back over time but require a substantial upfront investment. That's where you come in. In exchange for a small contribution, you receive the excellent incentives on the right including free salads and the chance to name a salad after yourself! Most importantly you will also personally invest in the success and sustainability of the Little Salad Shop. For that, we are eternally grateful. Together we can make the Little Salad Shop and New Haven more efficient and healthy places.  </p> <h3 class="content-header">Why contribute?</h3> <p> You believe in the Little Salad Shop. You believe in a more sustainable future. You believe in the power of communities to effect real change in a quick and effective manner. You want great rewards. Your contribution will help us lower our energy costs substantially, allowing us to spend even more on delivering the best salad experience in the world. Your contribution will also help us drastically reduce our carbon footprint while being less wasteful </p> <h3 class="content-header">How does it work? </h3> <p> You may contribute either online through Communificiency or in person at the Little Salad Shop. You will receive an email with a coupon code redeemable for your selected reward to be used within the allotted time period. You get to enjoy your reward and a more efficient LSS!  </p> <h3 class="content-header">Where are your contributions going? </h3> <p> All contributions will go toward work in multiple areas of building efficiency including: HVAC, lighting, and insulation. The work will all be done by certified professionals to ensure that we get the most out of your contribution.  </p>
+      </div> <!-- /hero unit -->
 
     </div><!--/span-->
 

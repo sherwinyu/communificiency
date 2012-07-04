@@ -47,7 +47,7 @@ module ApplicationHelper
     when :string
       f.text_field column.name.to_sym
     when :text
-      f.text_area column.name.to_sym
+      f.text_area column.name.to_sym, size: '25x30', class: 'span8'
     when :boolean
       f.check_box column.name.to_sym
     when :datetime
