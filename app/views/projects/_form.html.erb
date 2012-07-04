@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+
   <% @project.class.columns.each do |column| %>
     <div class="field">
       <div class="field">
@@ -18,6 +19,15 @@
       <%= generic_form_field(@project, f, column) %>
     </div>
   <% end %>
+  <% @project.rewards.each do |r| %>
+    <%= fields_for(r) do |rewards_form| %>
+      <% r.class.columns.each do |rewards_column| %>
+        <%= rewards_form.label "#{rewards_column.name}".to_sym %> 
+        <%= generic_form_field(r, rewards_form, rewards_column) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
 
 
 
