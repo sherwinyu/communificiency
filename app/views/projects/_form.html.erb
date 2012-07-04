@@ -23,18 +23,9 @@
   <div class="project-edit-rewards">
     <h3> Project edit rewards </h3>
     <%= f.fields_for :rewards do |rewards_form| %>
-      <% rewards_form.object.class.columns.each do |rewards_column| %>
-        <%= rewards_form.label "#{rewards_column.name}".to_sym %> 
-        <%= generic_form_field(rewards_form.object, rewards_form, rewards_column) %>
-        <br>
-      <% end %>
-        <%= rewards_form.label :_destroy, "Remove question" %>
-        <%= rewards_form.check_box :_destroy %>
+      <%= render partial: 'rewards/fields', locals: {f: rewards_form}%>
     <% end %>
   </div>
-
-
-
 
   <div class="actions">
     <%= f.submit %>
