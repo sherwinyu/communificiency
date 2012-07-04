@@ -64,4 +64,9 @@ module ApplicationHelper
     end
   end
 
+  def markdown text, extensions={}
+    require 'redcarpet'
+    raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new, extensions).render text
+  end
+
 end

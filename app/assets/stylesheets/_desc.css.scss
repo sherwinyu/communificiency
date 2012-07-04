@@ -77,9 +77,22 @@ h1#project-banner {
   background: white;
 }
 
-.content-header{
+div.markdown > h1, div.markdown > h2, div.markdown > h3, div.markdown > h4, .content-header{
   margin: 20px 0px 12px;
   color: $skyblue;
+}
+
+div.markdown > h2 {
+  text-align: left;
+}
+
+div.markdown > p {
+  text-indent: 50px;
+  line-height: 1.7em;
+}
+
+div.markdown > blockquote > p {
+  font-size: small; 
 }
 
 .rewards-bar {

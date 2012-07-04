@@ -7,43 +7,20 @@
         <div class="group">
           <%= image_tag(@project.picture, alt: @project.name, class: "project-banner") %>
           <div class="black-mask project-banner"></div>
-          <h1 class="overlay" id="project-banner">@project.name</h1>
+          <h1 class="overlay" id="project-banner"><%= @project.name %></h1>
         </div>
 
 
 <%#==========================MAIN TEXT============================%>
         <h3 class="content-header">The Project</h3>
         <p>
-The Little Salad Shop’s mission is to offer average Americans healthy and affordable eating options. We also want our business and building to reflect this same goal by being as efficient and healthy as possible. An investment in basic efficiency retrofits will reduce our energy consumption by up to 40%. The cost of such retrofits will be paid back over time but require a substantial upfront investment. That's where you come in. In exchange for a small contribution, you receive the excellent incentives on the right including free salads and the chance to name a salad after yourself! Most importantly you will also personally invest in the success and sustainability of the Little Salad Shop. For that, we are eternally grateful. Together we can make the Little Salad Shop and New Haven more efficient and healthy places.
-        </p>
-        <h3 class="content-header">Why contribute?</h3>
-        <p>
-You believe in the Little Salad Shop. You believe in a more sustainable future. You believe in the power of communities to effect real change in a quick and effective manner. You want great rewards. Your contribution will help us lower our energy costs substantially, allowing us to spend even more on delivering the best salad experience in the world. Your contribution will also help us drastically reduce our carbon footprint while being less wasteful
-        </p>
+        <div class="markdown"><%= markdown @project.short_description %></div>
 
-
-
-        <h3 class="content-header">How does it work? </h3>
-        <p>
-You may contribute either online through Communificiency or in person at the Little Salad Shop. You will receive an email with a coupon code redeemable for your selected reward to be used within the allotted time period. You get to enjoy your reward and a more efficient LSS!
-        </p>
-
-
-        <h3 class="content-header">Where are your contributions going? </h3>
-        <p>
-All contributions will go toward work in multiple areas of building efficiency including: HVAC, lighting, and insulation. The work will all be done by certified professionals to ensure that we get the most out of your contribution.
-        </p>
-
-        <h3 class="content-header">The Project</h3> <p> The Little Salad Shop’s mission is to offer average Americans healthy and affordable eating options. We also want our business and building to reflect this same goal by being as efficient and healthy as possible. An investment in basic efficiency retrofits will reduce our energy consumption by up to 40%. The cost of such retrofits will be paid back over time but require a substantial upfront investment. That's where you come in. In exchange for a small contribution, you receive the excellent incentives on the right including free salads and the chance to name a salad after yourself! Most importantly you will also personally invest in the success and sustainability of the Little Salad Shop. For that, we are eternally grateful. Together we can make the Little Salad Shop and New Haven more efficient and healthy places.  </p> <h3 class="content-header">Why contribute?</h3> <p> You believe in the Little Salad Shop. You believe in a more sustainable future. You believe in the power of communities to effect real change in a quick and effective manner. You want great rewards. Your contribution will help us lower our energy costs substantially, allowing us to spend even more on delivering the best salad experience in the world. Your contribution will also help us drastically reduce our carbon footprint while being less wasteful </p> <h3 class="content-header">How does it work? </h3> <p> You may contribute either online through Communificiency or in person at the Little Salad Shop. You will receive an email with a coupon code redeemable for your selected reward to be used within the allotted time period. You get to enjoy your reward and a more efficient LSS!  </p> <h3 class="content-header">Where are your contributions going? </h3> <p> All contributions will go toward work in multiple areas of building efficiency including: HVAC, lighting, and insulation. The work will all be done by certified professionals to ensure that we get the most out of your contribution.  </p>
+        <div class="markdown"> <%= markdown(@project.long_description) %> </div>
       </div> <!-- /hero unit -->
 
+
     </div><!--/span-->
-
-
-
-
-
-
 
 <%#==========================REWARD BAR============================%>
 
@@ -69,27 +46,6 @@ All contributions will go toward work in multiple areas of building efficiency i
       </div>
 
 
-<%#==========================SIDELINKS NAV============================%>
-      <%#<div class="sidebar-nav">%>
-        <%#<ul class="nav nav-list">%>
-          <%#<li class="nav-header">Sidebar</li>%>
-          <%#<li class="active"><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li class="nav-header">Sidebar</li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li class="nav-header">Sidebar</li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-          <%#<li><a href="#">Link</a></li>%>
-        <%#</ul>%>
-      <%#</div>[>/.well <]%>
     </div><!--/span-->
   </div><!--/row-->
 
