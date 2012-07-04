@@ -42,6 +42,13 @@ module ApplicationHelper
     return if options[:exclude] && options[:exclude].include?(column.name.to_sym)
 
     return case column.type
+    when -> t {t == :integer && column.name =~ /_id$/}
+      column_class = column.name.gsub(/_id$/, '').classify.constantize
+      if column_class
+        collection_select(object.class.name.underscore.to_sym, column.name.to_sym, column_class.all, :id, :name, :prompt => true) 
+      else
+        f.text_field column.name.to_sym
+      end
     when -> t { [:integer, :float, :decimal, :primary_key].include? t}
       f.number_field column.name.to_sym
     when :string
