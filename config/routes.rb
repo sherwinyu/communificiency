@@ -1,4 +1,7 @@
 Communificiency::Application.routes.draw do
+  resources :projects
+  resources :rewards
+
   get "sessions/new"
 
   resources :payments

@@ -1,0 +1,26 @@
+<%= form_for(@reward) do |f| %>
+  <% if @reward.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reward.errors.count, "error") %> prohibited this reward from being saved:</h2>
+
+      <ul>
+      <% @reward.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% @reward.class.columns.each do |column| %>
+    <div class="field">
+      <div class="field">
+        <%= f.label "#{column.name}".to_sym %> 
+      </div>
+      <%= generic_form_field(@reward, f, column) %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,60 @@
+
+<div class="container">
+  <div class="row-fluid">
+    <div class="span9">
+        <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
+      <div class="hero-unit">
+        <div class="group">
+          <%= image_tag(@project.picture, alt: @project.name, class: "project-banner") %>
+          <div class="black-mask project-banner"></div>
+          <h1 class="overlay" id="project-banner"><%= @project.name %></h1>
+        </div>
+
+
+<%#==========================MAIN TEXT============================%>
+        <h3 class="content-header">The Project</h3>
+        <p>
+        <div class="markdown"><%= markdown @project.short_description %></div>
+
+        <div class="markdown"> <%= markdown(@project.long_description) %> </div>
+      </div> <!-- /hero unit -->
+
+
+    </div><!--/span-->
+
+<%#==========================REWARD BAR============================%>
+
+
+    <div class="span3 rewards-bar">
+      <div class="rewards-container ">
+      <h3 class="reward-header"> Contribution levels </h3>
+        <div class="reward">
+          <h3 class="reward-tag"> Pledge $10 </h3> <a class="btn reward-btn"> Contribute </a>
+          <p>Receive a free salad of your choice (with meat or without) and a bag of chips. This is a deal you can’t miss! You would be paying more than $10 for these items separately. Get it while it lasts!</p>
+        </div>
+
+        <div class="reward">
+          <h3 class="reward-tag"> Pledge $25 </h3> <a class="btn reward-btn"> Contribute </a>
+          <p>Receive a ticket to a special afternoon event in the park catered by the Little Salad Shop. This is your opportunity to meet other like-minded supporters who believe in LSS, sustainability, and the power of communities to make a difference. (Quantity Available: 25) </p>
+        </div>
+
+        <div class="reward">
+          <h3 class="reward-tag"> Pledge $200 </h3> <a class="btn reward-btn"> Contribute </a>
+          <p>This is the biggie! Help us design your own personal salad, which we will name after you and which you will eat free for a month. There’s no better way to be a part of LSS! (Quantity Available: 2) </p>
+        </div>
+
+      </div>
+
+
+    </div><!--/span-->
+  </div><!--/row-->
+
+  <hr>
+
+
+</div><!--/.fluid-container-->
+
+
+
+<%= link_to 'Edit', edit_project_path(@project) if Rails.env.development? %> |
+<%= link_to 'Back', projects_path %>

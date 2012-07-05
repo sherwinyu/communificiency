@@ -1,0 +1,33 @@
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% @project.class.columns.each do |column| %>
+    <div class="field">
+      <div class="field">
+        <%= f.label "#{column.name}".to_sym %> 
+      </div>
+      <%= generic_form_field(@project, f, column) %>
+    </div>
+  <% end %>
+
+  <div class="project-edit-rewards">
+    <h3> Project edit rewards </h3>
+    <%= f.fields_for :rewards do |rewards_form| %>
+      <%= render partial: 'rewards/fields', locals: {f: rewards_form}%>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
