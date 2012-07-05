@@ -1,33 +1,34 @@
-<%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
-      <ul>
-        <% @project.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% @project.class.columns.each do |column| %>
-    <div class="field">
-      <div class="field">
-        <%= f.label "#{column.name}".to_sym %> 
-      </div>
-      <%= generic_form_field(@project, f, column) %>
-    </div>
-  <% end %>
-
-  <div class="project-edit-rewards">
-    <h3> Project edit rewards </h3>
-    <%= f.fields_for :rewards do |rewards_form| %>
-      <%= render partial: 'rewards/fields', locals: {f: rewards_form}%>
+<%= simple_nested_form_for @project, html: {class: 'form-horizontal'} do |f| %>
+  <fieldset>
+    <legend> <%= @project %> </legend>
+    <h3> Basic Info </h3>
+    <% if false # f.object.class.column_names.each do |column| %>
+      <%= f.input column.to_sym %>
     <% end %>
-  </div>
+    <%=  f.input :name                                     %>
+    <%=  f.input :short_description, input_html: {class: "span8"}, hint: "A short description of your project" %>
+    <%=  f.input :long_description , input_html: {class: "span8"} %>
+    <%=  f.input :video, label: 'Video URL', hint: "If you have a video you describing your project, include the URL here" %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <h3> Rewards </h3>
+    <div class="rewards-container">
+      <%= f.simple_fields_for :rewards do |nested| %>
+        <div class="well">
+          <% if false # (f.object.class.column_names - %w[minimum_contribution]).each do |column| %>
+            <%= nested.input column.to_sym %>
+          <% end %>
+          <%= nested.input :name %>
+
+          <%= nested.input :minimum_contribution, html: {class: 'input-prepend input-append'}, wrapper: 'prepend' do %>
+            <%= content_tag :span, "$", class: "add-on" %>
+            <%= nested.input_field :minimum_contribution %>
+            <%= content_tag :span, ".00", class: "add-on" %>
+          <% end %>
+          <%= nested.link_to_remove "Remove this reward" %>
+
+        </div>
+      <% end %>
+      <%= f.link_to_add "Add a reward", :rewards %>
+    </div>
+
+  <% end %>

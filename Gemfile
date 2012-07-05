@@ -4,7 +4,6 @@ group :development do
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.10.0'
   gem 'pry', '~> 0.9.9.6'
-  gem 'therubyracer'
 end
 
 group :production do
@@ -31,6 +30,8 @@ gem 'rails', '3.2.5'
 gem 'rest-client', '~> 1.6.7'
 
 gem 'redcarpet' 
+gem 'simple_form'
+gem 'nested_form'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

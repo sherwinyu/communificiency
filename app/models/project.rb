@@ -4,4 +4,8 @@ class Project < ActiveRecord::Base
   attr_accessible :rewards_attributes
   has_many :rewards
   accepts_nested_attributes_for :rewards, allow_destroy: true
+
+  def to_s
+    name
+  end
 end
