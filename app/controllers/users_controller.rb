@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   def sign_up
     @user = User.new
-    render 'sign_up', layout: "main_with_flash"
+    render 'sign_up'
   end
 
   def show
     @user = User.find(params[:id])
-    render layout: "main_with_flash"
+    render 
   end
 
   def create
@@ -17,9 +17,9 @@ class UsersController < ApplicationController
     if @user.save
       flash.notice = "Your profile was successfully created. Welcome to Communificiency!"
       sign_in @user
-      redirect_to @user, layout: "main_with_flash"
+      redirect_to @user
     else
-      render 'sign_up', layout: "main_with_flash"
+      render 'sign_up'
     end
   end
 
