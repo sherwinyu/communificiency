@@ -1,4 +1,6 @@
 Communificiency::Application.routes.draw do
+  resources :contributions
+
   resources :projects
   resources :rewards
 
