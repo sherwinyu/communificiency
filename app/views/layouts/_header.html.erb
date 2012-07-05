@@ -19,8 +19,10 @@
         </a>
 
         <ul class="dropdown-menu">
-          <li><a href="#">Sign out</a></li>
-          <li><a href="#">Edit profile</a></li>
+          <li><%= link_to "Sign in", sign_in_path if !current_user_signed_in? %></li>
+          <li><%= link_to "Edit profile", edit_user_path(current_user) if current_user_signed_in? %></li>
+
+          <li><%= link_to "Sign out", sign_out_path if current_user_signed_in? %></li>
         </ul>
         </li>
       </ul>

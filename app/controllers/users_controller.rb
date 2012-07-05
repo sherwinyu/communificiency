@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    redirect_to "/sign_up", layout: "main_with_flash" and return if params[:user].nil?
+    redirect_to "/sign_up" and return if params[:user].nil?
 
     @user = User.new  params[:user]
 
