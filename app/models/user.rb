@@ -1,5 +1,13 @@
 require 'digest'
 class User < ActiveRecord::Base
+
+  has_many :contributions
+  has_many :projects, through: :contributions
+  has_many :rewards, through: :contributions
+  has_many :payments, through: :contributions
+
+
+
   attr_accessor :password 
   ## TODO(SYU): understand where "password" is getting stored!
   # Notes: setting attr_accessor :email overrides the default :email attributes from the Rails model

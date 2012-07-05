@@ -54,6 +54,8 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     ffi (1.0.11)
+    formtastic (2.2.1)
+      actionpack (>= 3.0)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
@@ -159,6 +161,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.0.3)
   capybara (= 1.1.2)
   coffee-rails (= 3.2.2)
+  formtastic
   jquery-rails (= 2.0.0)
   nested_form
   pg (= 0.12.2)

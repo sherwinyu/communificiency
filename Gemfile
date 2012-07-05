@@ -31,6 +31,7 @@ gem 'rest-client', '~> 1.6.7'
 
 gem 'redcarpet' 
 gem 'simple_form'
+gem 'formtastic'
 gem 'nested_form'
 
 # To use ActiveModel has_secure_password
