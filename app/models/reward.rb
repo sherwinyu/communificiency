@@ -3,7 +3,10 @@ class Reward < ActiveRecord::Base
   belongs_to :project
   has_many :contributions
 
+  validates_presence_of :minimum_contribution 
+  validates_numericality_of :minimum_contribution, message: "has to be a number"
+
   def to_s
-    new_record? ? "New Reward" : "#{minimum_contribution} \t #{name} \t #{short_description}"
+    new_record? ? "New Reward" : "$ %.2f --  #{name} -- #{short_description}" % minimum_contribution
   end
 end

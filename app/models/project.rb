@@ -4,7 +4,8 @@ class Project < ActiveRecord::Base
   attr_accessible :rewards_attributes
   has_many :rewards
   has_many :contributions
-  accepts_nested_attributes_for :rewards, allow_destroy: true
+  accepts_nested_attributes_for :rewards, allow_destroy: true, reject_if: ->r  { r[:name].blank?}
+  validates_associated :rewards
 
   def to_s
     name

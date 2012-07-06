@@ -16,3 +16,9 @@
 //
 //= require bootstrap
 //= require jquery_nested_form
+//= require jquery_autogrowtextarea
+
+//TODO(syu): Definitely don't want this
+$(document).ready(function(){
+  $(".autogrow").autoGrow();
+});

@@ -28,10 +28,13 @@
     <div class="span3 rewards-bar">
       <div class="rewards-container ">
       <h3 class="reward-header"> Contribution levels </h3>
+      <%= @project.rewards.each do |reward| %>
         <div class="reward">
-          <h3 class="reward-tag"> Pledge $10 </h3> <a class="btn reward-btn"> Contribute </a>
+          <h3 class="reward-tag"> Pledge $<%= reward.minimum_contribution %> <a class="btn reward-btn"> Contribute </a>
           <p>Receive a free salad of your choice (with meat or without) and a bag of chips. This is a deal you can’t miss! You would be paying more than $10 for these items separately. Get it while it lasts!</p>
         </div>
+
+      <% end %>
 
         <div class="reward">
           <h3 class="reward-tag"> Pledge $25 </h3> <a class="btn reward-btn"> Contribute </a>

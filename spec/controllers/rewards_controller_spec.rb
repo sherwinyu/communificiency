@@ -24,9 +24,12 @@ describe RewardsController do
   # Reward. As you add validations to Reward, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {name: "Give sherwin a free massage",
+     short_description: "just use your hands",
+     long_description: "seriously",
+     minimum_contribution: 50}
   end
-  
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # RewardsController. Be sure to keep this updated too.

@@ -13,23 +13,29 @@
     <h3> Rewards </h3>
     <div class="rewards-container">
       <%= f.simple_fields_for :rewards do |nested| %>
-        <div class="well">
+        <div id="reward_<%= @ind ? @ind+=1 : @ind = 0 %>" class="well">
+          <%= nested.link_to_remove raw("&#215;"), class:"close" %>
+          <h4><%= nested.object %></h4>
           <% if false # (f.object.class.column_names - %w[minimum_contribution]).each do |column| %>
             <%= nested.input column.to_sym %>
           <% end %>
           <%= nested.input :name %>
+          <%= nested.input :short_description %>
+          <%= nested.input :long_description, input_html: {class: 'autogrow span8', rows: 10, cols: 50 }%>
+
 
           <%= nested.input :minimum_contribution, html: {class: 'input-prepend input-append'}, wrapper: 'prepend' do %>
             <%= content_tag :span, "$", class: "add-on" %>
             <%= nested.input_field :minimum_contribution %>
             <%= content_tag :span, ".00", class: "add-on" %>
           <% end %>
-          <%= nested.link_to_remove "Remove this reward" %>
 
         </div>
       <% end %>
-      <%= f.link_to_add "Add a reward", :rewards %>
+      <%= f.link_to_add raw("+"), :rewards %>
     </div>
-    <%= f.button :submit %>
-
+    <div class="form-actions">
+      <%= f.button :submit, "Save project", class: "btn-large btn-primary" %>
+      <%= link_to "Discard changes", project_path(@project), class: "btn-large btn-danger" %>
+    </div>
   <% end %>
