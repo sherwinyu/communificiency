@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_after_filter :store_location
+
   def new
   end
 
@@ -11,7 +13,7 @@ class SessionsController < ApplicationController
     else
       flash.notice = 'Successfully logged in!' if Rails.env.development?
       sign_in @user
-      redirect_to @user
+      redirect_back_or @user 
       # success
       #
     end

@@ -24,14 +24,17 @@ class ContributionsController < ApplicationController
 
   # GET /projects/1/contributions/new
   def new
-    @project = Project.find(params[:project_id])
-    @reward = @project.rewards.find(params[:reward_id])
-    if @reward.nil?
-      flash.alert = 'Error'
-      redirect_to :back
-      # error!
+    if !current_user_signed_in?
+      flash.notice = "Please sign in first."
+      redirect_to sign_in_path and return
     end
-    @contribution = @project.contributions.build(reward: @reward)
+
+    @project = Project.find_by_id params[:project_id]
+    redirect_to projects_path, alert: "project error" and return unless @project
+    @reward = @project.rewards.find_by_id params[:reward_id] 
+    redirect_to project_path(@project) , alert: "reward error" and return unless @reward
+
+    @contribution = @project.contributions.build(reward: @reward, user: current_user)
 
     respond_to do |format|
       format.html # new.html.erb
