@@ -32,8 +32,10 @@ class ContributionsController < ApplicationController
     @project = Project.find_by_id params[:project_id]
     redirect_to projects_path, alert: "project error" and return unless @project
     @reward = @project.rewards.find_by_id params[:reward_id] 
-    redirect_to project_path(@project) , alert: "reward error" and return unless @reward
-
+    if @reward.nil?
+      flash.notice = "Please select your reward!" 
+      # redirect_to project_path(@project) , alert: "reward error" and return unless @reward
+    end
     @contribution = @project.contributions.build(reward: @reward, user: current_user)
 
     respond_to do |format|

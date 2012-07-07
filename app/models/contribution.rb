@@ -14,7 +14,7 @@ class Contribution < ActiveRecord::Base
 
   validates_presence_of :reward
 
-  validates_each :amount do |record, attr, value|
+  validates_each :amount, unless: Proc.new{ |contrib| contrib.reward.nil? } do |record, attr, value|
     record.errors.add(attr, "Contribution must be at least #{self.reward.minimum_contribution}, #{reward}'s minimum contribution") unless value > record.reward.minimum_contribution
   end
 

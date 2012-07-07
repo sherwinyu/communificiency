@@ -1,8 +1,8 @@
 
 <div class="container">
-  <div class="row-fluid">
-    <div class="span9">
-        <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
+  <div class="row">
+    <div class="span8">
+      <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
       <div class="hero-unit">
         <div class="group">
           <%= image_tag(@project.picture, alt: @project.name, class: "project-banner") %>
@@ -11,7 +11,7 @@
         </div>
 
 
-<%#==========================MAIN TEXT============================%>
+        <%#==========================MAIN TEXT============================%>
         <h3 class="content-header">The Project</h3>
         <p>
         <div class="markdown"><%= markdown @project.short_description %></div>
@@ -22,18 +22,34 @@
 
     </div><!--/span-->
 
-<%#==========================REWARD BAR============================%>
+    <%#==========================REWARD BAR============================%>
 
 
-    <div class="span3 rewards-bar">
+    <div class="span4 rewards-bar">
       <div class="rewards-container ">
-      <h3 class="reward-header"> Contribution levels </h3>
-      <% @project.rewards.each do |reward| %>
-        <div class="reward">
-          <h3 class="reward-tag"> Pledge $<%= reward.minimum_contribution %> <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn" %>
-          <p> <%= reward.long_description %> </p>
+        <h3 class="reward-header"> Contribution levels </h3>
+        <div class="contribution-info well">
+          <h4>25% funded</h4>
+          <h4>$350 of $1,400 raised</h4>
+          <h4>281 contributors</h4>
         </div>
-      <% end %>
+        <div class='well'>
+          <%= simple_form_for(@contribution, url: new_project_contribution_path(@project), method: 'GET') do |f| %>
+
+            <%= f.input :amount, html: {class: 'input-prepend input-append'}, wrapper: 'prepend' do %>
+              <%= content_tag :span, "$", class: "add-on" %>
+              <%= f.input_field :amount, class: 'span2' %>
+              <%= content_tag :span, ".00", class: "add-on" %>
+            <% end %>
+          <% end %>
+        </div>
+        <% @project.rewards.each do |reward| %>
+          <div class="reward">
+            <h3 class="reward-tag"> Pledge $<%= reward.minimum_contribution %>
+            <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn" %>
+            <p> <%= reward.long_description %> </p>
+          </div>
+        <% end %>
 
         <div class="reward">
           <h3 class="reward-tag"> Pledge $25 </h3> <a class="btn reward-btn"> Contribute </a>
