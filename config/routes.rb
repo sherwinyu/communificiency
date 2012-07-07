@@ -1,8 +1,9 @@
 Communificiency::Application.routes.draw do
-  resources :contributions
-
-  resources :projects
-  resources :rewards
+  resources :projects do
+    resources :contributions
+  end
+    resources :rewards
+    resources :contributions
 
   get "sessions/new"
 

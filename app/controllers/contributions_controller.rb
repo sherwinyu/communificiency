@@ -22,10 +22,16 @@ class ContributionsController < ApplicationController
     end
   end
 
-  # GET /contributions/new
-  # GET /contributions/new.json
+  # GET /projects/1/contributions/new
   def new
-    @contribution = Contribution.new
+    @project = Project.find(params[:project_id])
+    @reward = @project.rewards.find(params[:reward_id])
+    if @reward.nil?
+      flash.alert = 'Error'
+      redirect_to :back
+      # error!
+    end
+    @contribution = @project.contributions.build(reward: @reward)
 
     respond_to do |format|
       format.html # new.html.erb
