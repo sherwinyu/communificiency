@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120705221923) do
+ActiveRecord::Schema.define(:version => 20120707082233) do
 
   create_table "contributions", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20120705221923) do
     t.integer  "payment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.float    "amount"
   end
 
   create_table "payments", :force => true do |t|
