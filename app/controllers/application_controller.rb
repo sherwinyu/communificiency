@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
     super(options, response_status)
   end
 
+  def redirect_back_after *args
+    store_location
+    redirect_to *args
+  end
+
   private
     def store_location
       session[:return_to] = request.fullpath
