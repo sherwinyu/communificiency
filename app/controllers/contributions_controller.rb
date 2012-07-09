@@ -36,7 +36,12 @@ class ContributionsController < ApplicationController
       flash.notice = "Please select your reward!" 
       # redirect_to project_path(@project) , alert: "reward error" and return unless @reward
     end
-    @contribution = @project.contributions.build(reward: @reward, user: current_user)
+    contrib_params = params[:contribution] || {}
+    contrib_params[:user] = current_user
+    contrib_params[:reward] = @reward # for both nil and non nil
+    contrib_params[:amount] ||= @reward?  @reward.minimum_contribution : 0
+
+    @contribution = @project.contributions.build(contrib_params)
 
     respond_to do |format|
       format.html # new.html.erb

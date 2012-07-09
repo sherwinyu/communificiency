@@ -125,23 +125,23 @@ textarea {
 
 /* typography */
 /*h1, h2, h3, h4, h5, h6 {*/
-  /*line-height: 1;*/
+/*line-height: 1;*/
 /*}*/
 
 /*h1 {*/
-  /*margin-bottom: 30px;*/
-  /*text-align: center;*/
+/*margin-bottom: 30px;*/
+/*text-align: center;*/
 /*}*/
 
 /*h2 {*/
-  /*margin-bottom: 30px;*/
-  /*text-align: center;*/
-  /*font-weight: normal;*/
+/*margin-bottom: 30px;*/
+/*text-align: center;*/
+/*font-weight: normal;*/
 /*}*/
 
 /*h3 {*/
-  /*margin-top: 10px;*/
-  /*margin-bottom: 10px;*/
+/*margin-top: 10px;*/
+/*margin-bottom: 10px;*/
 /*}*/
 
 /* header */
@@ -195,3 +195,26 @@ footer ul li {
 .navbar-inner {
   height: $navBarHeight; 
 }
+
+.contributionPaymentHeader {
+  color: $skyblue;
+  margin-top: 10px;
+}
+
+.inputContributionAmount {
+  height: 50px;
+  font-size: 35px;
+  text-align: center;
+}
+#inputContributionDollarSign, #inputContributionZeros {
+  height: 50px;
+  font-size: 34px;
+  position: relative;
+  display: inline;
+  padding: 10px 5px 9px;
+}
+.step1 {
+  @extend .center;
+  margin-top: 25px;
+}
+

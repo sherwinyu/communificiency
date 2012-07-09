@@ -2,9 +2,6 @@
   <fieldset>
     <legend> <%= @project %> </legend>
     <h3> Basic Info </h3>
-    <% if false # f.object.class.column_names.each do |column| %>
-      <%= f.input column.to_sym %>
-    <% end %>
     <%=  f.input :name                                     %>
     <%=  f.input :short_description, input_html: {class: "span8"}, hint: "A short description of your project" %>
     <%=  f.input :long_description , input_html: {class: "span8"} %>

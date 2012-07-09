@@ -36,7 +36,7 @@
         <div class='well'>
           <%= simple_form_for(@contribution, url: new_project_contribution_path(@project), method: 'GET') do |f| %>
 
-            <%= f.input :amount, html: {class: 'input-prepend input-append'}, wrapper: 'prepend' do %>
+            <%= f.input :amount, wrapper: 'prepend' do %>
               <%= content_tag :span, "$", class: "add-on" %>
               <%= f.input_field :amount, class: 'span2' %>
               <%= content_tag :span, ".00", class: "add-on" %>

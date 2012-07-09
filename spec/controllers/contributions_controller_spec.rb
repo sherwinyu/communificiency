@@ -24,9 +24,9 @@ describe ContributionsController do
   # Contribution. As you add validations to Contribution, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {reward_id: 1, project_id: 1}
   end
-  
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ContributionsController. Be sure to keep this updated too.
@@ -51,10 +51,23 @@ describe ContributionsController do
   end
 
   describe "GET new" do
-    it "assigns a new contribution as @contribution" do
-      get :new, {}, valid_session
-      assigns(:contribution).should be_a_new(Contribution)
+    it 'should require you to sign in'
+
+    describe "GETS new with a valid reward and project combo" do
+
+      it 'should create a new contribution'
+
+      it "assigns a new contribution as @contribution" do
+        get :new, {}, valid_session
+        assigns(:contribution).should be_a_new(Contribution)
+      end
     end
+
+    describe 'GETS new with an invalid reward and project combo' do
+      it 'should redirect to project page with an error'
+    end
+
+
   end
 
   describe "GET edit" do
