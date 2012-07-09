@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:edit, :update]
+  before_filter :require_signed_in, only: [:edit, :update]
 
   def sign_up
     @user = User.new
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   private
-  def signed_in_user
+  def require_signed_in
     redirect_back_after sign_in_path, notice: "Please sign in first." unless current_user_signed_in?
   end
 

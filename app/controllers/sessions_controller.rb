@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
       sign_in @user
       redirect_back_or @user 
       # success
-      #
     end
 
   end
