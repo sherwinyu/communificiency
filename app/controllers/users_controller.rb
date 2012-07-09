@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_signed_in, only: [:edit, :update]
+  before_filter :require_correct_user, only: [:edit, :update]
 
   def sign_up
     @user = User.new
@@ -43,6 +44,10 @@ class UsersController < ApplicationController
   private
   def require_signed_in
     redirect_back_after sign_in_path, notice: "Please sign in first." unless current_user_signed_in?
+  end
+  def require_correct_user
+    @user = User.find_by_id params[:id]
+    redirect_back_or :root, alert: "Insufficient privileges" unless current_user?(@user)
   end
 
 end

@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
       session[:return_to] = nil
     end
 
-    def redirect_back_or(default)
-      redirect_to(session[:return_to] || default)
+    def redirect_back_or(default, *args)
+      redirect_to(session[:return_to] || default, *args)
       clear_stored_location
     end
 

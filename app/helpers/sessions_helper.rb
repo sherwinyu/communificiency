@@ -13,6 +13,13 @@ module SessionsHelper
     @current_user = user
   end
 
+  def current_user? ( user )
+    user == current_user
+  end
+
+
+
+
   def current_user_signed_in?
     return !current_user.nil?
   end
