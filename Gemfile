@@ -33,6 +33,8 @@ gem 'redcarpet'
 gem 'simple_form'
 gem 'formtastic'
 gem 'nested_form'
+gem 'faker', '1.0.1'
+gem 'bootstrap-will_paginate', '0.0.6'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

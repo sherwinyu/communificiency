@@ -7,6 +7,10 @@ class UsersController < ApplicationController
     render 'sign_up'
   end
 
+  def index
+    @users = User.paginate( page: params[ :page ])
+  end
+
   def show
     @user = User.find(params[:id])
     render 
@@ -42,9 +46,11 @@ class UsersController < ApplicationController
   end
 
   private
+
   def require_signed_in
     redirect_back_after sign_in_path, notice: "Please sign in first." unless current_user_signed_in?
   end
+
   def require_correct_user
     @user = User.find_by_id params[:id]
     redirect_back_or :root, alert: "Insufficient privileges" unless current_user?(@user)
