@@ -29,10 +29,6 @@
           <h2 class="contributionPaymentHeader"> 3. Pay </h2>
 
 
-          <h2 class="header"> Help out LSS! </h2>
-          <p>
-          Food truck chillwave exercitation veniam nihil cosby sweater. In tumblr semiotics mollit hoodie, elit vero. Biodiesel narwhal carles beard whatever high life, viral nostrud readymade cosby sweater trust fund tempor bushwick odd future. Aliquip fingerstache wayfarers williamsburg. Laboris minim polaroid raw denim cupidatat nostrud. Narwhal id pickled raw denim. Butcher direct trade keytar, nostrud aute swag pinterest fugiat wayfarers culpa whatever Austin velit artisan ex.
-          </p>
 
           <% end # form for %> 
 
@@ -40,96 +36,23 @@
 
           <%= link_to 'Back', contributions_path %>
 
-          <%= form_for(:payment, :url => payments_path) do |f|  %>
-            <div class="field">
-              <%= f.label :amount %> <br />
-              <%= f.number_field :amount %>
-            </div>
+          <%# form_for(:payment, :url => payments_path) do |f|  %>
+            <%# div class="field">
+              <%= f.label :amount %> 
+              <%# f.number_field :amount %>
+            <%# div>
 
             <div class="actions">
               <%= f.submit "Pay" %>
-            </div>
-          <% end %>
+            <%# /div %>
+          <%# end %>
 
         </div>
 
       </div><!--/span-->
+      <hr>
 
 
-
-
-
-
-
-
-
-      <div class="span3">
-        <div class="rewards-bar ">
-          <div class="reward">
-            <h3 class="reward-tag"> Pledge $25 </h3> <a class="btn reward-btn"> Contribute </a>
-            <p> Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          </div>
-
-          <div class="reward">
-            <h3 class="reward-tag"> Pledge $50 </h3> <a class="btn reward-btn"> Contribute </a>
-            <p> Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          </div>
-
-          <div class="reward">
-            <h3 class="reward-tag"> Pledge $100 </h3> <a class="btn reward-btn"> Contribute </a>
-            <p> Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          </div>
-
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="sidebar-nav">
-          <ul class="nav nav-list">
-            <li class="nav-header">Sidebar</li>
-            <li class="active"><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li class="nav-header">Sidebar</li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li class="nav-header">Sidebar</li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-          </ul>
-        </div><!--/.well -->
-      </div><!--/span-->
-    </div><!--/row-->
-
-    <hr>
-
-
-  </div><!--/.fluid-container-->
+    </div><!--/.fluid-container-->
 
 
