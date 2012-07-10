@@ -1,4 +1,8 @@
 Communificiency::Application.routes.draw do
+  get "projects/test1"
+  get "projects/test2"
+  get "projects/test3"
+  get "projects/test4"
   resources :projects do
     resources :contributions
   end
@@ -13,6 +17,7 @@ Communificiency::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   root :to => 'static_pages#home'
+
 
 
   match '/sign_in', to: "sessions#new"

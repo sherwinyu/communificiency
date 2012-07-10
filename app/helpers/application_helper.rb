@@ -76,4 +76,8 @@ module ApplicationHelper
     raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new, extensions).render text
   end
 
+  def find_asset filename
+    Communificiency::Application.assets.find_asset(filename)
+  end
+
 end
