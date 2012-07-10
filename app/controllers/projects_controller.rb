@@ -2,6 +2,21 @@ class ProjectsController < ApplicationController
 
   before_filter :require_admin, only: [:new, :create, :edit, :update, :destroy]
 
+  def test1
+    @project = Project.first
+  end
+  def test2
+    @project = Project.first
+  end
+  def test3
+    @project = Project.first
+  end
+  def test4
+    @project = Project.first
+  end
+  def test5
+    @project = Project.first
+  end
 
   # GET /projects
   # GET /projects.json
