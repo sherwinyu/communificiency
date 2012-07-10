@@ -14,64 +14,52 @@
 
         <%#==========================MAIN TEXT============================%>
         <div class="markdown">
-          <h2 class="content-header"> <%= @project.name %> 
-            <small><%= markdown @project.short_description %> </small>
-          </h2>
-        </div>
-
-
-        <div class="markdown"> <%= markdown(@project.long_description) %> </div>
-      </div> <!-- /hero unit -->
-
-
-    </div><!--/span-->
-
-    <%#==========================REWARD BAR============================%>
-
-
-    <div class="span4 rewards-bar">
-      <div class="rewards-container ">
-        <h3 class="reward-header"> Contribution levels </h3>
-        <div class="contribution-info well">
-          <h4>25% funded</h4>
-          <h4>$350 of $1,400 raised</h4>
-          <h4>281 contributors</h4>
-        </div>
-        <div class='well'>
-          <%= simple_form_for(@contribution, url: new_project_contribution_path(@project), method: 'GET') do |f| %>
-
-            <%= f.input :amount, wrapper: 'prepend' do %>
-              <%= content_tag :span, "$", class: "add-on" %>
-              <%= f.input_field :amount, class: 'span2' %>
-              <%= content_tag :span, ".00", class: "add-on" %>
-            <% end %>
-          <% end %>
-        </div>
-        <% @project.rewards.each do |reward| %>
-          <div class="reward">
-            <h3 class="reward-tag"> Pledge $<%= reward.minimum_contribution %> </h3>
-            <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn" %>
-            <p> <%= reward.long_description %> </p>
-          </div>
-        <% end %>
-
-        <div class="reward">
-          <h3 class="reward-tag"> Pledge $25 </h3> <a class="btn reward-btn"> Contribute </a>
-          <p>Receive a ticket to a special afternoon event in the park catered by the Little Salad Shop. This is your opportunity to meet other like-minded supporters who believe in LSS, sustainability, and the power of communities to make a difference. (Quantity Available: 25) </p>
-        </div>
-
-        <div class="reward">
-          <h3 class="reward-tag"> Pledge $200 </h3> <a class="btn reward-btn"> Contribute </a>
-          <p>This is the biggie! Help us design your own personal salad, which we will name after you and which you will eat free for a month. There’s no better way to be a part of LSS! (Quantity Available: 2) </p>
-        </div>
-
+          <h1 class="content-header"> <%= @project.name %> 
+          <small><%= markdown @project.short_description %> </small>
+        </h1>
       </div>
 
 
-    </div><!--/span-->
-  </div><!--/row-->
+      <div class="markdown"> <%= markdown(@project.long_description) %> </div>
+    </div> <!-- /hero unit -->
 
-  <hr>
+
+  </div><!--/span-->
+
+  <%#==========================REWARD BAR============================%>
+
+
+  <div class="span4 rewards-bar">
+    <div class="rewards-container ">
+      <h3 class="reward-header"> Contribution levels </h3>
+      <div class="contribution-info well">
+        <h4>25% funded</h4>
+        <h4>$350 of $1,400 raised</h4>
+        <h4>281 contributors</h4>
+      </div>
+      <div class='well'>
+        <%= simple_form_for(@contribution, url: new_project_contribution_path(@project), method: 'GET') do |f| %>
+
+          <%= f.input :amount, wrapper: 'prepend' do %>
+            <%= content_tag :span, "$", class: "add-on" %>
+            <%= f.input_field :amount, class: 'span2' %>
+            <%= content_tag :span, ".00", class: "add-on" %>
+          <% end %>
+        <% end %>
+      </div>
+      <% @project.rewards.each do |reward| %>
+        <div class="reward">
+          <h3 class="reward-tag"> Pledge $<%= reward.minimum_contribution %> </h3>
+          <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn" %>
+          <p> <%= reward.long_description %> </p>
+        </div>
+      <% end %>
+
+    </div>
+  </div><!--/span-->
+</div><!--/row-->
+
+<hr>
 
 
 </div><!--/.fluid-container-->
