@@ -1,6 +1,6 @@
 class ChangeProjectsDescriptionTypes < ActiveRecord::Migration
   def up
-    change_column :projects, :short_description, :text, limit: 1000
+    change_column :projects, :short_description, :text, limit: nil
     change_column :projects, :long_description, :text
   end
 
