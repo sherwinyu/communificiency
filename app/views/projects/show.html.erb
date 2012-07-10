@@ -8,7 +8,7 @@
           <%# image_tag(@project.picture, alt: @project.name, class: "project-banner") %>
           <%= image_tag(@project.picture, alt: @project.name, class: "project-banner") if @project.picture and find_asset @project.picture %>
           <div class="black-mask project-banner"></div>
-          <h1 class="overlay" id="project-banner"><%= @project.name %></h1>
+          <h1 class="overlay" id="project-banner"><%# @project.name %></h1>
         </div>
 
 
@@ -46,7 +46,7 @@
         </div>
         <% @project.rewards.each do |reward| %>
           <div class="reward">
-            <h3 class="reward-tag"> Pledge $<%= reward.minimum_contribution %>
+            <h3 class="reward-tag"> Pledge $<%= reward.minimum_contribution %> </h3>
             <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn" %>
             <p> <%= reward.long_description %> </p>
           </div>
@@ -75,5 +75,5 @@
 
 
 
-<%= link_to 'Edit', edit_project_path(@project) if Rails.env.development? %> |
+<%= link_to 'Edit', edit_project_path(@project) if current_user && current_user.admin? %> |
 <%= link_to 'Back', projects_path %>

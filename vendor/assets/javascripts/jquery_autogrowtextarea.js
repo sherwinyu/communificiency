@@ -59,7 +59,6 @@ jQuery.fn.autoGrow = function(){
 		this.style.overflow = "hidden";
 		this.style.width = ((characterWidth(this) * Math.max(10, this.cols)) + 6) + "px";
 		this.style.color = "red";
-                alert(this.id);
 		this.onkeyup = grow;
 		this.onfocus = grow;
 		this.onblur = grow;
