@@ -13,9 +13,12 @@
 
 
         <%#==========================MAIN TEXT============================%>
-        <h3 class="content-header">The Project</h3>
-        <p>
-        <div class="markdown"><%= markdown @project.short_description %></div>
+        <div class="markdown">
+          <h2 class="content-header"> <%= @project.name %> 
+            <small><%= markdown @project.short_description %> </small>
+          </h2>
+        </div>
+
 
         <div class="markdown"> <%= markdown(@project.long_description) %> </div>
       </div> <!-- /hero unit -->
@@ -51,6 +54,16 @@
             <p> <%= reward.long_description %> </p>
           </div>
         <% end %>
+
+        <div class="reward">
+          <h3 class="reward-tag"> Pledge $25 </h3> <a class="btn reward-btn"> Contribute </a>
+          <p>Receive a ticket to a special afternoon event in the park catered by the Little Salad Shop. This is your opportunity to meet other like-minded supporters who believe in LSS, sustainability, and the power of communities to make a difference. (Quantity Available: 25) </p>
+        </div>
+
+        <div class="reward">
+          <h3 class="reward-tag"> Pledge $200 </h3> <a class="btn reward-btn"> Contribute </a>
+          <p>This is the biggie! Help us design your own personal salad, which we will name after you and which you will eat free for a month. There’s no better way to be a part of LSS! (Quantity Available: 2) </p>
+        </div>
 
       </div>
 
