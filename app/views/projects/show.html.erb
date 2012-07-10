@@ -5,7 +5,8 @@
       <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
       <div class="hero-unit">
         <div class="group">
-          <%= image_tag(@project.picture, alt: @project.name, class: "project-banner") %>
+          <%# image_tag(@project.picture, alt: @project.name, class: "project-banner") %>
+          <%= image_tag('lss.jpg', alt: @project.name, class: "project-banner") %>
           <div class="black-mask project-banner"></div>
           <h1 class="overlay" id="project-banner"><%= @project.name %></h1>
         </div>
