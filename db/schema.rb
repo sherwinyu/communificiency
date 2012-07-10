@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(:version => 20120709221550) do
   end
 
   create_table "projects", :force => true do |t|
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "name"
-    t.text     "short_description", :limit => 1000
+    t.text     "short_description"
     t.text     "long_description",  :limit => 255
     t.string   "video"
     t.float    "funding_needed"
