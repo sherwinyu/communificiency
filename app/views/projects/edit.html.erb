@@ -4,3 +4,5 @@
 
 <%= link_to 'Show', @project %> |
 <%= link_to 'Back', projects_path %>
+<%= "|" if current_user_signed_in? && current_user.admin? %>
+<%= link_to 'Delete', @project, method: :delete, data: { confirm: "Are you sure?" } if  current_user.admin? %>

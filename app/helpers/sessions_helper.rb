@@ -36,5 +36,4 @@ module SessionsHelper
     User.authenticate_with_salt(*remember_token)
   end
 
-
 end

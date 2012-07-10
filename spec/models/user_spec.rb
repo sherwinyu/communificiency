@@ -116,4 +116,13 @@ describe User do
 
   end
 
+  # it {should respond_to :authenticate}
+  it {should respond_to :admin}
+  describe "with admin attribute set to 'true'" do
+    before { 
+      @user = User.new @user_attr
+      @user.toggle! :admin }
+    it { @user.should be_admin }
+  end
+
 end

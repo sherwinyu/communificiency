@@ -33,6 +33,7 @@
     </div>
     <div class="form-actions">
       <%= f.button :submit, "Save project", class: "btn-large btn-primary" %>
-      <%= link_to "Discard changes", project_path(@project), class: "btn-large btn-danger" %>
+      <%= link_to "Discard changes", project_path(@project), class: "btn-large btn-danger" unless @project.new_record? %>
+      <%= link_to "Discard changes", projects_path, class: "btn-large btn-danger" if @project.new_record? %>
     </div>
   <% end %>

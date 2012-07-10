@@ -1,5 +1,8 @@
-
 class ProjectsController < ApplicationController
+
+  before_filter :require_admin, only: [:new, :create, :edit, :update, :destroy]
+
+
   # GET /projects
   # GET /projects.json
   def index
@@ -37,6 +40,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+
     @project = Project.new(params[:project])
 
     respond_to do |format|
@@ -76,4 +80,14 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def require_admin
+    if current_user && !current_user.admin?
+      redirect_back_or :root, alert: "Sorry, you don't have access to that."
+    elsif !current_user_signed_in?
+      redirect_back_after sign_in_path, alert: "Please sign in first." 
+    end
+  end
+
 end
