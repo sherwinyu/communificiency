@@ -18,7 +18,7 @@
           <% end %>
           <%= nested.input :name %>
           <%= nested.input :short_description %>
-          <%= nested.input :long_description, input_html: {class: 'autogrow span8', rows: 10, cols: 50 }%>
+          <%= nested.input :long_description,  input_html: {class: 'autogrow span8', rows: 10, cols: 50 }%>
 
 
           <%= nested.input :minimum_contribution, html: {class: 'input-prepend input-append'}, wrapper: 'prepend' do %>
@@ -29,7 +29,7 @@
 
         </div>
       <% end %>
-      <%= f.link_to_add raw("+"), :rewards %>
+      <%= f.link_to_add raw("+"), :rewards, class: "herp derp", id: "add_reward" %>
     </div>
     <div class="form-actions">
       <%= f.button :submit, "Save project", class: "btn-large btn-primary" %>

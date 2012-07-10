@@ -21,4 +21,8 @@
 //TODO(syu): Definitely don't want this
 $(document).ready(function(){
   $(".autogrow").autoGrow();
+  $("#add_reward").click( function() {
+    alert('test');
+    $(".autogrow").autoGrow();
+  });
 });
