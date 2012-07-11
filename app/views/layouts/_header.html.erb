@@ -4,8 +4,8 @@
 
     <div class="nav-collapse">
       <ul class="nav">
-        <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), :root %>
-        <%= nav_li_tag(:root) { '<i class="icon-home icon-white"></i> Home'} %>
+        <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), home_path %>
+        <%= nav_li_tag(home_path) { '<i class="icon-home icon-white"></i> Home'} %>
         <%= nav_li_tag('Projects', :projects)  %>
         <%= nav_li_tag('About', about_path)  %>
       </ul>
@@ -40,12 +40,12 @@
 
     <% if false -%>
       <div class="row-fluid">
-        <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), :root %>
+        <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), home_path %>
         <nav> 
         <div class='span6 offset8'>
           <div class="nav-group pull-right"> 
             <ul class="nav mini-nav">
-              <li> <%= link_to 'Home', :root %><li>
+              <li> <%= link_to 'Home', home_path %><li>
               <li><%= link_to 'About', about_path %><li>
               <li><%= link_to 'Projects', about_path %><li>
             </ul>
