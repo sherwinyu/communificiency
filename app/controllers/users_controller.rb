@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @user = User.new  params[:user]
 
     if @user.save
+      UserMailer.welcome_email(@user).deliver
       flash.notice = "Your profile was successfully created. Welcome to Communificiency!"
       sign_in @user
       redirect_to @user
