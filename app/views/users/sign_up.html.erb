@@ -8,18 +8,18 @@
         <h2>Sign up for a Communificiency Account</h2>
 
 
-        <%= simple_form_for(@user, url: users_path) do |f|  %>
+        <%= form_for(@user, url: users_path) do |f|  %>
           <%# TODO(syu) -- fix display of this form, especially when presented with errors %>
           <%= render 'users/shared/errors' %>
           <div class="field">
-            <%= f.input :email %>  
-            <%= f.input :name %>  
-            <%= f.input :password %>  
-            <%= f.input :password_confirmation, label: "Confirm password" %>  <%# f.password_field :password_confirmation %>
+            <%= f.label :email %>  <%= f.text_field :email %>
+            <%= f.label :name %>  <%= f.text_field :name %>
+            <%= f.label :password %>  <%= f.password_field :password %>
+            <%= f.label :password_confirmation, "Confirm password" %>  <%= f.password_field :password_confirmation %>
           </div>
 
           <div class="actions">
-            <%= f.button :submit, "Create account" %>
+            <%= f.submit "Create account" %>
           </div>
         <% end %>
 
