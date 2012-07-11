@@ -9,6 +9,10 @@ module SessionsHelper
     @current_user ||= user_from_remember_token()
   end
 
+  def current_user_admin?
+    current_user && current_user.admin?
+  end
+
   def current_user=(user)
     @current_user = user
   end

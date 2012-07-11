@@ -1,46 +1,15 @@
 <% provide(:title, 'Sign up') %>
-<div class="container">
-  <div class="row">
-
-    <div class="span12">
-      <div class="hero-unit">
-        <h2 class="pageHeader">Create your Communificiency Account</h2>
-
-
-        <div class="signUpForm">
-          <%= simple_form_for(@user, url: users_path, html: { class: 'signUpForm' } ) do |f|  %>
-            <%# TODO(syu) -- fix display of this form, especially when presented with errors %>
-            <%= render 'users/shared/errors' %>
-            <div class="field">
-              <%= f.input :email %>  
-              <%= f.input :name %>  
-              <%= f.input :password %>  
-              <%= f.input :password_confirmation, label: "Confirm password" %>  <%# f.password_field :password_confirmation %>
-            </div>
-  
-            <div class="form-actions">
-              <%= f.button :submit, "Create account", class: "btn-primary blue" %>
-            </div>
-          <% end %>
-        </div>
-
+<div class="hero-unit">
+  <h2 class="pageHeader">Create your Communificiency Account</h2>
+  <div class="signUpForm">
+    <%= simple_form_for(@user, url: users_path, html: { class: 'signUpForm' } ) do |f|  %>
+      <%= f.input :email %>  
+      <%= f.input :name %>  
+      <%= f.input :password %>  
+      <%= f.input :password_confirmation, label: "Confirm password" %>  <%# f.password_field :password_confirmation %>
+      <div class="form-actions">
+        <%= f.button :submit, "Create account", class: "btn-primary blue" %>
       </div>
-
-    </div><!--/span-->
-
-
-
-
-
-
-
-
-
-  </div><!--/row-->
-
-  <hr>
-
-
-</div><!--/.fluid-container-->
-
-
+    <% end %>
+  </div>
+</div>

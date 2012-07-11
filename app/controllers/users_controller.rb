@@ -17,9 +17,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    redirect_to "/sign_up" and return if params[:user].nil?
-
-    @user = User.new  params[:user]
+    @user = User.new params[:user]
 
     if @user.save
       UserMailer.welcome_email(@user).deliver
@@ -37,6 +35,12 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+
+    admin = params[:user].delete :admin
+    @user.toggle :admin if admin && current_user_admin?
+    # TODO(syu) log when non admins try to PUT with admin set to 1
+
+    # TODO(syu) log update URL to be edit upon render (instead of /users/id)
     if @user.update_attributes(params[:user])
       flash.now.notice = 'Changes saved'
       sign_in @user
@@ -54,7 +58,7 @@ class UsersController < ApplicationController
 
   def require_correct_user
     @user = User.find_by_id params[:id]
-    redirect_back_or :root, alert: "Insufficient privileges" unless current_user?(@user)
+    redirect_back_or :root, alert: "Insufficient privileges" unless current_user?(@user) or current_user_admin?
   end
 
 end

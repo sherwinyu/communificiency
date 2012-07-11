@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
   def destroy
     flash.notice = 'Signed out'
     sign_out
-    redirect_to root_path 
+    redirect_to home_path
   end
 
 end
