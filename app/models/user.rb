@@ -30,6 +30,11 @@ class User < ActiveRecord::Base
     self.name
   end
 
+  def decorated_name
+    glyph = admin? ? '^' : ''
+    glyph << self.name 
+  end
+
   def matches_password? submitted_password
     return User.encrypt(submitted_password, self.salt) == self.encrypted_password
   end
