@@ -1,15 +1,20 @@
 <h2 class="pageHeader">Browsing Communificiency projects</h2>
 
+<div class="container">
+  <div class="alert alert-info">
+    <!-- a class="close" data-dismiss="alert">&#215;</a-->
+    <div id="flash_notice"> Are you a small business owner hoping to save on your energy efficiency? Let's work together. Contact us <%= link_to 'here', '#' %> </div>
+  </div>
 
-<% @projects.each do |project| %>
-  <%= render project %>
-  <tr>
+  <% @projects.each do |project| %>
+    <%= render project %>
+    <tr>
 
-    <%# render :partial => 'project' %>
-  </tr>
-<% end %>
-</table>
+      <%# render :partial => 'project' %>
+    </tr>
+  <% end %>
+</div>
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'New Project', new_project_path if current_user_admin? %>

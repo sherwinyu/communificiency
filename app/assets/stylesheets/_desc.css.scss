@@ -1,7 +1,17 @@
-// @import "bootstrap";
+@import "bootstrap/mixins";
 // $goldenLight: ($grayLight + #554)*.85 + $orange*.25;
-$goldenLight: #f1d570;
 $skyblue: #1a8bcb;
+$navBarHeight: 60px;
+$navBarFontHeight: 15px;
+$reallyLightYellow: #fffbef;
+$reallyLightBlue: #eaf0ff;
+$reallyLightBlue: #f3f7ff;
+$goldenLight: #f1d570;
+$goldenLighter: #f1d570;
+$skyblue: #1a8bcb;
+$rewardsBarBG: #F4EAC6;
+$rewardsBarBG: $reallyLightYellow;
+$rewardsBarBG: white;
 
 @mixin rounded($radius: 10px) {
   @include rounded-side(top, $radius);
@@ -99,8 +109,10 @@ div.markdown > blockquote > p {
   // background: black;
   // background: $skyblue;
   position: relative;
-  top: -30px;
-  background: #F4EAC6;
+  top: -20px;
+  background: $rewardsBarBG;
+  @include box-shadow(#{0 2px 6px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1)});
+
 
 }
 .rewards-container {
@@ -108,13 +120,13 @@ div.markdown > blockquote > p {
   padding-left: 15px;
   padding-right: 15px;
   position: relative;
-
 }
 
 .reward {
   @include rounded(10px);
-  // border: 1px black solid;
+  border: 1px #AAA dashed;
   background: $goldenLight;
+  background: $reallyLightYellow;
   padding: 15px;
   margin-bottom: 15px;
 
@@ -123,11 +135,13 @@ div.markdown > blockquote > p {
 h3.reward-header  {
   font-size:1.8em;
   text-align:center;
+  margin: 10px;
   // color: $skyblue;
 }
 
 .reward:hover {
-  background: $skyblue;
+  background: darken($reallyLightBlue, 10%);
+  background: darken($reallyLightBlue, 0%);
 }
 
 .reward > .reward-tag {
@@ -135,8 +149,54 @@ h3.reward-header  {
 }
 
 .reward > .reward-btn {
+  @extend .span2;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 10px;
   display: block;
+  background: $goldenLight;
+}
+
+.reward > .reward-btn:hover {
+  @extend .span2;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  display: block;
+  background: darken($goldenLight, 8%);
+}
+
+.contribution-Ask {
+  @extend .center;
+  line-height: 15px;
+  margin-bottom: 15px;
+  color: $skyblue;
+}
+
+div.statistic {
+  margin: 15px;
+}
+div.statistic-num {
+  // display: inline;
+  // width:50%;
+  font-size: 2.5em;
+  color: $skyblue;
+}
+
+div.statistic-caption {
+  font-size: 1.2em;
+   
+  // display: inline;
+  // width:50%;
+}
+
+.projectTagline {
+  font-size: 1.4em;
+}
+
+.projectDescription {
+  font-size: 1.1em;
+  color: gray;
 
 }
 

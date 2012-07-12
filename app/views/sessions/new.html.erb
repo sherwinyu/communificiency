@@ -1,13 +1,11 @@
 <% provide(:title, 'Sign in') %>
-<div class='hero-unit'>
-  <h2 class="pageHeader">Sign in</h2>
-  <div class="signInForm">
-    <%= simple_form_for(:session, url: sessions_path, html: {class: 'signInForm'}) do |f| %>
-      <%= f.input :email %>
-      <%= f.input :password %>
-      <div class='form-actions'>
-        <%= f.button :submit, "Sign in", class: "btn-primary blue" %>
-      </div>
-    <% end %>
-  </div>
+<h2 class="pageHeader">Sign in</h2>
+<div class="signInForm">
+  <%= simple_form_for(:session, url: sessions_path, html: {class: 'signInForm'}) do |f| %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <div class='form-actions'>
+      <%= f.button :submit, "Sign in", class: "btn-primary blue" %>
+    </div>
+  <% end %>
 </div>

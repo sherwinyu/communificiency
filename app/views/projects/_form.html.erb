@@ -2,15 +2,20 @@
   <fieldset>
     <legend> <%= @project %> </legend>
     <h3> Basic Info </h3>
-    <%=  f.input :name                                     %>
-    <%=  f.input :short_description, input_html: {class: "span8"}, hint: "A short description of your project" %>
-    <%=  f.input :long_description , input_html: {class: "span8"} %>
-    <%=  f.input :video, label: 'Video URL', hint: "If you have a video you describing your project, include the URL here" %>
+    <div class="projectBasicInfo">
+      <%=  f.input :name                                     %>
+      <%=  f.input :short_description, input_html: {class: "span8"}, hint: "A short description of your project" %>
+      <%=  f.input :long_description , input_html: {class: "span8"} %>
+
+      <div class="divider"> derp </div>
+
+      <%=  f.input :video, label: 'Video URL', hint: "If you have a video you describing your project, include the URL here" %>
+    </div>
 
     <h3> Rewards </h3>
-    <div class="rewards-container">
+    <div class="projectFormRewardsContainer">
       <%= f.simple_fields_for :rewards do |nested| %>
-        <div id="reward_<%= @ind ? @ind+=1 : @ind = 0 %>" class="well">
+        <div id="reward_<%= @ind ? @ind += 1 : @ind = 0 %>" class="projectForm-rewardWell">
           <%= nested.link_to_remove raw("&#215;"), class:"close" %>
           <h4><%= nested.object %></h4>
           <% if false # (f.object.class.column_names - %w[minimum_contribution]).each do |column| %>
@@ -29,11 +34,12 @@
 
         </div>
       <% end %>
-      <%= f.link_to_add raw("+"), :rewards, class: "herp derp", id: "add_reward" %>
+      <%= f.link_to_add raw("Add new reward"), :rewards, class: "btn btn-primary", id: "add_reward" %>
     </div>
     <div class="form-actions">
-      <%= f.button :submit, "Save project", class: "btn-large btn-primary" %>
-      <%= link_to "Discard changes", project_path(@project), class: "btn-large btn-danger" unless @project.new_record? %>
-      <%= link_to "Discard changes", projects_path, class: "btn-large btn-danger" if @project.new_record? %>
+      <%= f.button :submit, "Save project", class: "btn-large btn-success" unless @project.new_record? %>
+      <%= f.button :submit, "Create project", class: "btn-large btn-success" if @project.new_record? %>
+      <%= link_to "Discard changes", project_path(@project), class: "btn btn-large btn-danger" unless @project.new_record? %>
+      <%= link_to "Discard project", projects_path, class: "btn-large btn-danger" if @project.new_record? %>
     </div>
   <% end %>

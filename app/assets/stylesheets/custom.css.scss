@@ -1,11 +1,14 @@
 // @import "bootstrap/mixins";
 // @import "bootstrap/variables";
 
-@import "bootstrap";
-@import "desc"; 
 $skyblue: #1a8bcb;
 $navBarHeight: 60px;
 $navBarFontHeight: 15px;
+$reallyLightYellow: #fffbef;
+$reallyLightYellow: #fffbef;
+$reallyLightBlue: #eaf0ff;
+@import "bootstrap";
+@import "desc"; 
 
 html {
   overflow-y: scroll;
@@ -13,7 +16,56 @@ html {
 
 body {
   padding-top: $navBarHeight + 15px;
+  background: $reallyLightYellow;
+  background: black + #111;
+  background: black;
+  // background: $reallyLightBlue;
+  // background: url('background1.jpg');
+  // background-image: fixed;
+  // color: whitesmoke;
+}
+div.footerImage {
+  background: black;
+  width: 100%;
+  // height: 100%;
+  position: absolute;
+  bottom: -200px;
+  z-index: -50;
+}
+
+img.footerImage {
+  left: -200px;
+  bottom: 0;
+  height: 100%;
+  z-index: -50;
+  position:relative;
+  // position: fixed;
+}
+
+div.footerContainer {
+  @extend .span12;
+  // width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index:50;
+  
+  background: black;
+  padding: 50px;
+  opacity: 0.7;
+  position: relative;
+  top: -10px;
   background: whitesmoke;
+  border: 1px whitesmoke solid;
+}
+
+.main {
+  background: white;
+  padding: 20px;
+  top: -15px;
+  position: relative;
+  border-left: 1px whitesmoke solid;
+  border-right: 1px whitesmoke solid;
+  
 }
 
 section {
@@ -21,7 +73,7 @@ section {
 }
 
 textarea {
-  resize: vertical;
+  // resize: vertical;
 }
 
 
@@ -61,6 +113,16 @@ textarea {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 50, 50, 0.6)
 }
 
+pre.debug_dump, .well {
+  background: $reallyLightYellow;
+}
+
+.navbar-inner {
+
+  background: #ffffff;
+  @include box-shadow(#{0 6px 6px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1)});
+}
+
 
 /* all text in nav bar */
 .navbar .nav > li > a , .navbar .nav > li > p {
@@ -69,16 +131,22 @@ textarea {
   padding: ($navBarVpad + 10px) 10px $navBarVpad - 11;
   line-height: $navBarFontHeight;
   font-size: $navBarFontHeight;
-  color: #999;
+  color: black;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
+.navbar .nav > li > a:hover , .navbar .nav > li > p:hover {
+  color: #999;
+  
+}
+
 
 .navbar .nav .active > p, .navbar .nav .active > p.navbar-text:hover {
-  color: white;
+  color: black;
   text-decoration: none;
   background-color: $skyblue;
-  @include gradient-vertical(#333, darken($skyblue, 26%));
+  @include gradient-vertical(lighten($skyblue, 26%), #FFF );
+  @include gradient-vertical(#FFF, lighten($skyblue, 46%));
   //# @include gradient-vertical-three-colors(#000, darken($skyblue, 20%), 40%, #111); // #111, $skyblue);
 }
 
@@ -222,11 +290,13 @@ footer ul li {
   margin-bottom: 25px;
   text-align: center;
 }
+div.signUpForm, div.signInForm {
+  @extend .well;
+}
 .signUpForm, .signInForm {
   @extend .span6;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 form.signUpForm, form.signInForm{
@@ -243,5 +313,32 @@ form.signInForm .form-actions, form.signUpForm .form-actions {
   padding-left: 0;
   padding-right: 0;
   text-align: center;
+}
+
+div.projectBasicInfo {
+  @extend .well;
+
+}
+div.projectForm-RewardsContainer {
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+div.projectForm-rewardWell {
+  @extend .well;
+}
+
+div.contribution-info {
+  @extend .well;
+  background: whitesmoke;
+  padding: 25px;
+
+}
+
+div.divider {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-bottom: gray 1px solid;
 }
 
