@@ -3,7 +3,7 @@
     <h3> <%= project.name %> </h3>
 <% end %>
     <p> <%= project.short_description %> <p>
-    <%= link_to 'Show', project %> | 
-    <%= link_to 'Edit', edit_project_path(project) %> |
-    <%= link_to 'Destroy', project, confirm: 'Are you sure?', method: :delete %></td>
+    <%= link_to 'View', project %>  
+    <%= link_to 'Edit', edit_project_path(project) %> 
+    <%= link_to 'Remove', project, confirm: 'Are you sure?', method: :delete  if current_user_admin? %></td>
 </div>

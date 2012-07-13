@@ -3,7 +3,7 @@
 <div class="container">
   <div class="alert alert-info">
     <!-- a class="close" data-dismiss="alert">&#215;</a-->
-    <div id="flash_notice"> Are you a small business owner hoping to save on your energy efficiency? Let's work together. Contact us <%= link_to 'here', '#' %> </div>
+    <div id="flash_notice"> Are you a small business owner hoping to save on your energy efficiency? Let's work together. Contact us <%= mail_to 'founders@communificiency.com', "here", encode: 'javascript', subject: "Interested in working with Communificiency", body: "(Please tell us a bit about your business. We will be in touch with you shortly. --Max and Sherwin at Communificiency)" %> </div>
   </div>
 
   <% @projects.each do |project| %>
@@ -18,3 +18,5 @@
 <br />
 
 <%= link_to 'New Project', new_project_path if current_user_admin? %>
+
+
