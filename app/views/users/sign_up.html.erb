@@ -2,7 +2,7 @@
 <div class="hero-unit">
   <h2 class="pageHeader">Create your Communificiency Account</h2>
   <div class="signUpForm">
-    <%= simple_form_for(@user, url: users_path, html: { class: 'signUpForm' } ) do |f|  %>
+    <%= simple_form_for( @user, url: users_path, html: { class: 'signUpForm' }, validate: true ) do |f|  %>
       <%= f.input :email %>  
       <%= f.input :name %>  
       <%= f.input :password %>  

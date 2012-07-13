@@ -30,7 +30,12 @@ gem 'rails', '3.2.5'
 gem 'rest-client', '~> 1.6.7'
 
 gem 'redcarpet' 
+
 gem 'simple_form'
+gem 'client_side_validations'
+gem 'client_side_validations-simple_form'
+
+
 gem 'formtastic'
 gem 'nested_form'
 gem 'faker', '1.0.1'

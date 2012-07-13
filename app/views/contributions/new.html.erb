@@ -10,7 +10,7 @@
           <h2 class="contributionPaymentHeader"> 1. Confirm your contribution </h2>
           <p> Confirm the amount you want to contribute to <%= @project.name %>.</p>
           <div class='step1'>
-            <%= f.input :amount, class: "inputContributionAmount", label: false, wrapper: "prepend" do %>
+            <%= f.input :amount, class: "inputContributionAmount", label: false, wrapper: "prepend", input_html: {type: 'number'}  do %>
               <%= content_tag :span, "$", class: "add-on", id: 'inputContributionDollarSign' %>
               <%= f.input_field :amount, class: 'span2 inputContributionAmount' %>
               <%= content_tag :span, ".00", class: "add-on", id: "inputContributionZeros" %>
@@ -22,9 +22,7 @@
 
 
           <h2 class="contributionPaymentHeader"> 2. Choose your reward </h2>
-          <%= f.input :reward, as: 'radio_buttons', collection: @project.rewards, prompt: 'Select your reward', label: false do %>
-            <%= f.association :reward, as: 'radio_buttons', label: false %>
-          <% end %>
+          <%= f.association :reward, wrapper_html: {class: 'derp'}, as: "radio_buttons" %>
           <br>
           <h2 class="contributionPaymentHeader"> 3. Pay </h2>
 
@@ -32,16 +30,42 @@
 
           <% end # form for %> 
 
-          <%= render 'form' %>
+          <%- render 'form' %>
           <%= link_to 'Back', contributions_path %>
 
 
         </div>
 
       </div><!--/span-->
-      </div><!--/span-->
+    </div><!--/span-->
 
 
-    </div><!--/.fluid-container-->
+  </div><!--/.fluid-container-->
 
 
+
+
+
+  <div class="control-group radio_buttons required derp">
+    <label class="radio_buttons required control-label">
+      <abbr title="required">*
+      </abbr> Reward
+    </label>
+    <div class="controls">
+      <label class="radio">
+        <input class="radio_buttons required" id="contribution_reward_id_1" name="contribution[reward_id]" type="radio" value="1">Value meal
+      </label>
+      <label class="radio">
+        <input class="radio_buttons required" id="contribution_reward_id_3" name="contribution[reward_id]" type="radio" value="3">Local farm tour
+      </label>
+      <label class="radio">
+        <input class="radio_buttons required" id="contribution_reward_id_5" name="contribution[reward_id]" type="radio" value="5">Private meal
+      </label>
+      <label class="radio">
+        <input checked="checked" class="radio_buttons required" id="contribution_reward_id_6" name="contribution[reward_id]" type="radio" value="6">Picture with the cheese truck
+      </label>
+      <label class="radio">
+        <input class="radio_buttons required" id="contribution_reward_id_7" name="contribution[reward_id]" type="radio" value="7">Hunk o' Cheese
+      </label>
+    </div>
+  </div>

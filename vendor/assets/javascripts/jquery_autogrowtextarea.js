@@ -26,7 +26,7 @@ jQuery.fn.autoGrow = function(){
 			var linesCount = 0;
 			var lines = obj.value.split('\n');
 			
-			for (var i=lines.length-1; i>=0; --i)
+    			for (var i=lines.length-1; i>=0; --i)
 			{
 				linesCount += Math.floor((lines[i].length / colsDefault) + 1);
 			}
@@ -58,7 +58,6 @@ jQuery.fn.autoGrow = function(){
 		this.style.height = "auto";
 		this.style.overflow = "hidden";
 		this.style.width = ((characterWidth(this) * Math.max(10, this.cols)) + 6) + "px";
-		this.style.color = "red";
 		this.onkeyup = grow;
 		this.onfocus = grow;
 		this.onblur = grow;

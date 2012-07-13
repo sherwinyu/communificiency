@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
   has_many :contributions
   accepts_nested_attributes_for :rewards, allow_destroy: true, reject_if: ->r  { r[:name].blank?}
   validates_associated :rewards
+  validates_presence_of :name
 
   def to_s
     name

@@ -16,7 +16,10 @@
 //
 //= require bootstrap
 //= require jquery_nested_form
-//= require jquery_autogrowtextarea
+//= require jquery_autogrowtextarea/
+//= require rails.validations
+//= require rails.validations.simple_form
+
 
 //TODO(syu): Definitely don't want this
 $(document).ready(function(){
@@ -25,3 +28,4 @@ $(document).ready(function(){
     $(".autogrow").autoGrow();
   });
 });
+

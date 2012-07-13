@@ -148,6 +148,10 @@ h3.reward-header  {
   margin-bottom: 10px;
 }
 
+.reward-tag > em.reward-dollars {
+  font-style:normal;
+}
+
 .reward > .reward-btn {
   @extend .span2;
   margin-left: auto;
@@ -165,6 +169,8 @@ h3.reward-header  {
   display: block;
   background: darken($goldenLight, 8%);
 }
+
+
 
 .contribution-Ask {
   @extend .center;
