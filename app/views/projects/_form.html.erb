@@ -1,4 +1,4 @@
-<%= simple_nested_form_for @project, html: {class: 'form-horizontal'}, validate: true do |f| %>
+<%= simple_form_for @project, html: {class: 'form-horizontal'}, validate: true do |f| %>
   <fieldset>
     <legend> <%= @project %> </legend>
     <h3> Basic Info </h3>
@@ -7,39 +7,57 @@
       <%=  f.input :short_description, input_html: {class: "span8"}, hint: "A short description of your project" %>
       <%=  f.input :long_description , input_html: {class: "span8"} %>
 
-      <div class="divider"> derp </div>
+      <div class="divider"> </div>
 
       <%=  f.input :video, label: 'Video URL', hint: "If you have a video you describing your project, include the URL here" %>
     </div>
 
-    <h3> Rewards </h3>
+    <h3 class="projectFormHeader"> Rewards </h3>
     <div class="projectFormRewardsContainer">
+      <%= link_to_add_association raw("Add new reward"), f, :rewards, class: "btn btn-primary", id: "add_reward" %>
       <%= f.simple_fields_for :rewards do |nested| %>
-        <div id="reward_<%= @ind ? @ind += 1 : @ind = 0 %>" class="projectForm-rewardWell">
-          <%= nested.link_to_remove raw("&#215;"), class:"close" %>
-          <h4><%= nested.object %></h4>
-          <% if false # (f.object.class.column_names - %w[minimum_contribution]).each do |column| %>
-            <%= nested.input column.to_sym %>
-          <% end %>
-          <%= nested.input :name %>
-          <%= nested.input :short_description %>
-          <%= nested.input :long_description,  input_html: {class: 'span8', rows: 10, cols: 50 }%>
-
-
-          <%= nested.input :minimum_contribution, html: {class: 'input-prepend input-append'}, wrapper: 'prepend' do %>
-            <%= content_tag :span, "$", class: "add-on" %>
-            <%= nested.input_field :minimum_contribution %>
-            <%= content_tag :span, ".00", class: "add-on" %>
-          <% end %>
-
-        </div>
+        <%# render partial: 'reward_field', f: nested %>
+        <%= render 'reward_fields', f: nested %>
       <% end %>
-      <%= f.link_to_add raw("Add new reward"), :rewards, class: "btn btn-primary", id: "add_reward" %>
+      <%# f.link_to_add raw("Add new reward"), :rewards, class: "btn btn-primary", id: "add_reward" %>
     </div>
     <div class="form-actions">
       <%= f.button :submit, "Save project", class: "btn-large btn-success" unless @project.new_record? %>
       <%= f.button :submit, "Create project", class: "btn-large btn-success" if @project.new_record? %>
       <%= link_to "Discard changes", project_path(@project), class: "btn btn-large btn-danger" unless @project.new_record? %>
-      <%= link_to "Discard project", projects_path, class: "btn-large btn-danger" if @project.new_record? %>
+      <%= link_to "Discard project", projects_path, class: "btn btn-large btn-danger" if @project.new_record? %>
     </div>
   <% end %>
+
+            <div class="accordion-group">
+              <div class="">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                  Collapsible Group Item #1
+                </a>
+              </div>
+              <div id="collapseOne" class="accordion-body collapse in">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                  Collapsible Group Item #2
+                </a>
+              </div>
+              <div id="collapseTwo" class="accordion-body collapse">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                  Collapsible Group Item #3
+                </a>
+              </div>
+              <div id="collapseThree" class="accordion-body collapse">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>

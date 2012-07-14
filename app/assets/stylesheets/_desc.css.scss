@@ -124,7 +124,8 @@ div.markdown > blockquote > p {
 
 .reward {
   @include rounded(10px);
-  border: 1px #AAA dashed;
+  border: 1px darken($goldenLight, 5%) dashed;
+  // border: 1.5px #e9dcad dashed;
   background: $goldenLight;
   background: $reallyLightYellow;
   padding: 15px;
@@ -171,6 +172,17 @@ h3.reward-header  {
 }
 
 
+div.contribution-info {
+  @extend .well;
+  padding: 25px;
+
+}
+
+div.divider {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-bottom: gray 1px solid;
+}
 
 .contribution-Ask {
   @extend .center;

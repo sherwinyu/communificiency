@@ -15,10 +15,11 @@
 //= require_tree .
 //
 //= require bootstrap
-//= require jquery_nested_form
 //= require jquery_autogrowtextarea/
 //= require rails.validations
 //= require rails.validations.simple_form
+//
+//= require cocoon
 
 
 //TODO(syu): Definitely don't want this
@@ -27,5 +28,8 @@ $(document).ready(function(){
   $("#add_reward").click( function() {
     $(".autogrow").autoGrow();
   });
+  $(".collapse").collapse();
 });
+
+
 

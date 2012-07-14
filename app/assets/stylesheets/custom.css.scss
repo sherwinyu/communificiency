@@ -290,6 +290,10 @@ footer ul li {
   margin-bottom: 25px;
   text-align: center;
 }
+
+.well {
+  background: whitesmoke;
+}
 div.signUpForm, div.signInForm {
   @extend .well;
 }
@@ -319,28 +323,37 @@ div.projectBasicInfo {
   @extend .well;
 
 }
-div.projectForm-RewardsContainer {
+
+div.projectFormRewardsContainer {
+  @extend .well;
   padding-top: 20px;
   padding-left: 15px;
   padding-right: 15px;
 }
 
+.projectFormRewardsContainer .reward {
+  
+ margin-left: auto; 
+ margin-right: auto; 
+  width: 80%;
+
+}
+
+.projectFormRewardsContainer .reward-header {
+  border: 1px solid gray;
+}
+
+.toggle {
+  display: block;
+  padding: 8px 15px;
+}
+
 div.projectForm-rewardWell {
   @extend .well;
+  border: 1px #AAA dashed;
+  background: $reallyLightYellow;
 }
 
-div.contribution-info {
-  @extend .well;
-  background: whitesmoke;
-  padding: 25px;
-
-}
-
-div.divider {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-bottom: gray 1px solid;
-}
 
 
 
