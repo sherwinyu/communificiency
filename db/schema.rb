@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709221550) do
+ActiveRecord::Schema.define(:version => 20120714083134) do
 
   create_table "contributions", :force => true do |t|
     t.integer  "user_id"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20120709221550) do
     t.integer  "payment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.float    "amount"
+    t.integer  "amount"
   end
 
   create_table "payments", :force => true do |t|
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20120709221550) do
     t.text     "short_description"
     t.text     "long_description",  :limit => 255
     t.string   "video"
-    t.float    "funding_needed"
+    t.integer  "funding_needed"
     t.string   "proposer_name"
     t.string   "picture"
   end
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20120709221550) do
     t.integer  "project_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
-    t.float    "minimum_contribution"
+    t.integer  "minimum_contribution"
     t.boolean  "limited_quantity"
     t.integer  "max_available"
     t.integer  "current_available"
