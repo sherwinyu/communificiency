@@ -1,12 +1,14 @@
-<div id="reward_<%= @ind ? @ind += 1 : @ind = 0 %>" class="reward nested-fields">
+<div id="reward_<%= @ind ? @ind += 1 : @ind = 0 %>" class="reward-block nested-fields">
   <div class="reward-header">
-    <a href="#collapse_<%= @ind -%>" data-toggle="collapse" class="toggle">
       <%= link_to_remove_association raw("&#215;"), f, class: 'close' %>
-      <h4><%= f.object %></h4>
+    <a href="#collapse_<%= @ind -%>" data-toggle="collapse" class="toggle">
+      <h4>
+        <%= f.object %>
+      </h4>
     </a>
   </div>
 
-  <div class="collapse in" id ="collapse_<%= @ind -%>">
+  <div class="collapse" id ="collapse_<%= @ind -%>">
     <%= f.input :name %>
     <%= f.input :short_description %>
     <%= f.input :long_description,  input_html: {rows: 10, cols: 50 }%>

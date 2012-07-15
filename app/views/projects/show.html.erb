@@ -31,7 +31,7 @@
   <div class="span4 rewards-bar">
     <div class="rewards-container ">
       <h3 class="reward-header"> Project stats </h3>
-      <div class="contribution-info well">
+      <div class="contribution-info">
         <div class="statistic row-fluid">
           <div class="statistic-num span6"> 25% </div><div class="statistic-caption span6"> funded </div>
         </div>
@@ -59,7 +59,6 @@
           <%# TODO(syu) change content tag to something clickable %>
           <%= content_tag :span, "Ok!", class: "add-on" %>
         <% end %>
-      <% end %>
       <h3 class="contribution-Ask"> <small> Enter your contribution above. </small>  </h3>
     </div>
     <h3 class="reward-header"> Rewards </h3>
@@ -67,10 +66,12 @@
       <div class="reward">
         <h3 class="reward-tag">  <%= reward.name %> <em class="reward-dollars pull-right">$<%= reward.minimum_contribution.to_i %></em> </h3>
         <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn" %>
+        <%# f.button :submit  reward_id: reward),  class: "btn reward-btn" %>
         <p class="projectTagline"> <%= reward.short_description %> </p>
         <p class="projectDescription"> <%= reward.long_description %> </p>
       </div>
     <% end %>
+      <% end %>
 
   </div>
 </div><!--/span-->

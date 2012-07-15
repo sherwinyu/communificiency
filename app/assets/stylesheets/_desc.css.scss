@@ -130,8 +130,14 @@ div.markdown > blockquote > p {
   background: $reallyLightYellow;
   padding: 15px;
   margin-bottom: 15px;
-
 }
+
+.rewards-bar .reward:hover {
+  background: darken($reallyLightBlue, 10%);
+  background: darken($reallyLightBlue, 0%);
+  background: darken($reallyLightYellow, 2%);
+}
+
 
 h3.reward-header  {
   font-size:1.8em;
@@ -140,10 +146,6 @@ h3.reward-header  {
   // color: $skyblue;
 }
 
-.reward:hover {
-  background: darken($reallyLightBlue, 10%);
-  background: darken($reallyLightBlue, 0%);
-}
 
 .reward > .reward-tag {
   margin-bottom: 10px;
@@ -172,8 +174,9 @@ h3.reward-header  {
 }
 
 
-div.contribution-info {
+.contribution-info {
   @extend .well;
+  background: whitesmoke;
   padding: 25px;
 
 }

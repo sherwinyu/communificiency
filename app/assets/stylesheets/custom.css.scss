@@ -1,13 +1,20 @@
 // @import "bootstrap/mixins";
 // @import "bootstrap/variables";
 
+@import "bootstrap";
 $skyblue: #1a8bcb;
 $navBarHeight: 60px;
 $navBarFontHeight: 15px;
 $reallyLightYellow: #fffbef;
 $reallyLightYellow: #fffbef;
-$reallyLightBlue: #eaf0ff;
-@import "bootstrap";
+$reallyLightBlue: #f7f9ff;
+
+.well {
+   background: whitesmoke;
+   background: $reallyLightBlue;
+   background: $reallyLightYellow;
+}
+
 @import "desc"; 
 
 html {
@@ -48,7 +55,7 @@ div.footerContainer {
   margin-left: auto;
   margin-right: auto;
   z-index:50;
-  
+
   background: black;
   padding: 50px;
   opacity: 0.7;
@@ -65,7 +72,7 @@ div.footerContainer {
   position: relative;
   border-left: 1px whitesmoke solid;
   border-right: 1px whitesmoke solid;
-  
+
 }
 
 section {
@@ -113,8 +120,8 @@ textarea {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 50, 50, 0.6)
 }
 
-pre.debug_dump, .well {
-  background: $reallyLightYellow;
+pre.debug_dump {
+  @extend .well;
 }
 
 .navbar-inner {
@@ -137,7 +144,7 @@ pre.debug_dump, .well {
 }
 .navbar .nav > li > a:hover , .navbar .nav > li > p:hover {
   color: #999;
-  
+
 }
 
 
@@ -269,7 +276,7 @@ footer ul li {
   margin-top: 10px;
 }
 
-.inputContributionAmount {
+#inputContributionAmount {
   height: 50px;
   font-size: 35px;
   text-align: center;
@@ -286,14 +293,21 @@ footer ul li {
   margin-top: 25px;
 }
 
+#pay-button {
+  @extend btn;
+  @extend btn-large;
+  @extend btn-primary;
+}
+
+
+
+
 .pageHeader {
   margin-bottom: 25px;
   text-align: center;
 }
 
-.well {
-  background: whitesmoke;
-}
+
 div.signUpForm, div.signInForm {
   @extend .well;
 }
@@ -331,27 +345,28 @@ div.projectFormRewardsContainer {
   padding-right: 15px;
 }
 
-.projectFormRewardsContainer .reward {
-  
- margin-left: auto; 
- margin-right: auto; 
+.projectFormRewardsContainer .reward-block {
+  @extend .well;
+  border: 1 px gray;
+  padding: 0px;
+  margin-left: auto; 
+  margin-right: auto; 
   width: 80%;
-
 }
+
 
 .projectFormRewardsContainer .reward-header {
-  border: 1px solid gray;
+  padding: 10px;
 }
 
-.toggle {
+a.toggle {
   display: block;
   padding: 8px 15px;
+
 }
 
-div.projectForm-rewardWell {
-  @extend .well;
-  border: 1px #AAA dashed;
-  background: $reallyLightYellow;
+.projectFormRewardsContainer .reward-body {
+  padding: 5px;
 }
 
 
