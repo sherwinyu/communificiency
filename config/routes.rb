@@ -1,15 +1,12 @@
 Communificiency::Application.routes.draw do
-  get "projects/test1"
-  get "projects/test2"
-  get "projects/test3"
-  get "projects/test4"
-  get "projects/test5"
+
   resources :projects do
     resources :contributions
   end
-    resources :rewards
-    resources :contributions
-    resources :projects
+
+  resources :rewards
+  resources :contributions
+  resources :projects
 
   get "sessions/new"
 

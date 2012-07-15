@@ -4,7 +4,8 @@
     <div class="span12">
 
       <div class="hero-unit">
-        <%= simple_form_for(@contribution) do |f| %>
+        <%= binding.pry %>
+        <%= simple_form_for(@contribution, url: project_contributions_path(@project)) do |f| %>
           <h1>Thanks for helping <%= @project.name %><br> <small>You're almost there. Just a few more steps</small></h2>
 
           <h2 class="contributionPaymentHeader"> 1. Confirm your contribution </h2>
@@ -12,7 +13,7 @@
           <div class='step1'>
             <%= f.input :amount, class: "inputContributionAmount", label: false, wrapper: "prepend", input_html: {type: 'number'}  do %>
               <%= content_tag :span, "$", class: "add-on", id: 'inputContributionDollarSign' %>
-              <%= f.input_field :amount, class: 'span2 inputContributionAmount' %>
+              <%= f.input_field :amount, id: 'inputContributionAmount' %>
               <%= content_tag :span, ".00", class: "add-on", id: "inputContributionZeros" %>
             <% end %>
           </div>
@@ -24,13 +25,16 @@
           <h2 class="contributionPaymentHeader"> 2. Choose your reward </h2>
           <%= f.association :reward, wrapper_html: {class: 'derp'}, as: "radio_buttons" %>
           <br>
+
           <h2 class="contributionPaymentHeader"> 3. Pay </h2>
+
+
+          <%= f.button :submit, "Pay now!", id: "pay-button" %>
 
 
 
           <% end # form for %> 
 
-          <%- render 'form' %>
           <%= link_to 'Back', contributions_path %>
 
 
@@ -52,7 +56,7 @@
       </abbr> Reward
     </label>
     <div class="controls">
-      <label class="radio">
+      <label class="radio"> 
         <input class="radio_buttons required" id="contribution_reward_id_1" name="contribution[reward_id]" type="radio" value="1">Value meal
       </label>
       <label class="radio">

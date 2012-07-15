@@ -34,39 +34,35 @@ class ContributionsController < ApplicationController
     @reward = @project.rewards.find_by_id params[:reward_id] 
     if @reward.nil?
       flash.notice = "Please select your reward!" 
-      # redirect_to project_path(@project) , alert: "reward error" and return unless @reward
     end
+
+
     contrib_params = params[:contribution] || {}
     contrib_params[:user] = current_user
     contrib_params[:reward] = @reward # for both nil and non nil
     contrib_params[:amount] ||= @reward?  @reward.minimum_contribution : 0
+    session[:contrib_params] = contrib_params
 
     @contribution = @project.contributions.build(contrib_params)
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @contribution }
-    end
+    binding.pry
   end
 
-  # GET /contributions/1/edit
-  def edit
-    @contribution = Contribution.find(params[:id])
-  end
 
-  # POST /contributions
-  # POST /contributions.json
   def create
-    @contribution = Contribution.new(params[:contribution])
+    @project = Project.find params[:project_id] 
+    params[:contribution].merge! session[:contrib_params]
+    @contribution = @project.contributions.build params[:contribution]
+    
+    # create a new payment
+    # redirect them to the amazon payment page
 
-    respond_to do |format|
-      if @contribution.save
-        format.html { redirect_to @contribution, notice: 'Contribution was successfully created.' }
-        format.json { render json: @contribution, status: :created, location: @contribution }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @contribution.errors, status: :unprocessable_entity }
-      end
+    binding.pry
+    if @contribution.save
+      session[:contrib_params] = nil
+      redirect_to @contribution.project, notice: "Contribution created."
+    else
+      render action: "new" 
     end
   end
 
