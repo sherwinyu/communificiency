@@ -9,40 +9,44 @@
   </head>
   <body class="welcome">
     <%- render 'layouts/header' %>
-    <div class="container-fluid welcome">
-      <div class="row-fluid">
-        <div class="span12">
-          Level 1 of column
-          <div class="row-fluid">
-            <div class="span6">Level 2</div>
-            <div class="span6">Level 2</div>
+    <div class="container-fluid div1">
+      <div id="welcome-overlay">
+        <%= image_tag "db/communificiency-logo-thick-80.png", id:"welcome-logo"%>
+        <%= link_to "Browse projects", "#", id: "link-Projects"%>
+        <%= link_to "Sign up", "#", id: "link-SignUp" %>
+        <%= link_to "About", "#", id: "link-About" %>
+      </div>
+      <div class="container">
+        <div class="row valueProps">
+          <div class="span12">
+            <div class="row-fluid">
+              <div class="valuePropBox span4"> 
+                <%= image_tag "db/gift.png" %> 
+                <h2 class="valuePropBox">
+                  Get awesome,<br> exclusive deals
+                </h2>
+              </div>
+              <div class="valuePropBox span4"> 
+                <%= image_tag "db/clients.png" %> 
+                <h2 class="valuePropBox">
+                  Support local businesses
+                </h2>
+              </div>
+              <div class="valuePropBox span4"> 
+                <%= image_tag "db/world.png" %> 
+                <h2 class="valuePropBox">Build a cleaner tomorrow</h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container-fluid div1">
-      <div class="container">
-        <div class="row valueProps">
-          <div class="span12">
-            <div class="row-fluid">
-              <div class="valuePropBox span4"> hello2 </div>
-              <div class="valuePropBox span4">hello4</div>
-              <div class="valuePropBox span4"> hello2 </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="container-fluid div2">
       <div class="container">
-        <div class="row valueProps">
+        <div class="row bannerline">
           <div class="span12">
-            <div class="row-fluid">
-              <div class="valuePropBox span4"> hello2 </div>
-              <div class="valuePropBox span4">hello4</div>
-              <div class="valuePropBox span4"> hello2 </div>
-            </div>
+            <h1 class="bannerline"> Communificiency lets you <span class="blue"> support your community </span>while <span class="blue">receiving awesome perks </span>and  <span class="yellow"> reducing energy usage.</span> </h1>
           </div>
         </div>
       </div>
@@ -50,24 +54,42 @@
 
     <div class="container-fluid div3">
       <div class="container">
-        <div class="row valueProps">
+        <div class="row HowItWorks">
+          <h1 class="HowItWorks"> How does it work? </h1>
+          <ol>
+            <li> Find a Communificiency project at a local business </li>
+            <li> Contribute to help that business go green and reduce its energy usage</li>
+            <li>Receive great rewards from the business in exchange</li>
+            <li> Enjoy your reward, tell your friends, and help us retrofit the entire community </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid div4">
+      <div class="container">
+        <h1 class="interested"> Interested? </h1>
+        <div class="row interested">
           <div class="span12">
             <div class="row-fluid">
-              <div class="valuePropBox span4"> hello2 </div>
-              <div class="valuePropBox span4">hello4</div>
-              <div class="valuePropBox span4"> hello2 </div>
+              <div class="span6">
+                <h2> Check out our projects <%= link_to "here", "#" %> </h2>
+                <h2> Like us on Facebook </h2>
+                <h2> Follow us on Twitter </h2>
+              </div>
+              <div class="span6">
+                <h2> Sign up for our mailing list </h2>
+                <%= form_tag url:"/mailinglist" %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <% render partial: 'layouts/flash', locals: {:flash => flash}%>
-    <%- yield %>
-    <%-debug(params) if Rails.env.development? %>
-    <%-debug(flash) if Rails.env.development? %>
-    <%-debug(flash.now) if Rails.env.development? %>
-    <%-debug(session) if Rails.env.development? %>
-    <%-debug(assigns) if Rails.env.development? %>
+  </div>
+</div>
+</div>
+<% render partial: 'layouts/flash', locals: {:flash => flash}%>
+<%- yield %>
   </body>
-  <%- render 'layouts/footer' %>
 </html>
