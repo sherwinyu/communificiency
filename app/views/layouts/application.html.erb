@@ -6,24 +6,37 @@
     <%= javascript_include_tag "application"%>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
-  </head>
-  <body>
-    <div class="bg">
-      <% image_tag "background1.jpg", class: 'bg' %>
-      <% image_tag "background_smallercrop.jpg", class: 'bg' %>
-    </div>
-    <%= render 'layouts/header' %>
-    <div class="container main">
-      <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
-      <%= yield %>
-      <%  debug(params) if Rails.env.development? %>
-      <%  debug(flash) if Rails.env.development? %>
-      <%  debug(flash.now) if Rails.env.development? %>
-      <%  debug(session) if Rails.env.development? %>
-      <%  debug(assigns) if Rails.env.development? %>
-    </div>
-  </body>
-    <%=render 'layouts/footer' %>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-33512576-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
+
+     </script>
+   </head>
+   <body>
+     <div class="bg">
+       <% image_tag "background1.jpg", class: 'bg' %>
+       <% image_tag "background_smallercrop.jpg", class: 'bg' %>
+     </div>
+     <%= render 'layouts/header' %>
+     <div class="container main">
+       <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
+       <%= yield %>
+       <%  debug(params) if Rails.env.development? %>
+       <%  debug(flash) if Rails.env.development? %>
+       <%  debug(flash.now) if Rails.env.development? %>
+       <%  debug(session) if Rails.env.development? %>
+       <%  debug(assigns) if Rails.env.development? %>
+     </div>
+   </body>
+   <%=render 'layouts/footer' %>
 
 
-</html>
+ </html>

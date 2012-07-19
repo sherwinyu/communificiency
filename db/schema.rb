@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(:version => 20120719072529) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.integer  "minimum_contribution"
-    t.integer  "limited_quantity"
     t.integer  "current_available"
+    t.integer  "limited_quantity"
   end
 
   create_table "user_signups", :force => true do |t|
