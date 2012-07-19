@@ -8,7 +8,7 @@ Communificiency::Application.routes.draw do
   root to: "static_pages#home"
 
   # match {"*": "static_pages#coming_soon"}
-  match '/*e' => 'static_pages#coming_soon'
+  # match '/*e' => 'static_pages#coming_soon'
 
   resources :projects do
     resources :contributions
