@@ -4,8 +4,7 @@
     <div class="span12">
 
       <div class="hero-unit">
-        <%= binding.pry %>
-        <%= simple_form_for(@contribution, url: project_contributions_path(@project)) do |f| %>
+        <%= simple_form_for(@contribution, url: project_contributions_path(@project), validate: true) do |f| %>
           <h1>Thanks for helping <%= @project.name %><br> <small>You're almost there. Just a few more steps</small></h2>
 
           <h2 class="contributionPaymentHeader"> 1. Confirm your contribution </h2>
@@ -23,7 +22,7 @@
 
 
           <h2 class="contributionPaymentHeader"> 2. Choose your reward </h2>
-          <%= f.association :reward, wrapper_html: {class: 'derp'}, as: "radio_buttons" %>
+          <%= f.association :reward, collection: @project.rewards, wrapper_html: {class: 'derp'}, as: "radio_buttons" %>
           <br>
 
           <h2 class="contributionPaymentHeader"> 3. Pay </h2>
@@ -45,10 +44,6 @@
 
 
   </div><!--/.fluid-container-->
-
-
-
-
 
   <div class="control-group radio_buttons required derp">
     <label class="radio_buttons required control-label">

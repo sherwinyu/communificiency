@@ -10,9 +10,12 @@ class Reward < ActiveRecord::Base
     numericality: {only_integer: true, greater_than: 0},
     allow_nil: true
 
+  validates :minimum_contribution,
+    numericality: {only_integer: true, greater_than: 0}
+
   validates :name,
     presence: true,
-    uniqueness: { scope: :project_id, unless: "project.nil?"},
+    uniqueness: true, # { scope: :project_id, unless: "project.nil?", message: "reward name already exists for this project"},
     length: {maximum: 60}
 
 
@@ -24,6 +27,6 @@ class Reward < ActiveRecord::Base
     presence: true
 
   def to_s
-    name.blank? ? "New Reward" : "#{name} ($%.2f)" % minimum_contribution
+    (name.blank? or minimum_contribution.to_f < 1) ? "New Reward" : "#{name}" + " ($%.2f)" % minimum_contribution
   end
 end

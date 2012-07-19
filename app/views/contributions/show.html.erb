@@ -1,23 +1,55 @@
 <p id="notice"><%= notice %></p>
 
+<% for attribute in @contribution.attributes.keys %>
+  <p><%= attribute.humanize %> <%= @contribution.attributes[attribute].to_s %></p>
+<% end %>
+
+<h1> User info </h1>
+<% if @contribution.user %>
+  <% for attribute in @contribution.user.attributes.keys %>
+    <p><%= attribute.humanize %> <%= @contribution.user.attributes[attribute].to_s %></p>
+  <% end %>
+<% end %>
+
+<h1> project info </h1>
+<% if @contribution.project %>
+  <% for attribute in @contribution.project.attributes.keys %>
+    <p><%= attribute.humanize %> <%= @contribution.project.attributes[attribute].to_s %></p>
+  <% end %>
+<% end %>
+
+<h1> reward info </h1>
+<% if @contribution.reward %>
+  <% for attribute in @contribution.reward.attributes.keys %>
+    <p><%= attribute.humanize %> <%= @contribution.reward.attributes[attribute].to_s %></p>
+  <% end %>
+<% end %>
+
+<h1> payment info </h1>
+<% if @contribution.payment %>
+  <% for attribute in @contribution.payment.attributes.keys %>
+    <p><%= attribute.humanize %> <%= @contribution.payment.attributes[attribute].to_s %></p>
+  <% end %>
+<% end %>
+
 <p>
-  <b>User:</b>
-  <%= @contribution.user_id %>
+<b>User:</b>
+<%= @contribution.user_id %>
 </p>
 
 <p>
-  <b>Project:</b>
-  <%= @contribution.project_id %>
+<b>Project:</b>
+<%= @contribution.project_id %>
 </p>
 
 <p>
-  <b>Reward:</b>
-  <%= @contribution.reward_id %>
+<b>Reward:</b>
+<%= @contribution.reward_id %>
 </p>
 
 <p>
-  <b>Payment:</b>
-  <%= @contribution.payment_id %>
+<b>Payment:</b>
+<%= @contribution.payment_id %>
 </p>
 
 

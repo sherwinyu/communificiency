@@ -51,7 +51,7 @@
       </table-->
       <div class="divider">  </div>
       <h3 class="contribution-Ask"> Contribute to <%= @project.name%> <small> and get one of the following rewards! </small> </h3>
-      <%= simple_form_for(@contribution, url: new_project_contribution_path(@project), method: 'GET') do |f| %>
+      <%= simple_form_for(@contribution, url: new_project_contribution_path(@project), method: 'GET', id: "contributionForm") do |f| %>
 
         <%= f.input :amount, wrapper: 'prepend' , label: false do %>
           <%= content_tag :span, "$", class: "add-on" %>
@@ -65,7 +65,7 @@
     <% @project.rewards.each do |reward| %>
       <div class="reward">
         <h3 class="reward-tag">  <%= reward.name %> <em class="reward-dollars pull-right">$<%= reward.minimum_contribution.to_i %></em> </h3>
-        <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn" %>
+        <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn remote", "data-submit" => "#contribution_amount" %>
         <%# f.button :submit  reward_id: reward),  class: "btn reward-btn" %>
         <p class="projectTagline"> <%= reward.short_description %> </p>
         <p class="projectDescription"> <%= reward.long_description %> </p>

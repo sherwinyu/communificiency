@@ -3,6 +3,10 @@ class StaticPagesController < ApplicationController
     @title = 'Communificiency'
     @user_signup = UserSignup.new
     render layout: 'welcome'
+  end
+
+  def coming_soon
+    @user_signup = UserSignup.new
 
   end
 

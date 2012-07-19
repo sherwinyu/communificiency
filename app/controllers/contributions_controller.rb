@@ -2,6 +2,8 @@
 class ContributionsController < ApplicationController
   # GET /contributions
   # GET /contributions.json
+  before_filter :require_signed_in, only: [:new, :edit, :update]
+
   def index
     @contributions = Contribution.all
 
@@ -24,13 +26,9 @@ class ContributionsController < ApplicationController
 
   # GET /projects/1/contributions/new
   def new
-    if !current_user_signed_in?
-      flash.notice = "Please sign in first."
-      redirect_to sign_in_path and return
-    end
-
     @project = Project.find_by_id params[:project_id]
-    redirect_to projects_path, alert: "project error" and return unless @project
+    redirect_to projects_path, alert: "Invalid project" and return unless @project
+
     @reward = @project.rewards.find_by_id params[:reward_id] 
     if @reward.nil?
       flash.notice = "Please select your reward!" 
@@ -38,29 +36,38 @@ class ContributionsController < ApplicationController
 
 
     contrib_params = params[:contribution] || {}
-    contrib_params[:user] = current_user
-    contrib_params[:reward] = @reward # for both nil and non nil
+    contrib_params[:reward_id] = @reward.id if @reward 
     contrib_params[:amount] ||= @reward?  @reward.minimum_contribution : 0
     session[:contrib_params] = contrib_params
 
     @contribution = @project.contributions.build(contrib_params)
 
-    binding.pry
   end
 
 
   def create
+    unless current_user_signed_in?
+      redirect_back_or sign_in_path, notice: "Please sign in first."
+    end
     @project = Project.find params[:project_id] 
-    params[:contribution].merge! session[:contrib_params]
-    @contribution = @project.contributions.build params[:contribution]
+    contrib_params = session[:contrib_params] || {}
+    contrib_params.merge! params[:contribution]
+    contrib_params[:user] = current_user
+
+    @contribution = @project.contributions.build contrib_params
+    
+    @payment = @contribution.build_payment amount: @contribution.amount, transaction_provider: 'AMAZON'
+    @payment.caller_reference = @payment.id
+
+
     
     # create a new payment
     # redirect them to the amazon payment page
 
-    binding.pry
     if @contribution.save
       session[:contrib_params] = nil
-      redirect_to @contribution.project, notice: "Contribution created."
+      # redirect_to @contribution.project, notice: "Contribution created."
+      redirect_to @contribution, notice: "Contribution created."
     else
       render action: "new" 
     end

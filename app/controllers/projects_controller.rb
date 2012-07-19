@@ -69,14 +69,14 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.json
   def update
     @project = Project.find(params[:id])
-    respond_to do |format|
-      if @project.update_attributes(params[:project])
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    #respond_to do |format|
+    if @project.update_attributes(params[:project])
+      redirect_to @project, notice: "Your project was successfully saved."
+      # format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+      # format.json { head :no_content }
+    else
+      render action: "edit" 
+      # format.json { render json: @project.errors, status: :unprocessable_entity }
     end
   end
 
@@ -93,12 +93,5 @@ class ProjectsController < ApplicationController
   end
 
   private
-  def require_admin
-    if current_user && !current_user.admin?
-      redirect_back_or :root, alert: "Sorry, you don't have access to that."
-    elsif !current_user_signed_in?
-      redirect_back_after sign_in_path, alert: "Please sign in first." 
-    end
-  end
 
 end

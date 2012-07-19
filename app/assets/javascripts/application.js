@@ -24,11 +24,63 @@
 
 //TODO(syu): Definitely don't want this
 $(document).ready(function(){
+
+
+
+
   $(".autogrow").autoGrow();
+
+
+
+
+
   $("#add_reward").click( function() {
     $(".autogrow").autoGrow();
   });
+
+
+
+
+
   $(".collapse").collapse();
+
+
+
+
+
+
+
+
+
+  // This is just for project # show to convert the contribute button links to also post the contribution_amount input
+  $('a.remote').each( function(a) {
+
+    $(this).click(function(a){
+
+      // alert('true');
+      var href= $(this).attr('href');
+      var url = href.split('?')[0];
+      var data =  $(this).attr('data-submit');
+
+      // we only want to override the default value when contribution_amount is nonempty
+      if ($(data).val() === "")
+        return true;
+      var params = $(data).serialize();
+      var glyph = href.indexOf('?') != -1 ? '&' : '+'
+      href = href + glyph + params
+      $(this).attr('href', href);
+    // alert($(this).attr('href'))
+    });
+
+
+
+  });
+
+
+
+
+
+
 });
 
 
