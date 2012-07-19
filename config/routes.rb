@@ -7,8 +7,10 @@ Communificiency::Application.routes.draw do
   match '/about', to: "static_pages#about"
   root to: "static_pages#home"
 
+  match '/praemonitus/:id', to: 'projects#show'
+
   # match {"*": "static_pages#coming_soon"}
-  # match '/*e' => 'static_pages#coming_soon'
+  match '/*e' => 'static_pages#coming_soon'
 
   resources :projects do
     resources :contributions
