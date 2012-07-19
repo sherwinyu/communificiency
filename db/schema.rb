@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120715090030) do
+ActiveRecord::Schema.define(:version => 20120719072529) do
 
   create_table "contributions", :force => true do |t|
     t.integer  "user_id"
@@ -56,6 +56,12 @@ ActiveRecord::Schema.define(:version => 20120715090030) do
     t.integer  "minimum_contribution"
     t.integer  "limited_quantity"
     t.integer  "current_available"
+  end
+
+  create_table "user_signups", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -4,10 +4,13 @@
 @import "bootstrap";
 $cfblueOld: rgb(42, 147, 206);
 $skyblueOld: #1a8bcb;
+$goldenLight: #f1d570;
 
 $cfblue: rgb(30, 136, 210);
 $skyblue: $cfblue;
 $cfyellow: rgb(212, 182, 63);
+$cfyellow: rgb(212, 182, 63);
+$goldenLight: #f1d570;
 $navBarHeight: 60px;
 $navBarFontHeight: 15px;
 $reallyLightYellow: #fffbef;
@@ -16,7 +19,6 @@ $reallyLightBlue: #f7f9ff;
 $darkGray: rgb(47, 47, 47);
 $darkerGray: rgb(35, 35, 35);
 $mediumGray: #666666;
-$goldenLight: #f1d570;
 
 .well {
   background: whitesmoke;
@@ -500,11 +502,11 @@ h2.valuePropBox {
   padding: 50px;
   position: relative;
   z-index: 4;
-  border-bottom: $goldenLight 4px dashed;
+  border-bottom: $cfyellow 4px dashed;
 }
 
 .div3 {
-  background: $goldenLight;
+  background: $cfyellow;
   padding: 50px;
   position: relative;
   z-index: 3;
@@ -538,6 +540,13 @@ h1.HowItWorks {
   margin: 15px;
 }
 
+.HowItWorks .learn-more {
+  color: lighten($darkGray, 25%);
+  @extend .pull-right;
+  font-size: 2em;
+  line-height: 1em;
+}
+
 .div4 {
   padding: 35px;
   padding-bottom: 0px;
@@ -552,6 +561,7 @@ h1.interested {
   color: $darkerGray;;
   font-size: 4em;
   line-height: 1em;
+  margin-bottom: 15px;
 }
 
 .interested li {
@@ -562,6 +572,40 @@ h1.interested {
   margin: 15px;
 }
 
+#UserSignup_email {
+  @extend .center-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#new_user_signup  {
+  margin-bottom: 3px;
+}
+
+#new_user_signup .help-inline{
+  display:block;
+  color: white;
+}
+
+#welcome-overlay + .flash {
+  @extend .span8;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: -40px;
+}
+
+.interested a {
+  color: lighten($darkGray, 60%);
+}
+
+.interested h3 {
+  color: $darkGray;
+  font-size: 1.3em;
+  line-height: 1em;
+  font-weight: normal;
+
+}
 
 
 

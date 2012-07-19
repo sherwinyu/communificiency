@@ -1,6 +1,9 @@
 class StaticPagesController < ApplicationController
   def home
     @title = 'Communificiency'
+    @user_signup = UserSignup.new
+    render layout: 'welcome'
+
   end
 
   def help

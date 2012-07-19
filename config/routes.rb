@@ -4,6 +4,8 @@ Communificiency::Application.routes.draw do
     resources :contributions
   end
 
+  resources :user_signups, only: [:create]
+
   resources :rewards
   resources :contributions
   resources :projects
