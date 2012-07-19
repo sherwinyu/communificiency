@@ -76,13 +76,15 @@ div.footerContainer {
   border: 1px whitesmoke solid;
 }
 
-.main {
+.container.main {
   background: white;
   padding: 20px;
   top: -15px;
   position: relative;
   border-left: 1px whitesmoke solid;
   border-right: 1px whitesmoke solid;
+  @include
+  border-radius( 0px 0px 10px 10px);
 
 }
 
@@ -572,11 +574,6 @@ h1.interested {
   margin: 15px;
 }
 
-#UserSignup_email {
-  @extend .center-block;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 #new_user_signup  {
   margin-bottom: 3px;
@@ -608,4 +605,59 @@ h1.interested {
 }
 
 
+//-------------------- Coming soon
+//
+//
+
+h1.coming-soon {
+  @extend .center;
+  color: $cfblue;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 3em;
+}
+
+.coming-soon h2 {
+  font-size: 1.6em;
+}
+#coming-soon-form {
+  margin-bottom: 3px;
+}
+
+#coming-soon-form .help-inline{
+  display:block;
+  color: $cfyellow;
+}
+
+//--------------- ABOUT / FAQ
+//
+//
+.about-page-container {
+  padding: 30px;
+}
+.about h1 {
+  @extend .center;
+  color: $cfblue;
+}
+
+
+.faq h1 {
+  @extend .center;
+  color: $cfblue;
+}
+
+.faq h3 {
+  color: $cfblue;
+  font-size: 1.7em;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.about p, .faq p {
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+.faq li {
+  font-size: 1.2em;
+}
 

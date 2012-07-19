@@ -1,10 +1,19 @@
 Communificiency::Application.routes.draw do
 
+  resources :user_signups, only: [:create]
+  match '/home', to:"static_pages#home"
+  match "/sign_up", to: "users#sign_up"
+  match "/users", to: "users#create"
+  match '/about', to: "static_pages#about"
+  root to: "static_pages#home"
+
+  # match {"*": "static_pages#coming_soon"}
+  match '/*e' => 'static_pages#coming_soon'
+
   resources :projects do
     resources :contributions
   end
 
-  resources :user_signups, only: [:create]
 
   resources :rewards
   resources :contributions
@@ -16,7 +25,6 @@ Communificiency::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
-  #root :to => redirect('/projects')
   root :to => redirect('http://signup.communificiency.com')
 
 
@@ -24,13 +32,9 @@ Communificiency::Application.routes.draw do
   match '/sign_in', to: "sessions#new"
   match '/sign_out', to: "sessions#destroy"
 
-  match '/home', to:"static_pages#home"
   match '/help', to: "static_pages#help"
-  match '/about', to: "static_pages#about"
   match '/contact', to: "static_pages#contact"
 
-  match "/sign_up", to: "users#sign_up"
-  match "/users", to: "users#create"
 
   match "/projects/:id", to: "static_pages#desc", params: :id
 

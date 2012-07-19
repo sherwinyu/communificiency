@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.new params[:user]
 
     if @user.save
-      UserMailer.welcome_email(@user).deliver
+      # UserMailer.welcome_email(@user).deliver
       flash.notice = "Your profile was successfully created. Welcome to Communificiency!"
       sign_in @user
       redirect_to @user
@@ -52,13 +52,5 @@ class UsersController < ApplicationController
 
   private
 
-  def require_signed_in
-    redirect_back_after sign_in_path, notice: "Please sign in first." unless current_user_signed_in?
-  end
-
-  def require_correct_user
-    @user = User.find_by_id params[:id]
-    redirect_back_or :root, alert: "Insufficient privileges" unless current_user?(@user) or current_user_admin?
-  end
 
 end

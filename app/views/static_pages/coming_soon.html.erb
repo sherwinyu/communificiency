@@ -1,0 +1,15 @@
+<h1 class="coming-soon center"> 
+  Coming soon!
+</h1>
+
+<h2> Thanks for your interest in Communificiency. We're working hard and will be launching in New Haven this summer. Sign up for our mailing list below and we'll keep you updated. </h2>
+<div class="coming-soon center">
+<h2> Sign up for our mailing list </h2>
+<%= simple_form_for @user_signup, validate: true, html: {id: "coming-soon-form"} do |f|%>
+  <%= f.input :email, wrapper: 'append' , label: false do %>
+    <%= f.input_field :email, placeholder: "email" %>
+    <%= f.button :submit, "Sign me up", class: "button btn" %>
+  <% end %>
+<% end %>
+<h3> No spam, we promise.</h3>
+</div>

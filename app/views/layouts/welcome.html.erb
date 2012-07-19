@@ -12,10 +12,11 @@
     <div class="container-fluid div1">
       <div id="welcome-overlay">
         <%= image_tag "db/communificiency-logo-thick-80.png", id:"welcome-logo"%>
-        <%= link_to "Browse projects", "#", id: "link-Projects"%>
-        <%= link_to "Sign up", "#", id: "link-SignUp" %>
-        <%= link_to "About", "#", id: "link-About" %>
+        <%= link_to "Browse projects", projects_path, id: "link-Projects"%>
+        <%= link_to "Sign up", sign_up_path, id: "link-SignUp" %>
+        <%= link_to "About", about_path, id: "link-About" %>
       </div>
+      <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
       <div class="container">
         <div class="row valueProps">
           <div class="span12">
@@ -62,6 +63,7 @@
             <li>Receive great rewards from the business in exchange</li>
             <li> Enjoy your reward, tell your friends, and help us retrofit the entire community </li>
           </ol>
+          <%= link_to "Learn more", about_path, class: "learn-more" %>
         </div>
       </div>
     </div>
@@ -73,21 +75,26 @@
           <div class="span12">
             <div class="row-fluid">
               <div class="span6">
-                <h2> Check out our projects <%= link_to "here", "#" %> </h2>
-                <h2> Like us on Facebook </h2>
-                <h2> Follow us on Twitter </h2>
+                <h2> Check out our <%= link_to "projects", "#" %> </h2>
+                <h2> Like us on <%= link_to "Facebook", "http://www.facebook.com/Communificiency" %> </h2>
+                <h2> Follow us on <%= link_to "Twitter", "http://www.twitter.com/Communificiency" %> </h2>
               </div>
               <div class="span6">
                 <h2> Sign up for our mailing list </h2>
-                <%= form_tag url:"/mailinglist" %>
-              <% end %>
+                <%= simple_form_for @user_signup, validate: true do |f|%>
+                  <%= f.input :email, wrapper: 'append' , label: false do %>
+                    <%= f.input_field :email, placeholder: "email" %>
+                    <%= f.button :submit, "Sign me up", class: "button btn" %>
+                  <% end %>
+                <% end %>
+                <h3> We'll keep you updated when we launch.<br> No spam, we promise.</h3>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 <% render partial: 'layouts/flash', locals: {:flash => flash}%>
 <%- yield %>
