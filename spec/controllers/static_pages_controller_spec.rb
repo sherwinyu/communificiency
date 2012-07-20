@@ -1,7 +1,44 @@
 require 'spec_helper'
 
-describe UsersController do
+describe StaticPagesController  do
   render_views
+
+  describe "Welcome page" do
+    it "should have the content 'Communificiency'" do
+      visit '/home'
+      page.should have_content('Communificiency')
+    end
+  end
+
+
+  describe "sign up" do
+    it "should have the content 'sign up'" do
+      visit '/sign_up'
+      page.should have_content('Sign up')
+    end
+  end
+
+  describe "coming_soon" do
+    it "should have the content 'sign up'" do
+      visit '/coming_soon'
+      page.should have_content('Coming soon!')
+    end
+  end
+
+  describe "About" do
+    it "should have the content 'About'" do
+      visit '/about'
+      page.should have_content('About')
+      page.should have_content('Our vision')
+    end
+
+    it "should have the right title" do
+      visit '/about'
+      page.should have_selector('title', text: "About")
+    end
+  end
+
+=begin
 
   before :each do
     @user_attr = { name: 'Namey User', 
@@ -64,4 +101,5 @@ describe UsersController do
     end
   end
 
+=end
 end
