@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
   def render_404
-    binding.pry
     if /(jpe?g|png|gif)/i === request.path
       render :text => "404 Not Found", :status => 404
     else
