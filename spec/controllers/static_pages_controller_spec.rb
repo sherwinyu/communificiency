@@ -1,15 +1,8 @@
 require 'spec_helper'
 
 describe StaticPagesController  do
+=begin
   render_views
-
-  describe "Welcome page" do
-    it "should have the content 'Communificiency'" do
-      visit '/home'
-      page.should have_content('Communificiency')
-    end
-  end
-
 
   describe "sign up" do
     it "should have the content 'sign up'" do
@@ -38,7 +31,6 @@ describe StaticPagesController  do
     end
   end
 
-=begin
 
   before :each do
     @user_attr = { name: 'Namey User', 

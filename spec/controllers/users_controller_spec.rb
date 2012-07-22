@@ -60,7 +60,7 @@ describe UsersController do
     end
 
     it 'should redirect a valid new signup to the profile page' do
-      get :sign_up
+      # TODO(syu) get :sign_upd
     end
   end
 
