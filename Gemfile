@@ -36,6 +36,7 @@ gem 'jquery-rails', '2.0.0'
 gem 'bootstrap-sass', '~> 2.0.3'
 gem 'rest-client', '~> 1.6.7'
 
+gem 'devise'
 gem 'redcarpet' 
 gem 'simple_form'
 gem 'cocoon'
