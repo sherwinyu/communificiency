@@ -7,6 +7,9 @@
 # added accordng to rails tutorial: http://ruby.railstutorial.org/chapters/static-pages#sec:spork_and_guard
 require 'active_support/core_ext'
 
+# added according to section on notification: https://github.com/guard/guard/#notification
+# notification :libnotify, :timeout => 2, :transient => true, :append => true, :urgency => :critical
+
 # added accordng to rails tutorial: http://ruby.railstutorial.org/chapters/static-pages#sec:spork_and_guard
 guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' } do
   watch('config/application.rb')
@@ -21,6 +24,7 @@ guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' } do
 end
 
 guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--drb' do
+  notification :libnotify, :timeout => 1, :transient => true, :append => false, :urgency => :low
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }

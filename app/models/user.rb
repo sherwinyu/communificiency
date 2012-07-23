@@ -14,17 +14,23 @@ class User < ActiveRecord::Base
   # Creating a class-level local variable is is just a local variable in the class scope -- not recognizable in any of the methods
   #
   attr_accessible :email, :name, :password, :password_confirmation
-  
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates_presence_of :email 
-  validates :email, format: {with: email_regex}
-  validates :email, uniqueness: {case_sensitive: false} 
+  validates :name, presence: true,
+    length: {maximum: 40} 
+
+  validates :email,
+    presence: true,
+    format: { with: email_regex },
+    uniqueness: { case_sensitive: false }
 
   validates :password, presence: true
   validates :password, confirmation: true
   validates :password, length: {within: 6..40}
 
   before_save :generate_encrypted_password
+
+  before_save { |user| user.email = email.downcase }
 
   def to_s
     self.name
@@ -43,7 +49,7 @@ class User < ActiveRecord::Base
     user = User.find_by_email submitted_email
     (user && user.matches_password?(submitted_password)) ? user: nil 
     # if u.nil? || !u.matches_password?(submitted_password) 
-      # return nil
+    # return nil
     # end
     # return u
   end
@@ -53,7 +59,7 @@ class User < ActiveRecord::Base
     user = User.find_by_id submitted_id
     (user && user.salt == submitted_salt) ? user : nil
     #if user.nil? || !user.salt == submitted_salt
-      #return nil
+    #return nil
     #end
     #return u
   end

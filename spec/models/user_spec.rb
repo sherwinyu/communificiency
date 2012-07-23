@@ -1,57 +1,88 @@
 require 'spec_helper'
 
 describe User do
-  before :each do
+  before do 
     @user_attr = { name: 'Namey User',
                    email: 'namey.user@email.com',
                    password: 'p4ssw0rd',
                    password_confirmation: 'p4ssw0rd',
     }
+    @user = User.new @user_attr
   end
 
-  it "should accept a valid User" do
-    u = User.new @user_attr
-    u.should be_valid
+  subject { @user }
+
+  it { should respond_to :name }
+  it { should respond_to :email }
+  it { should respond_to :password }
+  it { should respond_to :password_confirmation }
+  it { should respond_to :admin }
+  it { should respond_to :encrypted_password }
+
+  it  { should be_valid }
+
+  describe "when name is not present" do
+    before { @user.name = "" }
+    it { should_not be_valid }
   end
 
-  it "should accept a nameless user a name" do
-    nameless_user = User.new @user_attr.merge({ name: "" })
-    nameless_user.should be_valid
+  describe "when name is nil" do
+    before { @user.name = nil }
+    it { should_not be_valid }
   end
 
-  it "should require an email" do
-    emailless_user = User.new @user_attr.merge({ email: "" })
-    emailless_user.should_not be_valid
+  describe "when email is blank" do
+    before { @user.email = "" }
+    it { should_not be_valid }
   end
 
-  it "should accept an user with a valid email" do
-    valid_emails = %w[sherwinyu@google.com sherwin.yu@google.com harry@k12.fcps.edu a.b@c.e lilgirl445@aaa.tl]
-    valid_emails.each do |e|
-      valid_user = User.new @user_attr.merge({ email: e })
-      valid_user.should be_valid
+  describe "when email is nil" do
+    before { @user.email = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when name is too long" do
+    before { @user.name = "a" * 41 }
+    it { should_not be_valid }
+  end
+
+  describe "when email format is invalid" do
+    it "should be invalid" do
+      invalid_emails = %w[4sherwinyugoogle.com arf @@ a.b.c @a.b.c]
+      invalid_emails.each do |e|
+        @user.email = e
+        @user.should_not be_valid
+      end
     end
   end
 
-  it "should reject an user with an invalid email" do
-    invalid_emails = %w[4sherwinyugoogle.com arf @@ a.b.c @a.b.c]
-    invalid_emails.each do |e|
-      invalid_user = User.new @user_attr.merge({ email: e })
-      invalid_user.should_not be_valid
+  describe "when email format is valid" do
+    it "should be valid" do
+      valid_emails = %w[sherwinyu@google.com sherwin.yu@google.com harry@k12.fcps.edu a.b@c.e lilgirl445@aaa.tl]
+      valid_emails.each do |e|
+        @user.email = e
+        @user.should be_valid
+      end
     end
   end
 
-  it "should reject an user with a duplicate email" do
-    User.create! @user_attr
-    duplicate_email_user = User.new @user_attr.merge({ name: "Bob" })
-    duplicate_email_user.should_not be_valid
+  describe "when email is already taken" do
+    before do
+      user_with_same_email = @user.dup
+      user_with_same_email.save
+    end
+    it { should_not be_valid }
   end
 
-  it "should reject an user with a duplicate email up to case" do
-    u = User.create! @user_attr
-    upcase_email_user = User.new @user_attr.merge({ name: "Bob",
-                                                    email: u.email.upcase })
-    upcase_email_user.should_not be_valid
+  describe "when email is not unique upto case" do
+    before do 
+      user_with_same_email = @user.dup
+      user_with_same_email.email.upcase!
+      user_with_same_email.save
+    end
+    it { should_not be_valid }
   end
+
 
   describe 'password validations' do
     it 'should require a password' do
@@ -122,7 +153,7 @@ describe User do
     before { 
       @user = User.new @user_attr
       @user.toggle! :admin }
-    it { @user.should be_admin }
+      it { @user.should be_admin }
   end
 
 end

@@ -25,11 +25,14 @@ describe "Static pages" do
     it { should have_selector('h1', text: "Coming soon!") }
   end
 
-  describe "sign_up" do
-    before { visit sign_up_path }
-
-    it { should have_selector('h1', text: 'Create your Communificiency Account') }
+  it "should have the right links on the layout" do
+    visit root_path
+    click_link "About"
+    page.should have_selector 'title', text: 'About' 
+    click_link "Sign up"
+    page.should have_selector 'title', text: 'Sign up' 
   end
+
 
 =begin
   describe "Contact page" do
