@@ -11,6 +11,7 @@ describe User do
   end
 
   subject { @user }
+  it  { should be_valid }
 
   it { should respond_to :name }
   it { should respond_to :email }
@@ -19,7 +20,6 @@ describe User do
   it { should respond_to :admin }
   it { should respond_to :encrypted_password }
 
-  it  { should be_valid }
 
   describe "when name is not present" do
     before { @user.name = "" }
@@ -82,6 +82,57 @@ describe User do
     end
     it { should_not be_valid }
   end
+
+  describe "when user is saved" do
+    it "should should downcase the email" do
+      upcase_email = "validEmailWithCaps@gmail.com"
+      @user.email = upcase_email
+      @user.save
+      @user.email.should == upcase_email.downcase
+    end
+  end
+
+  describe "when password is not present" do
+    before { @user.password = @user.password_confirmation = "" }
+    it { should_not be_valid }
+  end
+
+  describe "when password_confirmatino doesn't match" do
+    before { @user.password_confirmation = "derp" }
+    it { should_not be_valid }
+  end
+
+  describe "when password confirmation is nil" do
+    before { @user.password_confirmation = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when password is too short" do
+    before { @user.password = "a"*5 }
+    it { should_not be_valid }
+  end
+
+  describe "when password is too long" do
+    before { @user.password = "a"*41 }
+    it { should_not be_valid }
+  end
+
+  describe "retrn valueue of authenticate method" do
+    before { @user.save }
+    let(:found_user) { User.find_by_email(@user.email) }
+
+    describe "with valid password" do 
+      it { should == User.authenticate(found_user.email, @user.password) }
+    end
+
+    describe "with invalid password" do
+      let(:user_for_invalid_password) { User.authenticate(found_user.email, "invalid_password") }
+      it { should_not == user_for_invalid_password }
+      specify { user_for_invalid_password.should be_false}
+    end
+
+  end
+
 
 
   describe 'password validations' do

@@ -28,9 +28,9 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
   validates :password, length: {within: 6..40}
 
+  before_save { |user| user.email.downcase! }
   before_save :generate_encrypted_password
 
-  before_save { |user| user.email = email.downcase }
 
   def to_s
     self.name
