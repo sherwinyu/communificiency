@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :require_signed_in, only: [:edit, :update]
-  before_filter :require_correct_user, only: [:edit, :update]
+  # before_filter :require_signed_in, only: [:edit, :update]
+  # before_filter :require_correct_user, only: [:edit, :update]
+  before_filter :authenticate_user!, only: [:edit, :update]
 
   def new
     @user = User.new

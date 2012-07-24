@@ -102,10 +102,13 @@ describe User do
     it { should_not be_valid }
   end
 
+  # TODO(syu) -- is this necessary?
+=begin
   describe "when password confirmation is nil" do
     before { @user.password_confirmation = nil }
     it { should_not be_valid }
   end
+=end
 
   describe "when password is too short" do
     before { @user.password = "a"*5 }
@@ -117,7 +120,8 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "retrn valueue of authenticate method" do
+=begin
+  describe "return value of authenticate method" do
     before { @user.save }
     let(:found_user) { User.find_by_email(@user.email) }
 
@@ -132,6 +136,7 @@ describe User do
     end
 
   end
+=end
 
 
 
@@ -167,35 +172,16 @@ describe User do
       @user.encrypted_password.should_not be_blank
     end
 
-    describe "matches_password method" do
+    describe "valid_password?  method" do
 
       it 'should return true on a correct match' do
-        @user.matches_password?(@user_attr[:password]).should be_true
+        @user.valid_password?(@user_attr[:password]).should be_true
       end
 
       it 'should return false on an incorrect match' do
-        @user.matches_password?(@user_attr[:password] + "wrong password").should be_false
+        @user.valid_password?(@user_attr[:password] + "wrong password").should be_false
       end
     end
-
-    describe "authentication" do
-      it 'should return nil when no user exists'  do
-        u = User.authenticate "nonexistentemail@darkness.com", @user_attr[:password]
-        u.should be_nil
-      end
-
-      it 'should return nil for an invalid email/password combination' do
-        u = User.authenticate( @user_attr[:email], @user_attr[:password] + "derp" )
-        u.should be_nil
-      end
-
-      it 'should return the correct user for a valid email/password combination' do
-        u = User.authenticate @user_attr[:email], @user_attr[:password]
-        u.should  == @user
-      end
-    end
-
-
   end
 
   # it {should respond_to :authenticate}

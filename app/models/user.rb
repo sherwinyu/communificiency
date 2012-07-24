@@ -1,5 +1,13 @@
 require 'digest'
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_many :contributions
   has_many :projects, through: :contributions
@@ -8,7 +16,7 @@ class User < ActiveRecord::Base
 
 
 
-  attr_accessor :password 
+  # attr_accessor :password 
   ## TODO(SYU): understand where "password" is getting stored!
   # Notes: setting attr_accessor :email overrides the default :email attributes from the Rails model
   # Creating a class-level local variable is is just a local variable in the class scope -- not recognizable in any of the methods
@@ -26,10 +34,14 @@ class User < ActiveRecord::Base
 
   validates :password, presence: true
   validates :password, confirmation: true
-  validates :password, length: {within: 6..40}
+  validates :password, length: {within: 6..128}
+
+  validates :password_confirmation, presence: true
+=begin
 
   before_save { |user| user.email.downcase! }
   before_save :generate_encrypted_password
+=end
 
 
   def to_s
@@ -40,6 +52,7 @@ class User < ActiveRecord::Base
     glyph = admin? ? '^' : ''
     glyph << self.name 
   end
+=begin
 
   def matches_password? submitted_password
     return User.encrypt(submitted_password, self.salt) == self.encrypted_password
@@ -73,5 +86,6 @@ class User < ActiveRecord::Base
   def self.encrypt password_string, salt_string 
     Digest::SHA2.hexdigest("#{password_string}--#{salt_string}")
   end
+=end
 
 end
