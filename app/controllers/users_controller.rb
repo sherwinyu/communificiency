@@ -3,11 +3,6 @@ class UsersController < ApplicationController
   # before_filter :require_correct_user, only: [:edit, :update]
   before_filter :authenticate_user!, only: [:edit, :update]
 
-  def new
-    @user = User.new
-    render 'sign_up'
-  end
-
   def index
     @users = User.paginate( page: params[ :page ])
   end
@@ -16,6 +11,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     render 
   end
+
+
+=begin
 
   def create
     @user = User.new params[:user]
@@ -29,6 +27,7 @@ class UsersController < ApplicationController
       render 'sign_up'
     end
   end
+=end
 
   def edit
     @user = User.find(params[:id])
@@ -50,6 +49,7 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
 
   private
 

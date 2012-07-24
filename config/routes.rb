@@ -4,7 +4,7 @@ Communificiency::Application.routes.draw do
 
   resources :user_signups, only: [:create]
   match '/home', to:"static_pages#home"
-  match "/sign_up", to: "users#new"
+  match "/sign_up_old", to: "users#new"
   match "/users", to: "users#create"
   match '/about', to: "static_pages#about"
   root to: "static_pages#home"
@@ -35,6 +35,7 @@ Communificiency::Application.routes.draw do
 
   # match '/sign_in_old', to: "sessions#new"
   devise_scope :user do
+    match '/sign_up', to: "devise/registrations#new"
     match '/sign_in', to: "devise/sessions#new"
     match '/sign_out', to: "devise/sessions#destroy"
   end

@@ -6,6 +6,20 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  # override existing evise valid_password
+  alias :devise_valid_password? :valid_password?
+
+  def valid_password?(password)
+    begin
+      super(password)
+    rescue BCrypt::Errors::InvalidHash
+      return false unless self.matches_password? password
+      logger.info "User #{email} is using old password hashing method, updating attributes to use new password"
+      self.password = password
+      true
+    end
+  end
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
@@ -52,11 +66,12 @@ class User < ActiveRecord::Base
     glyph = admin? ? '^' : ''
     glyph << self.name 
   end
-=begin
 
   def matches_password? submitted_password
     return User.encrypt(submitted_password, self.salt) == self.encrypted_password
   end
+
+=begin
 
   def self.authenticate submitted_email, submitted_password
     user = User.find_by_email submitted_email
@@ -76,6 +91,7 @@ class User < ActiveRecord::Base
     #end
     #return u
   end
+=end
 
   private
   def generate_encrypted_password
@@ -86,6 +102,5 @@ class User < ActiveRecord::Base
   def self.encrypt password_string, salt_string 
     Digest::SHA2.hexdigest("#{password_string}--#{salt_string}")
   end
-=end
 
 end

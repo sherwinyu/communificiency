@@ -97,7 +97,7 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "when password_confirmatino doesn't match" do
+  describe "when password_confirmation doesn't match" do
     before { @user.password_confirmation = "derp" }
     it { should_not be_valid }
   end
