@@ -1,4 +1,6 @@
 module SessionsHelper
+
+=begin
   # sets current_user to user
   def sign_in user
     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
@@ -14,9 +16,11 @@ module SessionsHelper
     @current_user ||= user_from_remember_token()
   end
 
+=end
   def current_user_admin?
     current_user && current_user.admin?
   end
+=begin
 
   def current_user=(user)
     @current_user = user
@@ -26,9 +30,13 @@ module SessionsHelper
     user == current_user
   end
 
+=end
   def current_user_signed_in?
-    return !current_user.nil?
+    # return !current_user.nil?
+    # use devise instead
+    user_signed_in? 
   end
+=begin
 
   def require_signed_in
     redirect_back_after sign_in_path, notice: "Please sign in first." unless current_user_signed_in?
@@ -56,5 +64,6 @@ module SessionsHelper
     remember_token ||= [nil, nil]
     User.authenticate_with_salt(*remember_token)
   end
+=end
 
 end

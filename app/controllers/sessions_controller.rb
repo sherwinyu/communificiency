@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
   skip_after_filter :store_location
 
+=begin
   def new
+    @session = nil
   end
 
   # "/sign_in"
@@ -25,5 +27,6 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to home_path
   end
+=end
 
 end

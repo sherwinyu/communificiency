@@ -1,7 +1,7 @@
 <% provide(:title, 'Sign in') %>
 <h2 class="pageHeader">Sign in</h2>
 <div class="signInForm">
-  <%= simple_form_for(:session, url: sessions_path, html: {class: 'signInForm'}) do |f| %>
+  <%= simple_form_for(@session, as: :session, url: sessions_path, html: {class: 'signInForm'}, validate: true) do |f| %>
     <%= f.input :email %>
     <%= f.input :password %>
     <div class='form-actions'>

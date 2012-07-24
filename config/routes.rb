@@ -1,5 +1,7 @@
 Communificiency::Application.routes.draw do
 
+  devise_for :users
+
   resources :user_signups, only: [:create]
   match '/home', to:"static_pages#home"
   match "/sign_up", to: "users#new"
@@ -10,7 +12,7 @@ Communificiency::Application.routes.draw do
   match '/praemonitus/:id', to: 'projects#show'
 
   # match {"*": "static_pages#coming_soon"}
-  match '/*e' => 'static_pages#coming_soon'
+  # match '/*e' => 'static_pages#coming_soon'
 
   resources :projects do
     resources :contributions
@@ -21,7 +23,7 @@ Communificiency::Application.routes.draw do
   resources :contributions
   resources :projects
 
-  get "sessions/new"
+  # get "sessions/new"
 
   resources :payments
   resources :users
@@ -31,8 +33,11 @@ Communificiency::Application.routes.draw do
 
 
 
-  match '/sign_in', to: "sessions#new"
-  match '/sign_out', to: "sessions#destroy"
+  # match '/sign_in_old', to: "sessions#new"
+  devise_scope :user do
+    match '/sign_in', to: "devise/sessions#new"
+    match '/sign_out', to: "devise/sessions#destroy"
+  end
 
   match '/help', to: "static_pages#help"
   match '/contact', to: "static_pages#contact"
