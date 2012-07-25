@@ -19,6 +19,8 @@ describe User do
   it { should respond_to :password_confirmation }
   it { should respond_to :admin }
   it { should respond_to :encrypted_password }
+  it { should respond_to :remember_me }
+  it { should respond_to :valid_password? }
 
 
   describe "when name is not present" do
@@ -168,10 +170,6 @@ describe User do
       @user.should respond_to(:encrypted_password)
     end
 
-    it 'should set the encrypted password' do
-      @user.encrypted_password.should_not be_blank
-    end
-
     describe "valid_password?  method" do
 
       it 'should return true on a correct match' do
@@ -182,6 +180,13 @@ describe User do
         @user.valid_password?(@user_attr[:password] + "wrong password").should be_false
       end
     end
+  end
+
+  its(:remember_created_at) { should be_nil }
+  describe "remember_token" do
+    # let(:user) { FactoryGirl.new(:user) }
+    before { @user.remember_me! }
+    its(:remember_created_at) { should_not be_nil }
   end
 
   # it {should respond_to :authenticate}

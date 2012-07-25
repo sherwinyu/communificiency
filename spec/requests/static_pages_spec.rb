@@ -8,7 +8,7 @@ describe "Static pages" do
   describe "Welcome page" do
     before { visit home_path }
 
-    it { should have_selector('h1', text: "Communificiency") } 
+    it { should display_home_page }
   end
 
 

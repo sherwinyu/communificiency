@@ -11,7 +11,7 @@ Communificiency::Application.routes.draw do
 
   match '/praemonitus/:id', to: 'projects#show'
 
-  # match {"*": "static_pages#coming_soon"}
+  match '/coming_soon' => 'static_pages#coming_soon'
   # match '/*e' => 'static_pages#coming_soon'
 
   resources :projects do
