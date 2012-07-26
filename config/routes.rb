@@ -2,6 +2,10 @@ Communificiency::Application.routes.draw do
 
   devise_for :users
 
+  match '/caseus', to: 'projects#show', id: 1
+  match '/projects/caseus', to: 'projects#show', id: 1
+  match '/projects/1', to: 'projects#show', id: 1
+
   resources :user_signups, only: [:create]
   match '/home', to:"static_pages#home"
   match "/sign_up_old", to: "users#new"
@@ -12,7 +16,7 @@ Communificiency::Application.routes.draw do
   match '/praemonitus/:id', to: 'projects#show'
 
   match '/coming_soon' => 'static_pages#coming_soon'
-  # match '/*e' => 'static_pages#coming_soon'
+  match '/*e' => 'static_pages#coming_soon'
 
   resources :projects do
     resources :contributions
@@ -26,7 +30,11 @@ Communificiency::Application.routes.draw do
   # get "sessions/new"
 
   resources :payments
-  resources :users
+  resources :users, only: [:show, :index]
+  # TODO(syu) add other users resources under admin scope
+  # external user signup (new/create) and editing (edit/update) will be handled by the devise controller
+  # However, we still want admins to be able to add/edit users arbitrarily, which we will do through this
+  
   resources :sessions, only: [:new, :create, :destroy]
 
   root :to => redirect('http://signup.communificiency.com')

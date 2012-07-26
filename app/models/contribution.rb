@@ -42,7 +42,7 @@ class Contribution < ActiveRecord::Base
   #validates_presence_of :reward 
 
   #def validate_minimum_amount
-    #errors.add :amount, "must be at least #{reward.minimum_contribution} for reward '#{reward.name}'" unless amount.to_i < reward.mininum_contribution
+    #errors.add :amount, "must be at least #{reward.minimum_contribution} for reward '#{reward.name}'" unless amount.to_i < reward.minimum_contribution
   #end
 
   #validates_each :amount, unless: Proc.new{ |contrib| [contrib.amount.nil?,

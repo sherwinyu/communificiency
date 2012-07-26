@@ -33,7 +33,7 @@ describe PaymentsController do
   def valid_session
     {}
   end
-
+=begin
   describe "GET index" do
     it "assigns all payments as @payments" do
       payment = Payment.create! valid_attributes
@@ -161,4 +161,5 @@ describe PaymentsController do
     end
   end
 
+=end
 end

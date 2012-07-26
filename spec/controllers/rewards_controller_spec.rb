@@ -19,6 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe RewardsController do
+  
 
   # This should return the minimal set of attributes required to create a valid
   # Reward. As you add validations to Reward, be sure to

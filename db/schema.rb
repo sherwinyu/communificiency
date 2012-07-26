@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723051454) do
+ActiveRecord::Schema.define(:version => 20120726050149) do
 
   create_table "contributions", :force => true do |t|
     t.integer  "user_id"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20120723051454) do
     t.integer  "funding_needed"
     t.string   "proposer_name"
     t.string   "picture"
+    t.integer  "proposer_id"
   end
 
   create_table "rewards", :force => true do |t|

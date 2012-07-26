@@ -2,7 +2,7 @@
 class ContributionsController < ApplicationController
   # GET /contributions
   # GET /contributions.json
-  before_filter :require_signed_in, only: [:new, :edit, :update]
+  before_filter :authenticate_user!, only: [:new, :edit, :update]
 
   def index
     @contributions = Contribution.all
@@ -75,6 +75,7 @@ class ContributionsController < ApplicationController
 
   # PUT /contributions/1
   # PUT /contributions/1.json
+=begin
   def update
     @contribution = Contribution.find(params[:id])
 
@@ -100,4 +101,5 @@ class ContributionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+=end
 end

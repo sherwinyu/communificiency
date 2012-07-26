@@ -3,13 +3,12 @@ require 'spec_helper'
 describe "Authentication" do
 
 
-
-
   subject { page }
 
   describe "sign_in page" do
     before { visit sign_in_path }
 
+    it { should display_sign_in_page }
     it { should have_selector('h1', text: 'Sign in') }
     it { should have_selector('title', text: 'Sign in') }
   end
@@ -39,13 +38,11 @@ describe "Authentication" do
           fill_in "Password", with: "asdf"
           fill_in "Email", with: "asdf2"
         end
-        # TODO test CSVs
 
+        # TODO test CSVs
         # it { should have_selector "span.help-inline"}
 
       end
-
-
     end
 
 

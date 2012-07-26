@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :projects, through: :contributions
   has_many :rewards, through: :contributions
   has_many :payments, through: :contributions
+  has_many :proposed_projects, class_name: :project, inverse_of: :proposer
 
 
 
@@ -41,16 +42,19 @@ class User < ActiveRecord::Base
   validates :name, presence: true,
     length: {maximum: 40} 
 
-  validates :email,
-    presence: true,
-    format: { with: email_regex },
-    uniqueness: { case_sensitive: false }
+  # validates :email,
+    # presence: true,
+    # format: { with: email_regex },
+    # uniqueness: { case_sensitive: false }
 
-  validates :password, presence: true
-  validates :password, confirmation: true
-  validates :password, length: {within: 6..128}
+  # validates :password, presence: true
+  # validates :password, confirmation: true
+  # validates :password, length: {within: 6..128}
 
-  validates :password_confirmation, presence: true
+
+  # validates :current_password, presence: {allow_nil: true, allow_blank: true}
+
+  # validates :password_confirmation, presence: true
 =begin
 
   before_save { |user| user.email.downcase! }

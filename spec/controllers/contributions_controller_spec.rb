@@ -33,6 +33,7 @@ describe ContributionsController do
   def valid_session
     {}
   end
+=begin
 
   describe "GET index" do
     it "assigns all contributions as @contributions" do
@@ -173,5 +174,6 @@ describe ContributionsController do
       response.should redirect_to(contributions_url)
     end
   end
+=end
 
 end

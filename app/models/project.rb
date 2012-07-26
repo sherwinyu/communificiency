@@ -5,8 +5,10 @@ class Project < ActiveRecord::Base
 
   has_many :rewards, order: "minimum_contribution ASC", inverse_of: :project
   has_many :contributions, inverse_of: :project
+  has_many :contributors, through: :contributions, source: :user
+  belongs_to :proposer, class_name: :user, inverse_of: :proposed_projects
 
-  accepts_nested_attributes_for :rewards, allow_destroy: true, reject_if: ->r  { r[:name].blank?}
+  accepts_nested_attributes_for :rewards, allow_destroy: true, reject_if: -> r  { r[:name].blank?}
 
 
   validates :name,
@@ -20,7 +22,11 @@ class Project < ActiveRecord::Base
 
   validates :long_description,
     presence: true
-    
+
+  validates :funding_needed,
+    presence: true,
+    numericality: {only_integer: true, greater_than: 0}
+
   validates_associated :rewards
 
   def to_s

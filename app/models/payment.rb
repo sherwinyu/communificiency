@@ -1,4 +1,5 @@
 class Payment < ActiveRecord::Base
+
   attr_accessible :amount, :transaction_id, :transaction_provider
   after_initialize :default_values
 
@@ -10,7 +11,15 @@ class Payment < ActiveRecord::Base
     STATUS_CANCELLED = "payment cancelled or other error"
 
     ALL_STATUSES = [STATUS_CREATED, STATUS_WAITING_CBUI, STATUS_CONFIRMED, STATUS_PENDING, STATUS_SUCCESS, STATUS_CANCELLED]
-    validates_inclusion_of :transaction_status, in: ALL_STATUSES
+
+    validates :transaction_status,
+      presence: true,
+      inclusion: { in: ALL_STATUSES }
+
+    # Note: contribution amount / reward amount is only integer, but payment amount is float.
+    validates :amount,
+      numericality: true
+
 
     private
       def default_values

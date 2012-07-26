@@ -3,19 +3,20 @@ class Reward < ActiveRecord::Base
   belongs_to :project, inverse_of: :rewards
   has_many :contributions, inverse_of: :reward
 
-  validates_presence_of :minimum_contribution 
-  validates_numericality_of :minimum_contribution, message: "has to be a number"
+  validates :project,
+    presence: true
 
   validates :limited_quantity, 
     numericality: {only_integer: true, greater_than: 0},
     allow_nil: true
 
   validates :minimum_contribution,
+    presence: true,
     numericality: {only_integer: true, greater_than: 0}
 
   validates :name,
     presence: true,
-    uniqueness: true, # { scope: :project_id, unless: "project.nil?", message: "reward name already exists for this project"},
+    uniqueness: {scope: :project_id, unless: "project.nil?", message: "already exists for this project"},
     length: {maximum: 60}
 
 
