@@ -11,7 +11,6 @@ class Payment < ActiveRecord::Base
     STATUS_CANCELLED = "payment cancelled or other error"
 
     ALL_STATUSES = [STATUS_CREATED, STATUS_WAITING_CBUI, STATUS_CONFIRMED, STATUS_PENDING, STATUS_SUCCESS, STATUS_CANCELLED]
-
     validates :transaction_status,
       presence: true,
       inclusion: { in: ALL_STATUSES }

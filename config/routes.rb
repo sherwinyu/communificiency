@@ -14,14 +14,18 @@ Communificiency::Application.routes.draw do
   root to: "static_pages#home"
 
   match '/praemonitus/:id', to: 'projects#show'
+  devise_scope :user do
+    match '/sign_up', to: "devise/registrations#new"
+    match '/sign_in', to: "devise/sessions#new"
+    match '/sign_out', to: "devise/sessions#destroy"
+  end
 
   match '/coming_soon' => 'static_pages#coming_soon'
-  match '/*e' => 'static_pages#coming_soon'
 
   resources :projects do
     resources :contributions
   end
-
+  match '/*e' => 'static_pages#coming_soon'
 
   resources :rewards
   resources :contributions
@@ -42,11 +46,6 @@ Communificiency::Application.routes.draw do
 
 
   # match '/sign_in_old', to: "sessions#new"
-  devise_scope :user do
-    match '/sign_up', to: "devise/registrations#new"
-    match '/sign_in', to: "devise/sessions#new"
-    match '/sign_out', to: "devise/sessions#destroy"
-  end
 
   match '/help', to: "static_pages#help"
   match '/contact', to: "static_pages#contact"

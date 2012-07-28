@@ -28,6 +28,7 @@ class Reward < ActiveRecord::Base
     presence: true
 
   def to_s
-    (name.blank? or minimum_contribution.to_f < 1) ? "New Reward" : "#{name}" + " ($%.2f)" % minimum_contribution
+    # (name.blank? or minimum_contribution.to_f < 1) ? "New Reward" : "#{name}" + " ($%.2f)" % minimum_contribution
+    (name.blank? or minimum_contribution.to_f < 1) ? "New reward" : "%s ($%d)" % [self.name, self.minimum_contribution] # "#{name}" + " ($%.2f)" % minimum_contribution
   end
 end

@@ -69,4 +69,16 @@ describe Reward do
     it { should have_many :contributions }
   end
 
+  describe ".to_s" do
+    subject { reward.to_s}
+    describe "when name is blank" do
+      before { reward.name = "" }
+      it { should == "New reward" }
+    end
+    describe "when name is not blank" do
+      it { should == "%s ($%d)" % [reward.name, reward.minimum_contribution] }
+    end
+  end
+
+
 end
