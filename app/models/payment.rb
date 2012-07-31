@@ -19,6 +19,26 @@ class Payment < ActiveRecord::Base
     validates :amount,
       numericality: true
 
+    def amazon_cbui_url
+        uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
+        cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount" => self.amount,
+                                                       "returnurl"=>  "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
+                                                       "callerReference"=>  "#{self.id}",
+                                                       "paymentReason"=> "Communificiency contribution" } )
+
+        signature = SignatureUtils.sign_parameters({parameters: cbui_params, 
+                                                    aws_secret_key: Communificiency::Application.config.aws_secret_key,
+                                                    host: uri.host,
+                                                    verb: AmazonFPSUtils.http_method,
+                                                    uri: uri.path })
+
+        cbui_params[SignatureUtils::SIGNATURE_KEYNAME] = signature
+        cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
+        puts "\n\n\tCBUI!", cbui_url
+        cbui_url
+
+    end
+
 
     private
       def default_values

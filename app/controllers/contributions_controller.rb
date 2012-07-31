@@ -58,6 +58,7 @@ class ContributionsController < ApplicationController
 
     @payment = @contribution.build_payment amount: @contribution.amount, transaction_provider: 'AMAZON'
     @payment.caller_reference = @payment.id
+    binding.pry
 
 
 
@@ -78,27 +79,24 @@ class ContributionsController < ApplicationController
     # create a new payment
     # redirect them to the amazon payment page
 
-    if @contribution.save
+    if @contribution.save && @payment.save
       session[:contrib_params] = nil
-      cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount" => @payment.amount,
-                                                     "returnurl"=>  "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
-                                                     "callerReference"=>  "#{@payment.id}",
-                                                     "paymentReason"=> "Communificiency contribution" } )
-      uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
+=begin
+        uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
 
-      signature = SignatureUtils.sign_parameters({parameters: cbui_params, 
-                                                  aws_secret_key: Communificiency::Application.config.aws_secret_key,
-                                                  host: uri.host,
-                                                  verb: AmazonFPSUtils.http_method,
-                                                  uri: uri.path })
-      cbui_params[SignatureUtils::SIGNATURE_KEYNAME] = signature
-      @cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
+        signature = SignatureUtils.sign_parameters({parameters: cbui_params, 
+                                                    aws_secret_key: Communificiency::Application.config.aws_secret_key,
+                                                    host: uri.host,
+                                                    verb: AmazonFPSUtils.http_method,
+                                                    uri: uri.path })
+        cbui_params[SignatureUtils::SIGNATURE_KEYNAME] = signature
+        @cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
 
-      puts "\n\n\nCBUI!", @cbui_url
-      @payment.transaction_status = Payment::STATUS_WAITING_CBUI
-      @payment.save!
+        @payment.transaction_status = Payment::STATUS_WAITING_CBUI
+        @payment.save!
+=end
 
-      redirect_to @cbui_url
+      redirect_to @payment.amazon_cbui_url
       # redirect_to @contribution, notice: "Contribution created."
     else
       render action: "new" 
