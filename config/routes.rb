@@ -11,6 +11,8 @@ Communificiency::Application.routes.draw do
   match "/sign_up_old", to: "users#new"
   match "/users", to: "users#create"
   match '/about', to: "static_pages#about"
+  match "/users/:id", to: "users#show"
+
   root to: "static_pages#home"
 
   match '/praemonitus/:id', to: 'projects#show'

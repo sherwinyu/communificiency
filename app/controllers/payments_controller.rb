@@ -50,10 +50,12 @@ class PaymentsController < ApplicationController
 
 
 
-    cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount"=>@payment.amount,
-                                                   "returnurl" => "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
-                                                   "callerReference" => "#{@payment.id}",
-                                                   "paymentReason" => "Communificiency contribution" } )
+
+
+    cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount": @payment.amount,
+                                                   "returnurl":  "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
+                                                   "callerReference":  "#{@payment.id}",
+                                                   "paymentReason": "Communificiency contribution" } )
 
     #cbui_params["callerkey"] = config.aws_access_key
     #cbui_params["transactionamount"] = @payment.amount
@@ -63,15 +65,13 @@ class PaymentsController < ApplicationController
     #cbui_params["callerReference"] = "ref#{Time.now.to_i}" # caller_reference unless caller_reference.nil?
     #cbui_params["paymentReason"] = 'Communificiency' # payment_reason unless payment_reason.nil?
 
-    cbui_params[SignatureUtils::SIGNATURE_VERSION_KEYNAME] = '2'
-    cbui_params[SignatureUtils::SIGNATURE_METHOD_KEYNAME] = SignatureUtils::HMAC_SHA256_ALGORITHM
     uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
 
-    signature = SignatureUtils.sign_parameters({:parameters => cbui_params, 
-                                                :aws_secret_key => Communificiency::Application.config.aws_secret_key,
-                                                :host => uri.host,
-                                                :verb => AmazonFPSUtils.http_method,
-                                                :uri  => uri.path })
+    signature = SignatureUtils.sign_parameters({parameters: cbui_params, 
+                                                aws_secret_key: Communificiency::Application.config.aws_secret_key,
+                                                host: uri.host,
+                                                verb: AmazonFPSUtils.http_method,
+                                                uri: uri.path })
     cbui_params[SignatureUtils::SIGNATURE_KEYNAME] = signature
     @cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
 

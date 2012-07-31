@@ -20,8 +20,6 @@ class Contribution < ActiveRecord::Base
     errors[:amount] << "must be at least #{reward.minimum_contribution} for reward '#{reward}'" unless amount.to_i >= reward.minimum_contribution
   end
 
-
-
   def reward_belongs_to_project
     errors[:reward] << " #{reward} is not available for project #{project} " unless project.rewards.include? reward
   end

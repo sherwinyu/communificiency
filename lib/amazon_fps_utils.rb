@@ -10,14 +10,14 @@ class AmazonFPSUtils
   @fps_endpoint = "https://fps.sandbox.amazonaws.com/"
   @fps_version = "2008-09-17"
 
-  def self.get_cbui_params(options )#amount, pipeline, caller_reference, payment_reason, return_url, signature_version, signature_method)
+  def self.get_cbui_params(options) #amount, pipeline, caller_reference, payment_reason, return_url, signature_version, signature_method)
     params = {}
     params["callerKey"] = Communificiency::Application.config.aws_access_key
     params["pipelineName"] = "SingleUse"
     params["version"] = @cbui_version
     # params["callerReference"] = caller_reference unless caller_reference.nil?
     # params["paymentReason"] = payment_reason unless payment_reason.nil?
-    params[SignatureUtils::SIGNATURE_VERSION_KEYNAME] = 2
+    params[SignatureUtils::SIGNATURE_VERSION_KEYNAME] = '2'
     params[SignatureUtils::SIGNATURE_METHOD_KEYNAME] = SignatureUtils::HMAC_SHA256_ALGORITHM
 
     params.merge! options

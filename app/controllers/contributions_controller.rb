@@ -31,7 +31,7 @@ class ContributionsController < ApplicationController
 
     @reward = @project.rewards.find_by_id params[:reward_id] 
     if @reward.nil?
-      flash.notice = "Please select your reward!" 
+      flash.now.notice = "Please select your reward!" 
     end
 
 
@@ -55,19 +55,51 @@ class ContributionsController < ApplicationController
     contrib_params[:user] = current_user
 
     @contribution = @project.contributions.build contrib_params
-    
+
     @payment = @contribution.build_payment amount: @contribution.amount, transaction_provider: 'AMAZON'
     @payment.caller_reference = @payment.id
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # create a new payment
     # redirect them to the amazon payment page
 
     if @contribution.save
       session[:contrib_params] = nil
-      # redirect_to @contribution.project, notice: "Contribution created."
-      redirect_to @contribution, notice: "Contribution created."
+      cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount" => @payment.amount,
+                                                     "returnurl"=>  "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
+                                                     "callerReference"=>  "#{@payment.id}",
+                                                     "paymentReason"=> "Communificiency contribution" } )
+      uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
+
+      signature = SignatureUtils.sign_parameters({parameters: cbui_params, 
+                                                  aws_secret_key: Communificiency::Application.config.aws_secret_key,
+                                                  host: uri.host,
+                                                  verb: AmazonFPSUtils.http_method,
+                                                  uri: uri.path })
+      cbui_params[SignatureUtils::SIGNATURE_KEYNAME] = signature
+      @cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
+
+      puts "\n\n\nCBUI!", @cbui_url
+      @payment.transaction_status = Payment::STATUS_WAITING_CBUI
+      @payment.save!
+
+      redirect_to @cbui_url
+      # redirect_to @contribution, notice: "Contribution created."
     else
       render action: "new" 
     end

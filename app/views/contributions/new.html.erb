@@ -22,7 +22,7 @@
 
 
           <h2 class="contributionPaymentHeader"> 2. Choose your reward </h2>
-          <%= f.association :reward, collection: @project.rewards + [Reward.new(name: "blank reward")], wrapper_html: {class: 'derp'}, as: "radio_buttons", validate: true %>
+          <%= f.association :reward, collection:  [Reward.new(name: "No reward")] + @project.rewards, wrapper_html: {class: 'derp'}, as: "radio_buttons", validate: true %>
           <br>
 
           <h2 class="contributionPaymentHeader"> 3. Pay </h2>
