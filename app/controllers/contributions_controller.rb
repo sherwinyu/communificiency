@@ -35,7 +35,6 @@ class ContributionsController < ApplicationController
     end
 
 
-    @contribution = @project.contributions.build(contrib_params)
 
     contrib_params = params[:contribution] || {}
     contrib_params[:reward_id] = @reward.id if @reward 
@@ -43,6 +42,7 @@ class ContributionsController < ApplicationController
     contrib_params[:amount] ||= @reward?  @reward.minimum_contribution : 0
     session[:contrib_params] = contrib_params
 
+    @contribution = @project.contributions.build(contrib_params)
 
   end
 

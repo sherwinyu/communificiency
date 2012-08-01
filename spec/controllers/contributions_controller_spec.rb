@@ -90,16 +90,16 @@ describe ContributionsController do
       it {should raise_error}
     end
 
-    specify { session[:contrib_params].with_indifferent_access.should == {amount: 0}.with_indifferent_access }
+    specify { session[:contrib_params].with_indifferent_access.should == {amount: 0, project_id: project.id}.with_indifferent_access }
 
     describe "when amount is specified" do
       let(:params) { {project_id: project.id, contribution: {amount: 25}} }
-      specify { session[:contrib_params].should == {amount: "25"}.with_indifferent_access }
+      specify { session[:contrib_params].should == {amount: "25", project_id: project.id}.with_indifferent_access }
     end
 
     describe "when amount and reward are specified" do
       let(:params) { {project_id: project.id, reward_id: reward.id, contribution: {amount: 25}} }
-      specify { session[:contrib_params].should == {amount: "25", reward_id: reward.id }.with_indifferent_access }
+      specify { session[:contrib_params].should == {amount: "25", reward_id: reward.id, project_id: project.id }.with_indifferent_access }
     end
   end
 

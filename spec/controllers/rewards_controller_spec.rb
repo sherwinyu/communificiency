@@ -38,6 +38,7 @@ describe RewardsController do
     {}
   end
 
+=begin
   describe "GET index" do
     it "assigns all rewards as @rewards" do
       reward = Reward.create! valid_attributes
@@ -165,4 +166,5 @@ describe RewardsController do
     end
   end
 
+=end
 end

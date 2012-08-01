@@ -1,5 +1,6 @@
 
 class RewardsController < ApplicationController
+=begin
   # GET /rewards
   # GET /rewards.json
   def index
@@ -81,4 +82,5 @@ class RewardsController < ApplicationController
       format.json { head :no_content }
     end
   end
+=end
 end
