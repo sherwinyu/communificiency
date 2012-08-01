@@ -36,7 +36,6 @@ class Payment < ActiveRecord::Base
         cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
         puts "\n\n\tCBUI!", cbui_url
         cbui_url
-
     end
 
 

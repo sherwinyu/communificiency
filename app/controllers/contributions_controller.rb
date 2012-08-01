@@ -2,7 +2,7 @@
 class ContributionsController < ApplicationController
   # GET /contributions
   # GET /contributions.json
-  before_filter :authenticate_user!, only: [:new, :edit, :update]
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def index
     @contributions = Contribution.all
@@ -46,57 +46,34 @@ class ContributionsController < ApplicationController
 
 
   def create
-    unless current_user_signed_in?
-      redirect_back_or sign_in_path, notice: "Please sign in first."
+    # unless current_user_signed_in?
+      # redirect_back_or sign_in_path, notice: "Please sign in first."
+    # end
+    @project = Project.find_by_id params[:project_id] 
+    unless @project
+      render action: "new", alert: "Something went wrong."
+      return
     end
-    @project = Project.find params[:project_id] 
     contrib_params = session[:contrib_params] || {}
-    contrib_params.merge! params[:contribution]
+    contrib_params = contrib_params.with_indifferent_access
+    contrib_params.merge! params[:contribution] if params[:contribution]
     contrib_params[:user] = current_user
 
     @contribution = @project.contributions.build contrib_params
 
     @payment = @contribution.build_payment amount: @contribution.amount, transaction_provider: 'AMAZON'
     @payment.caller_reference = @payment.id
-    binding.pry
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     # create a new payment
     # redirect them to the amazon payment page
 
     if @contribution.save && @payment.save
       session[:contrib_params] = nil
-=begin
-        uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
-
-        signature = SignatureUtils.sign_parameters({parameters: cbui_params, 
-                                                    aws_secret_key: Communificiency::Application.config.aws_secret_key,
-                                                    host: uri.host,
-                                                    verb: AmazonFPSUtils.http_method,
-                                                    uri: uri.path })
-        cbui_params[SignatureUtils::SIGNATURE_KEYNAME] = signature
-        @cbui_url = AmazonFPSUtils.get_cbui_url(cbui_params)
-
-        @payment.transaction_status = Payment::STATUS_WAITING_CBUI
-        @payment.save!
-=end
 
       redirect_to @payment.amazon_cbui_url
+      # TODO(syu) --- what happen when this payment is abandoned? we should def not disiplay this notice then
+      
+      flash.notice = "Payment processed by Amazon."
       # redirect_to @contribution, notice: "Contribution created."
     else
       render action: "new" 

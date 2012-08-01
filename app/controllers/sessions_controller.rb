@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_after_filter :store_location
+  # skip_after_filter :store_location
 
 =begin
   def new

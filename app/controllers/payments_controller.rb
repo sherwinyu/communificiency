@@ -52,10 +52,10 @@ class PaymentsController < ApplicationController
 
 
 
-    cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount": @payment.amount,
-                                                   "returnurl":  "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
-                                                   "callerReference":  "#{@payment.id}",
-                                                   "paymentReason": "Communificiency contribution" } )
+    # cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount": @payment.amount,
+                                                   # "returnurl":  "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
+                                                   # "callerReference":  "#{@payment.id}",
+                                                   # "paymentReason": "Communificiency contribution" } )
 
     #cbui_params["callerkey"] = config.aws_access_key
     #cbui_params["transactionamount"] = @payment.amount
