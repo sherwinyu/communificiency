@@ -52,7 +52,6 @@ Communificiency::Application.routes.draw do
   match '/help', to: "static_pages#help"
   match '/contact', to: "static_pages#contact"
 
-
   match "/projects/:id", to: "static_pages#desc", params: :id
 
   match '/projects/1', to: "static_pages#desc"

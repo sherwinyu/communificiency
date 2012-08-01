@@ -152,8 +152,6 @@ describe ContributionsController do
       end
     end
 
-   
-
   end
 
 =begin
