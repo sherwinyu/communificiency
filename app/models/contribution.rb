@@ -16,12 +16,15 @@ class Contribution < ActiveRecord::Base
     numericality: {only_integer: true, greater_than: 0}
   validate :amount_meets_reward_minimum_contribution, unless: "reward.nil?"
 
+  validates :payment,
+    presence: true
+
   def amount_meets_reward_minimum_contribution
     errors[:amount] << "must be at least #{reward.minimum_contribution} for reward '#{reward}'" unless amount.to_i >= reward.minimum_contribution
   end
 
   def reward_belongs_to_project
-    errors[:reward] << " #{reward} is not available for project #{project} " unless project.rewards.include? reward
+    errors[:reward] << " '#{reward}' is not available for project '#{project}' " unless project.rewards.include? reward
   end
 
 end

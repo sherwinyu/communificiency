@@ -66,7 +66,25 @@ FactoryGirl.define do
   end
 
   factory :contribution do
+    amount { 55 }
+    project
     user
+    payment
+
+    factory :contribution_with_reward do
+      ignore do
+        
+      end
+      reward  nil
+    end
+
+  end
+
+  factory :payment do
+    transaction_id 1
+    caller_reference 1
+    transaction_provider "AMAZON"
+    transaction_status Payment::STATUS_CREATED
   end
 end
 
