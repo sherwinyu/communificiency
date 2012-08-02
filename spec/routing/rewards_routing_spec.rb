@@ -2,7 +2,8 @@ require "spec_helper"
 
 describe RewardsController do
   describe "routing" do
-
+    pending "admin views" 
+=begin
     it "routes to #index" do
       get("/rewards").should route_to("rewards#index")
     end
@@ -31,5 +32,6 @@ describe RewardsController do
       delete("/rewards/1").should route_to("rewards#destroy", :id => "1")
     end
 
+=end
   end
 end
