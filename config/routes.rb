@@ -2,9 +2,9 @@ Communificiency::Application.routes.draw do
 
   devise_for :users
 
-  match '/caseus', to: 'projects#show', id: 1
-  match '/projects/caseus', to: 'projects#show', id: 1
-  match '/projects/1', to: 'projects#show', id: 1
+  match '/caseus', to: 'projects#show', id: "1"
+  match '/projects/caseus', to: 'projects#show', id: "1"
+  get '/projects/1', to: 'projects#show', id: "1"
 
   resources :user_signups, only: [:create]
   match '/home', to:"static_pages#home"
