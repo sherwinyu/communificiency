@@ -26,10 +26,10 @@ Communificiency::Application.routes.draw do
 
   resources :projects do
     resources :contributions
+    resources :rewards
   end
   match '/*e' => 'static_pages#coming_soon'
 
-  resources :rewards
   resources :contributions
   resources :projects
 

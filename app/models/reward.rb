@@ -1,3 +1,5 @@
+include ActionView::Helpers::NumberHelper
+
 class Reward < ActiveRecord::Base
   attr_accessible :long_description, :name, :project_id, :short_description, :minimum_contribution, :limited_quantity 
   belongs_to :project, inverse_of: :rewards
@@ -29,6 +31,15 @@ class Reward < ActiveRecord::Base
 
   def to_s
     # (name.blank? or minimum_contribution.to_f < 1) ? "New Reward" : "#{name}" + " ($%.2f)" % minimum_contribution
-    (name.blank? or minimum_contribution.to_f < 1) ? "New reward" : "%s ($%d)" % [self.name, self.minimum_contribution] # "#{name}" + " ($%.2f)" % minimum_contribution
+    (name.blank? or minimum_contribution.to_f < 1) ? "New reward" : "%s (%s)" % [self.name, self.minimum_contribution_dollars] 
   end
+
+  def minimum_contribution_dollars
+    number_to_currency(self.minimum_contribution, precision: 0)
+  end
+
+  def as_json(options={})
+    super(methods: :minimum_contribution_dollars)
+  end
+
 end

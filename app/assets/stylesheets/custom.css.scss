@@ -211,6 +211,10 @@ pre.debug_dump {
 
 
 
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
+
+}
 /* typography */
 /*h1, h2, h3, h4, h5, h6 {*/
 /*line-height: 1;*/
@@ -304,6 +308,80 @@ footer ul li {
 .step1 {
   @extend .center;
   margin-top: 25px;
+}
+
+#reward-minimum-contribution {
+}
+
+#reward {
+  @extend .well;
+}
+
+#reward-name {
+  font-size: 1.7em;
+}
+
+.reward-description {
+  font-size: 1.4em;
+  line-height: 1.4em;
+}
+
+.reward-label {
+  font-style: italic;
+}
+
+.instructions {
+  color: black;
+  font-size: 1.3em;
+  padding: 10px;
+}
+
+#reward #reward-name:after {
+  @extend .label;
+  @extend .label-success;
+  content: "SELECTED";
+  font-size: 0.6em;
+  padding-left: .5em;
+  padding-right: .5em;
+  padding: .1em .5em;
+  margin-left: 1em;
+}
+
+#reward.error #reward-name:after {
+  @extend .label;
+  @extend .label-important;
+  content: "MINIMUM CONTRIBUTION NOT MET";
+  font-size: 0.6em;
+  padding-left: .5em;
+  padding-right: .5em;
+  padding: .1em .5em;
+  width: auto;
+  margin-left: 1em;
+}
+
+#reward-minimum-contribution .reward-display {
+  color: green;
+}
+
+#reward.error #reward-minimum-contribution .reward-display {
+  color: red;
+}
+
+#contribution_reward_id {
+  width: auto;
+}
+#steptwo option {
+  color: green;
+}
+#steptwo option.invalid  {
+  color: red;
+}
+#steptwo option.invalid:after {
+  content: "minimum contribution not met"
+}
+
+.reward-display {
+  font-style: normal;
 }
 
 #pay-button {

@@ -70,13 +70,14 @@ describe Reward do
   end
 
   describe ".to_s" do
+    before {reward.minimum_contribution = 4567}
     subject { reward.to_s}
     describe "when name is blank" do
       before { reward.name = "" }
       it { should == "New reward" }
     end
     describe "when name is not blank" do
-      it { should == "%s ($%d)" % [reward.name, reward.minimum_contribution] }
+      it { should == "%s ($4,567)" % [reward.name] }
     end
   end
 
