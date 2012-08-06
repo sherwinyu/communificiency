@@ -4,26 +4,68 @@
     <div class="span12">
 
       <div class="hero-unit">
-        <%= simple_form_for(@contribution, url: project_contributions_path(@project), validate: true) do |f| %>
-          <h1>Thanks for helping <%= @project.name %><br> <small>You're almost there. Just a few more steps</small></h2>
+        <div id="stepone">
+          <%= simple_form_for(@contribution, url: project_contributions_path(@project), validate: true) do |f| %>
+            <h1>Thanks for helping <%= @project.name %><br> <small>You're almost there. Just a few more steps</small></h2>
 
-          <h2 class="contributionPaymentHeader"> 1. Confirm your contribution </h2>
-          <p> Confirm the amount you want to contribute to <%= @project.name %>.</p>
-          <div class='step1'>
-            <%= f.input :amount, class: "inputContributionAmount", label: false, wrapper: "prepend", input_html: {type: 'number'}  do %>
-              <%= content_tag :span, "$", class: "add-on", id: 'inputContributionDollarSign' %>
-              <%= f.input_field :amount, id: 'inputContributionAmount' %>
-              <%= content_tag :span, ".00", class: "add-on", id: "inputContributionZeros" %>
-            <% end %>
+            <h2 class="contributionPaymentHeader"> 1. Confirm your contribution </h2>
+            <div class="instructions">
+              Confirm the amount you want to contribute to <%= @project.name %>.
+            </div>
+            <div class='step1'>
+              <%= f.input :amount, class: "inputContributionAmount", label: false, wrapper: "prepend", input_html: {type: 'number'}  do %>
+                <%= content_tag :span, "$", class: "add-on", id: 'inputContributionDollarSign' %>
+                <%= f.input_field :amount, id: 'inputContributionAmount' %>
+                <%= content_tag :span, ".00", class: "add-on", id: "inputContributionZeros" %>
+              <% end %>
+            </div>
           </div>
 
 
           <br>
 
+          <div id="steptwo">
+            <h2 class="contributionPaymentHeader"> 2. Choose your reward </h2>
+            <%= javascript_tag do %>
+              window.rewardsURL = '<%= j project_path(@project) %>';
+              window.rewards = <%= raw @project.rewards.to_json %>;
+              window.reward = <%= @reward ? (raw @reward.to_json) : 'null'  %>;
+            <% end %>
+            <div class="instructions">
+              Select your reward below.
+            </div>
 
-          <h2 class="contributionPaymentHeader"> 2. Choose your reward </h2>
-          <%= f.association :reward, collection:  [Reward.new(name: "No reward")] + @project.rewards, wrapper_html: {class: 'derp'}, as: "radio_buttons", validate: true %>
+            <div id="reward">
+              <h3 id="reward-name"> Loading reward... </h3> 
+              <div class="reward-description">
+                <div id="reward-minimum-contribution" class="reward-label">
+                  <% #TODO add "what's this" helper %>
+                  Minimum contribution:
+                  <span class="reward-display"> </span>
+                </div>
+                <div id="reward-short-description" class="reward-label">
+                  Description:
+                  <span class="reward-display"> 
+                    Lorem ipsum ipsum dicksum Lorem ipsum ipsum dicksum Lorem ipsum ipsum dicksum Lorem ipsum ipsum dicksum
+                  </span>
+                </div>
+                <div id="reward-estimated-delivery" class="reward-label">
+                  Estimated delivery date:
+                  <span class="reward-display"> 
+                    September 2010
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="center">
+              <%= f.association :reward, collection:  [Reward.new(name: "No reward -- I just want to contribute")] + @project.rewards, wrapper_html: {class: 'derp'},  validate: true, selected: @contribution.reward ? @contribution.reward.id : nil, label: false, input_html: { class: "derp" } %>
+            </div>
+          </div>
           <br>
+
+
+
+
 
           <h2 class="contributionPaymentHeader"> 3. Pay </h2>
 

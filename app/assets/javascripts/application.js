@@ -20,13 +20,16 @@
 //= require rails.validations.simple_form
 //
 //= require cocoon
+//
+
+
 
 
 //TODO(syu): Definitely don't want this
 
 
 
-$(document).ready(function(){
+$(document).ready(function() {
 
 
 

@@ -53,6 +53,10 @@ def form_sign_in(user)
   click_button "Sign in"
 end
 
+def form_sign_out
+  visit sign_out_path
+end
+
 def form_signed_in?
   user_signed_in?
 end
