@@ -6,6 +6,7 @@
       <%=  f.input :name                                     %>
       <%=  f.input :short_description, input_html: {class: "span8"}, hint: "A short description of your project" %>
       <%=  f.input :long_description , input_html: {class: "span8"} %>
+      <%=  f.input :funding_needed , input_html: {class: "span8"} %>
 
       <div class="divider"> </div>
 
@@ -14,10 +15,9 @@
 
     <h3 class="projectFormHeader"> Rewards </h3>
     <div class="projectFormRewardsContainer">
-      <p> You can edit your project's rewards here. 
-      </p>
+      <p> You can edit your project's rewards here. </p>
       <%= link_to_add_association raw("Add new reward"), f, :rewards, class: "btn btn-primary", id: "add_reward" %>
-      <%= f.simple_fields_for :rewards do |nested| %>
+      <%= f.simple_fields_for :rewards, validate: false do |nested| %>
         <%# render partial: 'reward_field', f: nested %>
         <%= render 'reward_fields', f: nested %>
       <% end %>
