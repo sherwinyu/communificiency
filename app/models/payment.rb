@@ -8,9 +8,10 @@ class Payment < ActiveRecord::Base
     STATUS_CONFIRMED = "amazon cbui confirmed"
     STATUS_PENDING = "amazon fps call made, payment pending"
     STATUS_SUCCESS = "payment succeeded"
-    STATUS_CANCELLED = "payment cancelled or other error"
+    STATUS_CANCELLED = "payment cancelled"
+    STATUS_CANCELLED = "payment failed"
 
-    ALL_STATUSES = [STATUS_CREATED, STATUS_WAITING_CBUI, STATUS_CONFIRMED, STATUS_PENDING, STATUS_SUCCESS, STATUS_CANCELLED]
+    ALL_STATUSES = [STATUS_CREATED, STATUS_WAITING_CBUI, STATUS_CONFIRMED, STATUS_PENDING, STATUS_SUCCESS, STATUS_CANCELLED, STATUS_FAILURE]
     validates :transaction_status,
       presence: true,
       inclusion: { in: ALL_STATUSES }

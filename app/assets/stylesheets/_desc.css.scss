@@ -139,20 +139,48 @@ div.markdown > blockquote > p {
 }
 
 
-h3.reward-header  {
+h3.rewardsBarHeader{
   font-size:1.8em;
   text-align:center;
   margin: 10px;
   // color: $skyblue;
+  line-height: normal;
 }
 
 
-.reward > .reward-tag {
-  margin-bottom: 10px;
+.reward-header {
+  font-size: 1.2em;
 }
 
-.reward-tag > em.reward-dollars {
+.reward .reward-header .reward-name {
+  font-size: 1.6em;
+  min-height: 50px;
+  height: 2em;
+  line-height: normal;
+  display: table;
+}
+
+.reward .reward-header .reward-name p {
+  display: block;
+  display: table-cell; 
+  vertical-align: middle;
+  // direction: rtl;
+  // padding-right: 1em;
+  
+}
+
+
+.reward .reward-header .reward-dollars {
   font-style:normal;
+  font-size: 2em;
+  direction: rtl;
+  // padding-top: .2em;
+  line-height: normal;
+  min-height: 50px;
+  height: 50px;
+  position: relative;
+  top: 2px;
+  color: green;
 }
 
 .reward > .reward-btn {
@@ -182,9 +210,9 @@ h3.reward-header  {
 }
 
 div.divider {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-bottom: gray 1px solid;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-bottom: gray 1px solid;
 }
 
 .contribution-Ask {
@@ -206,7 +234,7 @@ div.statistic-num {
 
 div.statistic-caption {
   font-size: 1.2em;
-   
+
   // display: inline;
   // width:50%;
 }

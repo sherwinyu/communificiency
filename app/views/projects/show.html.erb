@@ -62,13 +62,19 @@
         <% end %>
       <h3 class="contribution-Ask"> <small> Enter your contribution above. </small>  </h3>
     </div>
-    <h3 class="reward-header"> Rewards </h3>
+    <h3 class="rewardBarHeader"> Rewards </h3>
     <% @project.rewards.each do |reward| %>
       <div class="reward">
-        <h3 class="reward-tag">  <%= reward.name %> <em class="reward-dollars pull-right">$<%= reward.minimum_contribution.to_i %></em> </h3>
+        <div class="reward-header row-fluid">
+          <div class="span9 reward-name">
+            <p><%= reward.name %>  </p>
+          </div> 
+          <div class="span3 reward-dollars">
+            $<%= reward.minimum_contribution.to_i -%>
+          </div>
+      </div>
         <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn remote", "data-submit" => "#contribution_amount" %>
         <%# f.button :submit  reward_id: reward),  class: "btn reward-btn" %>
-        <p class="projectTagline"> <%= reward.short_description %> </p>
         <p class="projectDescription"> <%= reward.long_description %> </p>
       </div>
     <% end %>

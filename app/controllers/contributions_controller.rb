@@ -100,12 +100,10 @@ class ContributionsController < ApplicationController
     puts "response " + response
     pay_result_hash = Hash.from_xml(response)["PayResponse"]["PayResult"]
     @payment.transaction_id = pay_result_hash["TransactionId"]
-    binding.pry
 
     payment_status = pay_result_hash["TransactionStatus"]
     while payment_status == "Pending"
       fps_status_url = AmazonFPSUtils.get_fps_get_transaction_status_url(@payment.caller_reference, @payment.transaction_id)
-      binding.pry
       response = RestClient.get fps_status_url
       status_result_hash = Hash.from_xml(response)["GetTransactionStatusResponse"]["GetTransactionStatusResult"]
       payment_status = status_result_hash["TransactionStatus"]
@@ -115,23 +113,19 @@ class ContributionsController < ApplicationController
     when "Success"
       @payment.transaction_status = Payment::STATUS_SUCCESS
       @payment.save
-      flash.now.notice = "Your payment was successfully received! Look out for an email from us."
-      render @contribution.project
+      flash.notice = "Your payment was successfully received! Look out for an email from us."
+      redirect_to project_path( @contribution.project ) and return
     when "Cancelled"
       @payment.transaction_status = Payment::STATUS_CANCELLED
       @payment.save
-      flash.now.notice = "Looks like you changed your mind. If you reconsider, just go back to"
-      render @contribution.project
+      flash.notice = "Looks like you changed your mind. If you reconsider, just go back to"
+      redirect_to project_path( @contribution.project ) and return
     else  #failure
       @payment.transaction_status = Payment::STATUS_FAILURE
       @payment.save
-      flash.now.notice = "Something went wrong. Please try again or contact info@communificiency.com"
-      render @contribution.project
+      flash.notice = "Something went wrong. Please try again or contact info@communificiency.com"
+      redirect_to project_path( @contribution.project ) and return
     end
-
-
-
-   binding.pry
   end
 
   # PUT /contributions/1
