@@ -19,10 +19,10 @@ class Payment < ActiveRecord::Base
     validates :amount,
       numericality: true
 
-    def amazon_cbui_url
+    def amazon_cbui_url contribution
         uri = URI.parse(AmazonFPSUtils.cbui_endpoint)
         cbui_params = AmazonFPSUtils.get_cbui_params( {"transactionamount" => self.amount,
-                                                       "returnurl"=>  "#{Communificiency::Application.config.host_address}/confirm_payment_cbui",
+                                                       "returnurl"=>  "#{Communificiency::Application.config.host_address}/amazon_confirm_payment_callback/#{contribution.id}",
                                                        "callerReference"=>  "#{self.id}",
                                                        "paymentReason"=> "Communificiency contribution" } )
 

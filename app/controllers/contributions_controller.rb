@@ -68,11 +68,10 @@ class ContributionsController < ApplicationController
 
     # create a new payment
     # redirect them to the amazon payment page
-
-    if @contribution.save && @payment.save
+    if @contribution.save && @payment.save && @payment.update_attribute( :caller_reference, @payment.id)
       session[:contrib_params] = nil
-
-      redirect_to @payment.amazon_cbui_url
+      binding.pry
+      redirect_to @payment.amazon_cbui_url(@contribution)
       # TODO(syu) --- what happen when this payment is abandoned? we should def not disiplay this notice then
       
       flash.notice = "Payment processed by Amazon."

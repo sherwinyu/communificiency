@@ -113,11 +113,12 @@ describe ContributionsController do
     let(:params) {{project_id: project.id}}
     # before { post :create, params }
 
+    # TODO(SYU) fix this test to actually use @contribution.payment.amazon_cbui_url
     it "should redirect to the payment url" do
       post :create, params
       payment = Payment.new amount: reward.minimum_contribution
       payment.id = Payment.last.id
-      url = payment.amazon_cbui_url
+      url = payment.amazon_cbui_url Contribution.last
       response.should redirect_to url
     end
 
