@@ -29,7 +29,8 @@ Communificiency::Application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # changed to true 2012 07 24 http://ruby.railstutorial.org/chapters/sign-up#sec:deploying_to_production_with_ssl
-  config.force_ssl = true
+  # changed to false  (sslendpoint on heroku requires money)  2012 08 09
+  # config.force_ssl = true
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
