@@ -38,7 +38,7 @@ class Project < ActiveRecord::Base
   end
 
   def percent_funded
-    "#{(current_funding / funding_needed.to_f * 100).round(0).humanize}%"
+    "#{(current_funding / funding_needed.to_f * 100).round(0)}%"
   end
 
 end

@@ -14,10 +14,6 @@ jQuery ->
       console.log id
       reward = (reward for reward in rewards when reward.id == id)[0]
       updateRewardDescription(reward)
-      # $('#reward .reward-header').text(reward.name)
-      # $('#reward-minimum-contribution .reward-display').text(reward.minimum_contribution_dollars)
-      # $('#reward-short-description .reward-display').text(reward.short_description)
-      # $('#reward-extimated-delivery .reward-display').text(reward.short_description)
       console.log reward
 
     updateRewardDescription = (reward) ->
@@ -28,8 +24,8 @@ jQuery ->
 
       $('#reward-name').text(reward.name)
       $('#reward-minimum-contribution .reward-display').text(reward.minimum_contribution_dollars)
-      $('#reward-short-description .reward-display').text(reward.short_description)
-      $('#reward-extimated-delivery .reward-display').text(reward.short_description)
+      $('#reward-short-description .reward-display').text(reward.long_description)
+      $('#reward-extimated-delivery .reward-display').text(reward.long_description)
       current = parseInt $("#inputContributionAmount").val()
       console.log "current: " + current
       console.log "min: " + reward.minimum_contribution
