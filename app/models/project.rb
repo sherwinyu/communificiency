@@ -33,4 +33,12 @@ class Project < ActiveRecord::Base
     name
   end
 
+  def current_funding
+    self.contributions.collect{ |c| c.amount }.compact.sum
+  end
+
+  def percent_funded
+    "#{(current_funding / funding_needed.to_f * 100).round(0).humanize}%"
+  end
+
 end

@@ -34,13 +34,13 @@
       <h3 class="reward-header"> Project stats </h3>
       <div class="contribution-info">
         <div class="statistic row-fluid">
-          <div class="statistic-num span6"> 25% </div><div class="statistic-caption span6"> funded </div>
+          <div class="statistic-num span6"><%=  @project.percent_funded %> </div><div class="statistic-caption span6"> funded </div>
         </div>
         <div class="statistic row-fluid">
-          <div class="statistic-num span6">$350 </div><div class="statistic-caption span6"> of $1400 raised </div>
+          <div class="statistic-num span6"><%=  number_to_currency(@project.current_funding, precision: 0)  %></div><div class="statistic-caption span6"> of <%= number_to_currency(@project.funding_needed, precision: 0) %> raised </div>
         </div>
         <div class="statistic row-fluid">
-          <div class="statistic-num span6">281</div><div class="statistic-caption span6">contributors</div>
+          <div class="statistic-num span6"><%=  @project.contributions.size %> </div><div class="statistic-caption span6">contributors</div>
         </div>
         <div class="statistic row-fluid">
           <div class="statistic-num span6">41</div><div class="statistic-caption span6">days to go</div>
