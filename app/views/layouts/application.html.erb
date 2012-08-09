@@ -27,6 +27,15 @@
      </div>
      <%= render 'layouts/header' %>
      <div class="container main">
+       <div id="helpDiv" class="modal fade">
+         <h2> Need help? </h2>
+      <a class="close" data-dismiss="modal">&#215;</a>
+         <p> If you need any help or have any questions, please <%= mail_to("team@communificiency.com", "email us", subject: "Communificiency help", body: "I have a question about communificiency...", target: "_blank")  %>. We'll get back to you within the day. </p>
+
+         <p> We really appreciate your interest in Communificiency. We're a small team that just launched and are working hard to make sure everything runs smoothly, so please ask us for help if you need it!  </p>
+
+
+       </div>
        <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
        <%= yield %>
        <%=  debug(params) if Rails.env.development? %>

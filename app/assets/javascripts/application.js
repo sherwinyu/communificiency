@@ -32,6 +32,7 @@
 $(document).ready(function() {
 
 
+  $("#helpDiv").modal({ show: false });
 
 
   $(".autogrow").autoGrow();

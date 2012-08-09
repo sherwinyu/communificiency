@@ -18,6 +18,7 @@ module ApplicationHelper
     else
       inner = args[0]
       options = args[1] || {}
+      options2 = args[2] || {}
       # url = url_for(options)
 
       str = current_page?(options) ? '<li class="active">' : '<li>'
@@ -26,7 +27,8 @@ module ApplicationHelper
         str << inner
         str << '</p>'
       else
-        str << ( link_to inner, options )
+        # binding.pry
+        str << ( link_to inner, options, options2 )
       end
       str << '</li>'
       str.html_safe
