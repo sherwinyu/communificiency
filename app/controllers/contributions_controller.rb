@@ -119,7 +119,7 @@ class ContributionsController < ApplicationController
       when "Success"
         @payment.transaction_status = Payment::STATUS_SUCCESS
         @payment.save
-        flash.notice = "Your contribution to #{@project.name} for #{$@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
+        flash.notice = "Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
         redirect_to project_path( @contribution.project ) and return
       when "Cancelled"
         @payment.transaction_status = Payment::STATUS_CANCELLED
