@@ -4,7 +4,7 @@ jQuery ->
   # console.log $('#rewards').data( "url" )
   # TODO (syu) on inputContribution change, update SELECTED tag
 
-  if reward? && rewards?
+  if rewards?
     $("#inputContributionAmount").change (event)->
       updateDropDown()
 
