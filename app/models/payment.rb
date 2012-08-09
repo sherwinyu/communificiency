@@ -2,6 +2,8 @@ class Payment < ActiveRecord::Base
 
   attr_accessible :amount, :transaction_id, :transaction_provider
   after_initialize :default_values
+  
+  has_one :contribution, inverse_of: :payment
 
     STATUS_CREATED = "payment created"
     STATUS_WAITING_CBUI = "waiting on user / amazon / cbui"

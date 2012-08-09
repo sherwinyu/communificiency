@@ -5,9 +5,9 @@ class AmazonFPSUtils
 
   @http_method = "GET"
   @cbui_version = "2009-01-09"
-  @cbui_endpoint = "https://authorize.payments-sandbox.amazon.com/cobranded-ui/actions/start"
+  @cbui_endpoint = Communificiency::Application.config.cbui_endpoint
 
-  @fps_endpoint = "https://fps.sandbox.amazonaws.com/"
+  @fps_endpoint = Communificiency::Application.config.fps_endpoint
   @fps_version = "2008-09-17"
 
   def self.get_cbui_params(options) #amount, pipeline, caller_reference, payment_reason, return_url, signature_version, signature_method)

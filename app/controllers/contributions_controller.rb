@@ -49,7 +49,7 @@ class ContributionsController < ApplicationController
 
   def create
     # unless current_user_signed_in?
-      # redirect_back_or sign_in_path, notice: "Please sign in first."
+    # redirect_back_or sign_in_path, notice: "Please sign in first."
     # end
     @project = Project.find_by_id params[:project_id] 
     unless @project
@@ -72,7 +72,7 @@ class ContributionsController < ApplicationController
       session[:contrib_params] = nil
       redirect_to @payment.amazon_cbui_url(@contribution)
       # TODO(syu) --- what happen when this payment is abandoned? we should def not disiplay this notice then
-      
+
       flash.notice = "Payment processed by Amazon."
       # redirect_to @contribution, notice: "Contribution created."
     else
@@ -83,46 +83,60 @@ class ContributionsController < ApplicationController
   def amazon_confirm_payment_callback
     @contribution = Contribution.find_by_id params[:contribution_id]
     @payment = Payment.find_by_caller_reference params[:callerReference]
-    unless @contribution && @payment && @contribution.payment == @payment
-      raise "EXCEPTION"
-    end
-    unless params[:status] == "SC"
-      raise "EXCEPTION"
-    end
+    @project = @contribution.project
+    begin
+      unless @contribution && @payment && @contribution.payment == @payment
+        raise "payment and contribution mismatch"
+      end
+      unless params[:status] == "SC"
+        raise "amazon cbui call was not successful: " + params
+      end
 
 
-    @payment.token_id = params[:tokenID]
-    @payment.transaction_status = Payment::STATUS_CONFIRMED
-    fps_pay_url = AmazonFPSUtils.get_fps_pay_url(@payment.caller_reference, @payment.amount, @payment.token_id)
-    puts "fps_pay_url " + fps_pay_url
-    response = RestClient.get fps_pay_url
-    puts "response " + response
-    pay_result_hash = Hash.from_xml(response)["PayResponse"]["PayResult"]
-    @payment.transaction_id = pay_result_hash["TransactionId"]
+      @payment.token_id = params[:tokenID]
+      @payment.transaction_status = Payment::STATUS_CONFIRMED
+      fps_pay_url = AmazonFPSUtils.get_fps_pay_url(@payment.caller_reference, @payment.amount, @payment.token_id)
+      puts "fps_pay_url " + fps_pay_url
+      payment_status = "trying"
+      begin
+        response = RestClient.get fps_pay_url
+        puts "response " + response
+        pay_result_hash = Hash.from_xml(response)["PayResponse"]["PayResult"]
+        @payment.transaction_id = pay_result_hash["TransactionId"]
+        payment_status = pay_result_hash["TransactionStatus"]
+      rescue => e
+        puts "error rest client: ", e.response
+        raise "rest client error" + e.response
+      end
 
-    payment_status = pay_result_hash["TransactionStatus"]
-    while payment_status == "Pending"
-      fps_status_url = AmazonFPSUtils.get_fps_get_transaction_status_url(@payment.caller_reference, @payment.transaction_id)
-      response = RestClient.get fps_status_url
-      status_result_hash = Hash.from_xml(response)["GetTransactionStatusResponse"]["GetTransactionStatusResult"]
-      payment_status = status_result_hash["TransactionStatus"]
-    end
-    case payment_status
-    when "Success"
-      @payment.transaction_status = Payment::STATUS_SUCCESS
-      @payment.save
-      flash.notice = "Your payment was successfully received! Look out for an email from us."
-      redirect_to project_path( @contribution.project ) and return
-    when "Cancelled"
-      @payment.transaction_status = Payment::STATUS_CANCELLED
-      @payment.save
-      flash.notice = "Looks like you changed your mind. If you reconsider, just go back to"
-      redirect_to project_path( @contribution.project ) and return
-    else  #failure
-      @payment.transaction_status = Payment::STATUS_FAILURE
-      @payment.save
+      while payment_status == "Pending"
+        fps_status_url = AmazonFPSUtils.get_fps_get_transaction_status_url(@payment.caller_reference, @payment.transaction_id)
+        response = RestClient.get fps_status_url
+        status_result_hash = Hash.from_xml(response)["GetTransactionStatusResponse"]["GetTransactionStatusResult"]
+        payment_status = status_result_hash["TransactionStatus"]
+      end
+      case payment_status
+      when "Success"
+        @payment.transaction_status = Payment::STATUS_SUCCESS
+        @payment.save
+        flash.notice = "Your contribution to #{@project.name} for #{$@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
+        redirect_to project_path( @contribution.project ) and return
+      when "Cancelled"
+        @payment.transaction_status = Payment::STATUS_CANCELLED
+        @payment.save
+        flash.notice = "Looks like you changed your mind. If you reconsider, just go back to"
+        redirect_to project_path( @contribution.project ) and return
+      else  #failure
+        @payment.transaction_status = Payment::STATUS_FAILURE
+        @payment.save
+        raise "payment failure"
+        flash.notice = "Something went wrong. Please try again or contact info@communificiency.com"
+        # redirect_to project_path( @contribution.project ) and return
+      end
+    rescue => e
+      puts "error in amazon_confirm_payment_callback", e
       flash.notice = "Something went wrong. Please try again or contact info@communificiency.com"
-      redirect_to project_path( @contribution.project ) and return
+      redirect_to new_project_contribution_path(@contribution.project || 1)
     end
   end
 

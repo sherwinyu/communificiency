@@ -1,6 +1,6 @@
 class Contribution < ActiveRecord::Base
   attr_accessible :payment_id, :project_id, :reward_id, :user_id, :reward, :user, :amount
-  belongs_to :payment 
+  belongs_to :payment, inverse_of: :contribution
   belongs_to :user, inverse_of: :contributions
   belongs_to :project, inverse_of: :contributions
   belongs_to :reward, inverse_of: :contributions

@@ -69,4 +69,6 @@ Communificiency::Application.configure do
   
   # Added per Devise install 
   config.action_mailer.default_url_options = { :host => 'communificiency.com' }
+  config.cbui_endpoint = "https://authorize.payments.amazon.com/cobranded-ui/actions/start"
+  config.fps_endpoint = "https://fps.amazonaws.com/"
 end

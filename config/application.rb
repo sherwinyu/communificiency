@@ -62,8 +62,12 @@ module Communificiency
     config.assets.version = '1.0'
 
     # Custom Configs
+    # for sherwin.x.yu@gmail.com
     config.aws_access_key = "AKIAI5RRHRFM2GH67ORA"
     config.aws_secret_key = "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"
     config.host_address = "http://localhost:3000"
+
+    config.cbui_endpoint = "https://authorize.payments-sandbox.amazon.com/cobranded-ui/actions/start"	
+    config.fps_endpoint = "https://fps.sandbox.amazonaws.com/"
   end
 end
