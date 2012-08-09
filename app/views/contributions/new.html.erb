@@ -49,7 +49,7 @@
                     Lorem ipsum ipsum dicksum Lorem ipsum ipsum dicksum Lorem ipsum ipsum dicksum Lorem ipsum ipsum dicksum
                   </span>
                 </div>
-                <div id="reward-estimated-delivery" class="reward-label">
+                <div id="reward-estimated-delivery" class="reward-label" style="display: none">
                   Estimated delivery date:
                   <span class="reward-display"> 
                     September 2010
@@ -68,15 +68,22 @@
 
 
           <h2 class="contributionPaymentHeader"> 3. Pay </h2>
+          <div class="instructions">
+          Click below to pay. You will be directed to Amazon, where you can sign in with your Amazon account (or create a new one). After confirming your payment with amazon, you'll be redirected here.
+        </div>
 
 
-          <%= f.button :submit, "Pay now!", id: "pay-button" %>
+        <div class="center">
+          <%= f.button :submit, "Pay through Amazon", id: "pay-button" %>
+        </div>
 
 
 
           <% end # form for %> 
 
-          <%= link_to 'Back', contributions_path %>
+          <p>
+          <%= link_to "Back to #{@project.name}", project_path( @project ) %>
+          </p>
 
 
         </div>
@@ -87,26 +94,3 @@
 
   </div><!--/.fluid-container-->
 
-  <div class="control-group radio_buttons required derp">
-    <label class="radio_buttons required control-label">
-      <abbr title="required">*
-      </abbr> Reward
-    </label>
-    <div class="controls">
-      <label class="radio"> 
-        <input class="radio_buttons required" id="contribution_reward_id_1" name="contribution[reward_id]" type="radio" value="1">Value meal
-      </label>
-      <label class="radio">
-        <input class="radio_buttons required" id="contribution_reward_id_3" name="contribution[reward_id]" type="radio" value="3">Local farm tour
-      </label>
-      <label class="radio">
-        <input class="radio_buttons required" id="contribution_reward_id_5" name="contribution[reward_id]" type="radio" value="5">Private meal
-      </label>
-      <label class="radio">
-        <input checked="checked" class="radio_buttons required" id="contribution_reward_id_6" name="contribution[reward_id]" type="radio" value="6">Picture with the cheese truck
-      </label>
-      <label class="radio">
-        <input class="radio_buttons required" id="contribution_reward_id_7" name="contribution[reward_id]" type="radio" value="7">Hunk o' Cheese
-      </label>
-    </div>
-  </div>

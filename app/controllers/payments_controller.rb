@@ -112,18 +112,18 @@ class PaymentsController < ApplicationController
       elsif status == "Cancelled"
         @payment.transaction_status = Payment::STATUS_CANCELLED
         @payment.save
-        flash.now.notice = "Looks like you changed your mind. Won't you please reconsider?"
+        flash.now.notice = "Looks like you changed your mind. If you reconsider, just go back to"
         render 'static_pages/desc/'
       else
         @payment.transaction_status = Payment::STATUS_FAILURE
         @payment.save
-        flash.now.notice = "Something went wrong. Please try again or contact support@communificiency.com"
+        flash.now.notice = "Something went wrong. Please try again or contact info@communificiency.com"
         render 'static_pages/desc/'
       end
     else 
       @payment.transaction_status = Payment::STATUS_FAILURE
       @payment.save
-      flash.now.notice = "Something went wrong. Please try again or contact support@communificiency.com"
+      flash.now.notice = "Something went wrong. Please try again or contact info@communificiency.com"
       render 'static_pages/desc/'
     end
   end

@@ -385,10 +385,16 @@ footer ul li {
 }
 
 #pay-button {
-  @extend btn;
-  @extend btn-large;
-  @extend btn-primary;
+  @extend .btn;
+  @extend .btn-large;
+  @extend .btn-primary;
+  // @extend .center;
+  // margin-left: auto;
+  // margin-right: auto;
+  margin: 2em auto;
+  // display: block;
 }
+
 
 
 
