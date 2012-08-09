@@ -81,6 +81,59 @@ class ContributionsController < ApplicationController
     end
   end
 
+  def amazon_confirm_payment_callback
+    @contribution = Contribution.find_by_id params[:contribution_id]
+    @payment = Payment.find_by_caller_reference params[:callerReference]
+    unless @contribution && @payment && @contribution.payment == @payment
+      raise "EXCEPTION"
+    end
+    unless params[:status] == "SC"
+      raise "EXCEPTION"
+    end
+
+
+    @payment.token_id = params[:tokenID]
+    @payment.transaction_status = Payment::STATUS_CONFIRMED
+    fps_pay_url = AmazonFPSUtils.get_fps_pay_url(@payment.caller_reference, @payment.amount, @payment.token_id)
+    puts "fps_pay_url " + fps_pay_url
+    response = RestClient.get fps_pay_url
+    puts "response " + response
+    pay_result_hash = Hash.from_xml(response)["PayResponse"]["PayResult"]
+    @payment.transaction_id = pay_result_hash["TransactionId"]
+    binding.pry
+
+    payment_status = pay_result_hash["TransactionStatus"]
+    while payment_status == "Pending"
+      fps_status_url = AmazonFPSUtils.get_fps_get_transaction_status_url(@payment.caller_reference, @payment.transaction_id)
+      binding.pry
+      response = RestClient.get fps_status_url
+      status_result_hash = Hash.from_xml(response)["GetTransactionStatusResponse"]["GetTransactionStatusResult"]
+      payment_status = status_result_hash["TransactionStatus"]
+      binding.pry
+    end
+    case payment_status
+    when "Success"
+      @payment.transaction_status = Payment::STATUS_SUCCESS
+      @payment.save
+      flash.now.notice = "Your payment was successfully received! Look out for an email from us."
+      render @contribution.project
+    when "Cancelled"
+      @payment.transaction_status = Payment::STATUS_CANCELLED
+      @payment.save
+      flash.now.notice = "Looks like you changed your mind. If you reconsider, just go back to"
+      render @contribution.project
+    else  #failure
+      @payment.transaction_status = Payment::STATUS_FAILURE
+      @payment.save
+      flash.now.notice = "Something went wrong. Please try again or contact info@communificiency.com"
+      render @contribution.project
+    end
+
+
+
+   binding.pry
+  end
+
   # PUT /contributions/1
   # PUT /contributions/1.json
 =begin

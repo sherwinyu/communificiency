@@ -23,6 +23,7 @@ Communificiency::Application.routes.draw do
   end
 
   match '/coming_soon' => 'static_pages#coming_soon'
+  match 'amazon_confirm_payment_callback/:contribution_id', to: "contributions#amazon_confirm_payment_callback"
 
   resources :projects do
     resources :contributions

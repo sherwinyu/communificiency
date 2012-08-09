@@ -2,6 +2,14 @@ require "spec_helper"
 
 describe RewardsController do
   describe "routing" do
+    it "routes /amazon_confirm_payment_callback/:contribution_id to contributions#amazon_confirm_payment_callback for contribution_id" do
+      get( "/amazon_confirm_payment_callback/55").should route_to(
+        controller: "contributions",
+        action: "amazon_confirm_payment_callback",
+        contribution_id: "55")
+
+    end
+
 =begin
     it "routes to #index" do
       get("/rewards").should route_to("rewards#index")
