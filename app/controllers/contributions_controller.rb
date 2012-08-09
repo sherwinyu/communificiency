@@ -70,7 +70,6 @@ class ContributionsController < ApplicationController
     # redirect them to the amazon payment page
     if @contribution.save && @payment.save && @payment.update_attribute( :caller_reference, @payment.id)
       session[:contrib_params] = nil
-      binding.pry
       redirect_to @payment.amazon_cbui_url(@contribution)
       # TODO(syu) --- what happen when this payment is abandoned? we should def not disiplay this notice then
       
@@ -107,7 +106,6 @@ class ContributionsController < ApplicationController
       response = RestClient.get fps_status_url
       status_result_hash = Hash.from_xml(response)["GetTransactionStatusResponse"]["GetTransactionStatusResult"]
       payment_status = status_result_hash["TransactionStatus"]
-      binding.pry
     end
     case payment_status
     when "Success"
