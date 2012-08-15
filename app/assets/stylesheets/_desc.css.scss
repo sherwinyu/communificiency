@@ -153,11 +153,13 @@ h3.rewardsBarHeader{
 }
 
 .reward .reward-header .reward-name {
-  font-size: 1.4em;
+  font-size: 1.3em;
   min-height: 50px;
   height: 2em;
   line-height: normal;
   display: table;
+  text-align: right;
+  padding-right: .45em;
 }
 
 .reward .reward-header .reward-name p {
@@ -170,7 +172,6 @@ h3.rewardsBarHeader{
 .reward .reward-header .reward-dollars {
   font-weight: bold;
   font-size: 2em;
-  direction: rtl;
   line-height: normal;
   min-height: 50px;
   height: 50px;
@@ -230,9 +231,20 @@ div.statistic-num {
 
 div.statistic-caption {
   font-size: 1.2em;
+}
 
-  // display: inline;
-  // width:50%;
+#contribution_amount {
+  width: 80px;
+}
+#okButton {
+  background: $goldenLight;
+  position: relative;
+  left: -5px;
+  @include border-radius(0px 3px 3px 0px);
+}
+
+#okButton:hover {
+  background: darken($goldenLight, 8%);
 }
 
 .projectTagline {

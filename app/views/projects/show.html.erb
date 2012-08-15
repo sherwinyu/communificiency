@@ -45,21 +45,17 @@
         <div class="statistic row-fluid">
           <div class="statistic-num span6">41</div><div class="statistic-caption span6">days to go</div>
         </div>
-      <!-- table> 
-        <tr> <td> 25% </td> <td> funded </td> </tr>
-        <tr> <td>$350 </td> <td> of $1400 raised </td> </tr>
-        <tr> <td>281</td> <td>contributors</td> </tr>
-      </table-->
       <div class="divider">  </div>
       <h3 class="contribution-Ask"> Contribute to <%= @project.name%> <small> and get one of the following rewards! </small> </h3>
       <%= simple_form_for(@contribution, url: new_project_contribution_path(@project), method: 'GET', id: "contributionForm") do |f| %>
 
-        <%= f.input :amount, wrapper: 'prepend' , label: false do %>
-          <%= content_tag :span, "$", class: "add-on" %>
-          <%= f.input_field :amount, class: 'span2' %>
-          <%# TODO(syu) change content tag to something clickable %>
-          <%= content_tag :span, "Ok!", class: "add-on" %>
+        <div class="center">
+        <%= f.input :amount, wrapper: 'prepend', label: false do %>
+          <%= content_tag :span, "$", class: "add-on" %> <%= f.input_field :amount, size: 5, class: 'span2' %>
+          <%= f.button :submit, "Contribute", class: "btn", id: "okButton" %>
+
         <% end %>
+      </div>
       <h3 class="contribution-Ask"> <small> Enter your contribution above. </small>  </h3>
     </div>
     <h3 class="rewardBarHeader"> Rewards </h3>
