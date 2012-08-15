@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
-  # before_filter :require_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_filter :require_admin!, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /projects
   # GET /projects.json

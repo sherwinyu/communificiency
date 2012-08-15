@@ -47,8 +47,15 @@ module SessionsHelper
     @user = User.find_by_id params[:id]
     redirect_back_or home_path, alert: "Insufficient privileges" unless current_user?(@user) or current_user_admin?
   end
+=end
 
-  def require_admin
+  def require_admin!
+    if !current_user_admin?
+      redirect_back_or home_path, alert: "Sorry, you don't have access to that."
+    end
+  end
+
+=begin
     if current_user && !current_user_admin?
       redirect_back_or home_path, alert: "Sorry, you don't have access to that."
     elsif !current_user_signed_in?
