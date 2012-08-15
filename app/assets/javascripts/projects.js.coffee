@@ -20,6 +20,7 @@ jQuery ->
       unless reward?
         $('#reward').hide()
         $('#steptwo .instructions').text("You haven’t chosen a reward yet. Use the dropdown menu below to find a reward you like. Or, if you don't want a reward, just go on step 3.")
+        $('.step1 .control-group').removeClass('error');
         return;
 
       $('#reward-name').text(reward.name)
@@ -27,15 +28,18 @@ jQuery ->
       $('#reward-short-description .reward-display').text(reward.long_description)
       $('#reward-extimated-delivery .reward-display').text(reward.long_description)
       current = parseInt $("#inputContributionAmount").val()
+      current = 0 if isNaN(current)
       console.log "current: " + current
       console.log "min: " + reward.minimum_contribution
       instructions = ""
       if (current < reward.minimum_contribution) # invalid
         instructions = "You’ve selected this reward, but your contribution doesn’t meet the minimum. Please select another reward or increase your contribution."
         $('#reward').addClass('error')
+        $('.step1 .control-group').addClass('error');
       else # valid
         instructions = "Make sure this is the reward you want, and move on to step 3! If you want to select another reward, just use the dropdown menu."
         $('#reward').removeClass('error')
+        $('.step1 .control-group').removeClass('error');
       console.log instructions
       $('#steptwo .instructions').text(instructions)
       $('#reward').show()
@@ -43,6 +47,8 @@ jQuery ->
     updateDropDown = ->
       console.log "updateDropDown"
       current = parseInt $("#inputContributionAmount").val()
+      current = 0 if isNaN(current)
+      console.log current
       updateDropDownOption = (reward) ->
         option = $("#steptwo option[value=\"#{reward.id}\"]")
         if (current < reward.minimum_contribution) # invalid
