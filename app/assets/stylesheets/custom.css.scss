@@ -736,6 +736,7 @@ h1.coming-soon {
 .faq h1 {
   @extend .center;
   color: $cfblue;
+  margin-bottom: 1em;
 }
 
 .faq h3 {
@@ -760,6 +761,12 @@ h1.coming-soon {
 
 #helpDiv h2 {
   text-align: center;
+  padding-bottom: 1em;
+}
+
+#helpDiv p {
+  font-size: 1.4em;
+  line-height: normal;
 }
 
 #helpDiv h2 {

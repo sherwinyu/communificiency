@@ -27,7 +27,7 @@
 
     <h3>I know a business that should be on Communificiency. What should I do?</h3>
 
-    <p>Let us know! Refer the business to us or shoot us an email at info@communificiency.com</p> 
+    <p>Let us know! Refer the business to us or shoot us an <%= mail_to("team@communificiency.com", "email", subject: "Communificiency business referral", body: "I know a business that should work with Communificiency...", target: "_blank")  %>.</p> 
 
     <h3>Does it cost anything to join Communificiency?</h3>
 

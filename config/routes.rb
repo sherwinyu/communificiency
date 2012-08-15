@@ -6,6 +6,9 @@ Communificiency::Application.routes.draw do
   match '/projects/caseus', to: 'projects#show', id: "1"
   get '/projects/1', to: 'projects#show', id: "1"
 
+  # temporary
+  get '/projects', to: 'projects#show', id: "1"
+
   resources :user_signups, only: [:create]
   match '/home', to:"static_pages#home"
   match "/sign_up_old", to: "users#new"
