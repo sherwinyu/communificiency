@@ -30,6 +30,12 @@ FactoryGirl.define do
     email { FactoryGirl.generate :email }
     password "ilovekale"
     password_confirmation "ilovekale"
+
+    trait :admin do
+      name "ADMINISTRATOR"
+      admin true
+    end
+
   end
 
   factory :project do
@@ -73,7 +79,7 @@ FactoryGirl.define do
 
     factory :contribution_with_reward do
       ignore do
-        
+
       end
       reward  nil
     end
