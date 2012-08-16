@@ -123,7 +123,7 @@ class ContributionsController < ApplicationController
       end
     rescue => e
       puts e, "error in amazon_confirm_payment_callback", e.backtrace
-      flash.alert = "Something went wrong. Please try again or contact info@communificiency.com"
+      flash.alert = "Something went wrong. Please try again or contact team@communificiency.com"
       redirect_to new_project_contribution_path(@contribution.project || 1)
     end
 
