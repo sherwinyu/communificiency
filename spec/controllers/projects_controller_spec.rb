@@ -32,6 +32,8 @@ describe ProjectsController do
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:user, :admin) }
   let(:project) { FactoryGirl.create :project_with_rewards }
+  let(:unconfirmed_user) { FactoryGirl.create(:user, :unconfirmed) }
+
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -62,9 +64,18 @@ describe ProjectsController do
       it { should redirect_to home_path }
     end
 
-    describe "when signed in as admin" do
+    describe "when signed in as unconfirmed user" do
       let :prepare_session do
         sign_out user
+        sign_in unconfirmed_user
+      end
+      # it { should redirect_to }
+
+    end
+
+    describe "when signed in as admin" do
+      let :prepare_session do
+        # sign_out user
         sign_in admin
       end
       it { should respond_with :success} 

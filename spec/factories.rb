@@ -25,15 +25,28 @@ FactoryGirl.define do
   end
 
 
-  factory :user do
+  factory :user do 
     name "Maximilian Webstah"
     email { FactoryGirl.generate :email }
     password "ilovekale"
     password_confirmation "ilovekale"
+    confirmed_at = Time.new 2008, 07, 16
+
+    after_create do |instance|
+      instance.confirm! 
+    end
 
     trait :admin do
       name "ADMINISTRATOR"
       admin true
+    end
+
+    factory :unconfirmed_user do
+      after_create do |instance|
+        instance.name = "unconfirmed user"
+        instance.confirmed_at = nil 
+        instance.save
+      end
     end
 
   end

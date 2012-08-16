@@ -27,12 +27,12 @@ describe ContributionsController do
   # update the return value of this method accordingly.
   let(:project) { FactoryGirl.create :project_with_rewards }
   let(:reward) { project.rewards.first }
-  let(:user) { FactoryGirl.build(:user) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:unconfirmed_user) { FactoryGirl.create(:unconfirmed_user) }
 
   before do
     @request.env["devise.mapping"] = Devise.mappings[:user]
     project.save
-    user.save
     sign_in user
   end
 
@@ -81,13 +81,25 @@ describe ContributionsController do
 
   describe "GET new" do
     let(:params) { {project_id: project.id} }
-    before { get :new, params }
+    let(:prepare_session) do
+      sign_in user 
+    end
+    before do 
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      prepare_session
+      get :new, params
+    end
     it { should respond_with :success }
 
     describe "when not signed in" do
-      before { sign_out user}
+      before { sign_out user }
       # should throw an error because Devise requires us to be signed in
       it {should raise_error}
+    end
+
+    describe "when signed in with unconfirmed user" do
+      let(:prepare_session) { sign_in unconfirmed_user }
+      it { should redirect_to home_path }
     end
 
     specify { session[:contrib_params].with_indifferent_access.should == {amount: 0, project_id: project.id}.with_indifferent_access }
@@ -106,8 +118,17 @@ describe ContributionsController do
 
   describe "POST create" do
 
+    let(:prepare_session) { sign_in user }
     before do
       session[:contrib_params] = {reward_id: reward.id, amount: reward.minimum_contribution }
+      prepare_session
+    end
+
+
+    describe "when signed in with unconfirmed user" do
+      let(:prepare_session) { sign_in unconfirmed_user }
+      before { post :create, params }
+      it { should redirect_to home_path }
     end
 
     let(:params) {{project_id: project.id}}
