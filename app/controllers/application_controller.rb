@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
   end
 
 
+  def require_confirmed!
+    link = '<a href="/users/confirmation/new">More information</a>'
+    redirect_back_or home_path, notice: "Please confirm your email first. #{link}.".html_safe unless current_user.confirmed?
+  end
+
   after_filter :store_location
 
   def redirect_to(options = {}, response_status = {})
