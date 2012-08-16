@@ -1,0 +1,19 @@
+<p> Hi <%= @resource.name %>, </p>
+
+<p>Welcome to Communificiency!  We're excited to work together to help make your community more energy efficient. 
+
+<p> Here are the details of yoru account. Before you can contribute to Communificiency projects and receive rewards, you’ll need to confirm your account. </p>
+
+<p> Name: <%= @user.name %> <br> 
+Email: <%= @user.email %> <br>
+<%# link_to 'Click to confirm your account', confirmation_url(@resource, confirmation_token: @resource.confirmation_token) %>  OR copy and paste the following into your browser address bar: <%# link_to confirmation_url(@resource, confirmation_token: @resource.confirmation_token) %></p>
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+
+<p> We are small startup that just launched, so we welcome all of your feedback.  Whether you have any questions, ideas, concerns, or just want to say hi, we’re always willing to chat, so drop us a line at <%= mail_to("team@communificiency.com", "team@communificiency.com", subject: "Hi Communificiency!", body: "")  %>, or tweet us <%= link_to "@communifciency", "http://twitter.com/communificiency" %>. </p>
+
+<p>Thanks, </p>
+<p>Max and Sherwin</p>
+<p>The Communificiency Team</p>
+
+<p>P.S. You can reach either of us directly <%= link_to("@MaxAWebster", "http://twitter.com/MaxAWebster") %> or <%= link_to("@sherwin_yu", "http://twitter.com/sherwin_yu") %></p>
+
