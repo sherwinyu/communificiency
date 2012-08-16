@@ -90,30 +90,23 @@ class ContributionsController < ApplicationController
         raise "amazon cbui call was not successful: " + params
       end
 
-
       @payment.token_id = params[:tokenID]
       @payment.transaction_status = Payment::STATUS_CONFIRMED
-      fps_pay_url = AmazonFPSUtils.get_fps_pay_url(@payment.caller_reference, @payment.amount, @payment.token_id)
-      puts "fps_pay_url " + fps_pay_url
-      payment_status = "trying"
+
       begin
-        response = RestClient.get fps_pay_url
-        puts "response " + response
-        pay_result_hash = Hash.from_xml(response)["PayResponse"]["PayResult"]
+        pay_result_hash = @payment.amazon_fps_pay
         @payment.transaction_id = pay_result_hash["TransactionId"]
-        payment_status = pay_result_hash["TransactionStatus"]
+        @payment.amazon_fps_transaction_status = pay_result_hash["TransactionStatus"]
       rescue => e
-        puts "error rest client: ", e.response
-        raise "rest client error" + e.response
+        puts "error rest client: ", e, e.backtrace 
+        raise e, "rest client error"
       end
 
-      while payment_status == "Pending"
-        fps_status_url = AmazonFPSUtils.get_fps_get_transaction_status_url(@payment.caller_reference, @payment.transaction_id)
-        response = RestClient.get fps_status_url
-        status_result_hash = Hash.from_xml(response)["GetTransactionStatusResponse"]["GetTransactionStatusResult"]
-        payment_status = status_result_hash["TransactionStatus"]
+      while @payment.amazon_fps_transaction_status == "Pending"
+        @payment.amazon_poll_transaction_status
       end
-      case payment_status
+
+      case @payment.amazon_fps_transaction_status
       when "Success"
         @payment.transaction_status = Payment::STATUS_SUCCESS
         @payment.save
