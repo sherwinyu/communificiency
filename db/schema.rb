@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726050149) do
+ActiveRecord::Schema.define(:version => 20120816010313) do
 
   create_table "contributions", :force => true do |t|
     t.integer  "user_id"
@@ -27,11 +27,13 @@ ActiveRecord::Schema.define(:version => 20120726050149) do
     t.float    "amount"
     t.string   "transaction_provider"
     t.string   "transaction_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "caller_reference"
     t.string   "transaction_status"
     t.string   "token_id"
+    t.string   "amazon_fps_status_code"
+    t.string   "amazon_fps_transaction_status"
   end
 
   create_table "projects", :force => true do |t|

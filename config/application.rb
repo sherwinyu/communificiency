@@ -65,9 +65,16 @@ module Communificiency
     # for sherwin.x.yu@gmail.com
     config.aws_access_key = "AKIAI5RRHRFM2GH67ORA"
     config.aws_secret_key = "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"
+
+    # for founders@communificiency.com
+    config.aws_access_key = "AKIAILELHDMBRXAOPLNA"
+    config.aws_secret_key = "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"
+
     config.host_address = "http://localhost:3000"
 
-    config.cbui_endpoint = "https://authorize.payments-sandbox.amazon.com/cobranded-ui/actions/start"	
-    config.fps_endpoint = "https://fps.sandbox.amazonaws.com/"
+    # config.cbui_endpoint = "https://authorize.payments-sandbox.amazon.com/cobranded-ui/actions/start"	
+    # config.fps_endpoint = "https://fps.sandbox.amazonaws.com/"
+    config.cbui_endpoint = "https://authorize.payments.amazon.com/cobranded-ui/actions/start"
+    config.fps_endpoint = "https://fps.amazonaws.com/"
   end
 end

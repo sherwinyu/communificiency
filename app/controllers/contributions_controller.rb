@@ -49,12 +49,9 @@ class ContributionsController < ApplicationController
 
 
   def create
-    # unless current_user_signed_in?
-    # redirect_back_or sign_in_path, notice: "Please sign in first."
-    # end
     @project = Project.find_by_id params[:project_id] 
     unless @project
-      render action: "new", alert: "Something went wrong."
+      render action: "new", alert: "Something went wrong. Please try again."
       return
     end
     contrib_params = session[:contrib_params] || {}
@@ -74,7 +71,7 @@ class ContributionsController < ApplicationController
       redirect_to @payment.amazon_cbui_url(@contribution)
       # TODO(syu) --- what happen when this payment is abandoned? we should def not disiplay this notice then
 
-      flash.notice = "Payment processed by Amazon."
+      # flash.notice = "Payment processed by Amazon."
       # redirect_to @contribution, notice: "Contribution created."
     else
       render action: "new" 
@@ -125,20 +122,20 @@ class ContributionsController < ApplicationController
       when "Cancelled"
         @payment.transaction_status = Payment::STATUS_CANCELLED
         @payment.save
-        flash.notice = "Looks like you changed your mind. If you reconsider, just go back to"
+        flash.alert = "Looks like you changed your mind. If you reconsider, just go back to"
         redirect_to project_path( @contribution.project ) and return
       else  #failure
         @payment.transaction_status = Payment::STATUS_FAILURE
         @payment.save
+        puts "payment failure"
         raise "payment failure"
-        flash.notice = "Something went wrong. Please try again or contact info@communificiency.com"
-        # redirect_to project_path( @contribution.project ) and return
       end
     rescue => e
-      puts "error in amazon_confirm_payment_callback", e
-      flash.notice = "Something went wrong. Please try again or contact info@communificiency.com"
+      puts e, "error in amazon_confirm_payment_callback", e.backtrace
+      flash.alert = "Something went wrong. Please try again or contact info@communificiency.com"
       redirect_to new_project_contribution_path(@contribution.project || 1)
     end
+
   end
 
   # PUT /contributions/1
