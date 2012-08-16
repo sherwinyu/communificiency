@@ -547,19 +547,22 @@ body.welcome {
   display: inline-block;
   position: absolute;
   font-size: 1.6em;
-  letter-spacing: -.1em;
+  letter-spacing: -.06em;
   bottom: 22px;
   color: $mediumGray;
 
 }
 
 #link-Projects {
-  left: 60px;
-  letter-spacing: 0em;
+  left: 110px;
+}
+
+#link-Blog {
+  left: 45px;
 }
 
 #link-SignUp {
-  right: 55px;
+  right: 45px;
 }
 
 #link-About {
