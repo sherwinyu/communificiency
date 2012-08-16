@@ -31,9 +31,6 @@ class ContributionsController < ApplicationController
     redirect_to projects_path, alert: "Invalid project" and return unless @project
 
     @reward = @project.rewards.find_by_id params[:reward_id] 
-    if @reward.nil?
-      flash.now.notice = "Please select your reward!" 
-    end
 
 
 

@@ -7,6 +7,9 @@ jQuery ->
   if rewards?
     $("#inputContributionAmount").change (event)->
       updateDropDown()
+      id =  parseInt $('#contribution_reward_id').val()
+      reward = (reward for reward in rewards when reward.id == id)[0]
+      updateRewardDescription(reward)
 
     $('#contribution_reward_id').change (event)->
       # alert('Handler for .change() called' + event.data)

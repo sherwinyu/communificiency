@@ -54,7 +54,7 @@
               </div>
             </div>
             <div class="center">
-              <%= f.association :reward, collection:  [Reward.new(name: "No reward -- I just want to contribute")] + @project.rewards, wrapper_html: {class: 'derp'},  validate: true, selected: @contribution.reward ? @contribution.reward.id : nil, label: false, input_html: { class: "derp" } %>
+              <p>Choose reward: <%= f.association :reward, collection:  [Reward.new(name: "No reward -- I just want to contribute")] + @project.rewards, wrapper_html: {class: 'derp'},  validate: true, selected: @contribution.reward ? @contribution.reward.id : nil, label: false, input_html: { class: "derp" } %> </p>
             </div>
           </div>
           <br>
