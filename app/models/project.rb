@@ -34,7 +34,11 @@ class Project < ActiveRecord::Base
   end
 
   def current_funding
-    self.contributions.collect{ |c| c.amount }.compact.sum
+    valid_contributions.collect{|c| c.amount}.compact.sum
+  end
+
+  def valid_contributions
+    self.contributions.select{ |c| !c.payment.nil? && c.payment.transaction_status == "payment succeeded" }
   end
 
   def percent_funded

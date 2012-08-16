@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Project do
   let(:project) { FactoryGirl.build :project }
+  let(:user) { FactoryGirl.create(:user) }
 
   subject { project }
 
@@ -60,4 +61,23 @@ describe Project do
     it { should accept_nested_attributes_for(:rewards).allow_destroy(true) }
   end
 
+  describe "only includes valid contributions" do
+    before do
+      project.contributions.build(
+        payment: FactoryGirl.build(:payment, :succeeded),
+        amount: 6
+      )
+
+      project.contributions.build(
+        payment: FactoryGirl.build(:payment, :pending),
+        amount: 5
+      )
+    end
+
+    specify { project.contributions.size.should == 2}
+    specify { project.valid_contributions == 1}
+    specify { project.current_funding == 6}
+  end
+
 end
+

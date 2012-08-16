@@ -24,6 +24,10 @@ FactoryGirl.define do
     "max#{n}@communificiency.com"
   end
 
+  sequence :transaction_id do |n|
+    "123PaYmEnTTrAsNAcTiOnId#{n}"
+  end
+
 
   factory :user do 
     name "Maximilian Webstah"
@@ -100,10 +104,19 @@ FactoryGirl.define do
   end
 
   factory :payment do
-    transaction_id 1
+    transaction_id "PaYmEnTTrAsNAcTiOnId1234"
     caller_reference 1
     transaction_provider "AMAZON"
     transaction_status Payment::STATUS_CREATED
+    amount 5
+
+    trait(:succeeded) do 
+      transaction_status Payment::STATUS_SUCCESS
+    end
+
+    trait(:pending) do
+      transaction_status Payment::STATUS_PENDING
+    end
   end
 end
 
