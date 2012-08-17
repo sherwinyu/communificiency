@@ -64,5 +64,3 @@ jQuery ->
 
     updateDropDown()
     updateRewardDescription(reward)
-
-
