@@ -95,7 +95,6 @@ class ContributionsController < ApplicationController
         @payment.transaction_id = pay_result_hash["TransactionId"]
         @payment.amazon_fps_transaction_status = pay_result_hash["TransactionStatus"]
       rescue => e
-        binding.pry
         puts "error rest client: ", e.inspect, e.backtrace 
         raise e, "rest client error"
       end
