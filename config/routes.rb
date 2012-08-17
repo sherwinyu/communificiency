@@ -32,7 +32,11 @@ Communificiency::Application.routes.draw do
     resources :contributions
     resources :rewards
   end
+
+  match '/errors/404' => "static_pages#error404"
+  match '/errors/500' => "static_pages#error500"
   match '/*e' => 'static_pages#coming_soon'
+
 
   resources :contributions
   resources :projects

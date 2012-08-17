@@ -28,4 +28,12 @@ class StaticPagesController < ApplicationController
   def pay
     @title = 'Confirm contribution'
   end
+
+  def error404
+    render "errors/error_404"
+  end
+
+  def error500
+    render "errors/error_500"
+  end
 end
