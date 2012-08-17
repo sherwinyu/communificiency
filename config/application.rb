@@ -76,5 +76,8 @@ module Communificiency
     # config.fps_endpoint = "https://fps.sandbox.amazonaws.com/"
     config.cbui_endpoint = "https://authorize.payments.amazon.com/cobranded-ui/actions/start"
     config.fps_endpoint = "https://fps.amazonaws.com/"
+
+    # for heroku
+    config.assets.initialize_on_precompile = false
   end
 end
