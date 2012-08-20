@@ -31,7 +31,7 @@
          <%= link_to "Sign up", sign_up_path, id: "link-SignUp" %>
          <%= link_to "About", about_path, id: "link-About" %>
        </div>
-       <%= render partial: 'layouts/flash', locals: {:flash => flash}%>
+       <%= render partial: 'shared/flash', locals: {:flash => flash}%>
        <div class="container">
          <div class="row valueProps">
            <div class="span12">
@@ -111,7 +111,5 @@
      </div>
    </div>
  </div>
- <% render partial: 'layouts/flash', locals: {:flash => flash}%>
- <%- yield %>
   </body>
 </html>
