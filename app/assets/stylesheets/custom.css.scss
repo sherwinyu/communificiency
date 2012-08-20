@@ -385,6 +385,13 @@ footer ul li {
   font-style: normal;
 }
 
+.card-expiry-month {
+  width: auto;
+}
+.card-expiry-year {
+  width: auto;
+}
+
 #pay-button {
   @extend .btn;
   @extend .btn-large;

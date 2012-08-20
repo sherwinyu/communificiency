@@ -65,13 +65,48 @@
 
           <h2 class="contributionPaymentHeader"> 3. Pay </h2>
           <div class="instructions">
-          Click below to pay. You will be directed to Amazon, where you can sign in with your Amazon account (or create a new one). After confirming your payment with amazon, you'll be redirected here.
-        </div>
+            Click below to pay. You will be directed to Amazon, where you can sign in with your Amazon account (or create a new one). After confirming your payment with amazon, you'll be redirected here.
+          </div>
+          <div id="payAmazon">
+            <div class="center">
+              <%= f.button :submit, "Pay through Amazon", id: "pay-button" %>
+            </div>
+          </div>
+
+          <div id="payStripe">
+            <%= f.input "placeholder", as: "string", class: "card-number", label: "Card Number" %>
+            <%= f.input "placeholder", as: "string", class: "card-cvc", label: "CVC" %>
+              <label>Expiration (MM/YYYY)</label>
+              <input type="text" size="2" class="card-expiry-month"/>
+              <span> / </span>
+              <input type="text" size="4" class="card-expiry-year"/>
+            <%#= f.input "placeholder", as: "date", class: "expiry", label: "Expiration (MM/YYYY)" %>
+            <%#= f.input "placeholder", as: "string", class: "card-cvc", label: "CVC" %>
+              <%# f.input :amount, class: "inputContributionAmount", label: false, wrapper: "prepend", input_html: {type: 'number'}  do %>
+
+                <!--
+            <div class="form-row">
+              <label>Card Number</label>
+              <input type="text" size="20" autocomplete="off" class="card-number"/>
+            </div>
+            <div class="form-row">
+              <label>CVC</label>
+              <input type="text" size="4" autocomplete="off" class="card-cvc"/>
+            </div>
+            <div class="form-row">
+              <label>Expiration (MM/YYYY)</label>
+              <input type="text" size="2" class="card-expiry-month"/>
+              <span> / </span>
+              <input type="text" size="4" class="card-expiry-year"/>
+            </div>
+            --->
+
+            <div class="error"> </div>
+          </div>
+          <%= f.button :submit, "Pay", id: "stripePayButton" %>
 
 
-        <div class="center">
-          <%= f.button :submit, "Pay through Amazon", id: "pay-button" %>
-        </div>
+
 
 
 
