@@ -14,7 +14,7 @@ $ ->
 
   $('#stripePayButton').click (event) ->
     event.preventDefault()
-    $('#new_contribution').attr('action', '/contributions/new_stripe')
+    $('#new_contribution').attr('action', '/projects/1/contributions/1/new_stripe')
     console.log '#payButtonOnClick'
     console.log $('#new_contribution').attr('action')
     ret = stripeGeneratePayment()
@@ -47,7 +47,7 @@ $ ->
         token = response['id'];
         # // insert the token into the form so it gets submitted to the server
         form$.find("#payStripe").append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-        # form$.get(0).submit();
+        form$.get(0).submit();
     
 
 

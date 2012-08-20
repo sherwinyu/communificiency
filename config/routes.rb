@@ -29,11 +29,13 @@ Communificiency::Application.routes.draw do
   match 'amazon_confirm_payment_callback/:contribution_id', to: "contributions#amazon_confirm_payment_callback"
 
   resources :projects do
-    resources :contributions
+    resources :contributions do
+      match '/new_stripe', to: "contributions#new_stripe"
+    end
+      
     resources :rewards
   end
 
-  match '/contributions/new_stripe', to: "contributions#new_stripe"
   match '/errors/404' => "static_pages#error404"
   match '/errors/500' => "static_pages#error500"
   match '/*e' => 'static_pages#coming_soon'

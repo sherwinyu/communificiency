@@ -45,11 +45,40 @@ class ContributionsController < ApplicationController
   end
 
   def new_stripe
-    binding.pry
+    puts params
+
+    @project = Project.find_by_id params[:project_id] 
+    unless @project
+      render action: "new", alert: "Something went wrong. Please try again."
+      return
+    end
+    contrib_params = session[:contrib_params] || {}
+    contrib_params = contrib_params.with_indifferent_access
+    contrib_params.merge! params[:contribution] if params[:contribution]
+    contrib_params[:user] = current_user
+
+    @contribution = @project.contributions.build contrib_params
+    @payment = @contribution.build_payment
+
+    # get the credit card details submitted by the form
+    @payment.stripe_token = params[:stripeToken]
+
+    # create the charge on Stripe's servers - this will charge the user's card
+
+    charge = Stripe::Charge.create(
+      amount: @contribution.amount * 100, # amount in cents
+      currency:  "usd",
+      card:  @payment.stripe_token,
+      description: "Communificiency payment"
+    )
+    flash.notice = "Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
+    redirect_to @project
+
   end
 
 
   def create
+    puts params
     @project = Project.find_by_id params[:project_id] 
     unless @project
       render action: "new", alert: "Something went wrong. Please try again."
