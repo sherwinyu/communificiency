@@ -38,6 +38,7 @@ Communificiency::Application.routes.draw do
   match '/*e' => 'static_pages#coming_soon'
 
 
+  match '/contributions/new_stripe', to: "contributions#new_stripe"
   resources :contributions
   resources :projects
 
