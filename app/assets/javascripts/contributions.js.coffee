@@ -7,9 +7,13 @@ $ ->
 
   stripe$ = $('#payStripe')
   stripe$.find('input').removeAttr('name')
+  stripe$.find('.card-number').val('4242424242424242')
+  stripe$.find('.card-cvc').val('123')
+  stripe$.find('.card-expiry-month').val('12')
+  stripe$.find('.card-expiry-year').val('2013')
 
   $('#stripePayButton').click (event) ->
-    # event.preventDefault()
+    event.preventDefault()
     $('#new_contribution').attr('action', '/contributions/new_stripe')
     console.log '#payButtonOnClick'
     console.log $('#new_contribution').attr('action')
@@ -18,25 +22,32 @@ $ ->
   stripeGeneratePayment = ->
     $('.stripePayButton').attr("disabled", "disabled");
 
-    Stripe.createToken({
+
+    stripeObj = 
         number: $('.card-number').val(),
         cvc: $('.card-cvc').val(),
         exp_month: $('.card-expiry-month').val(),
         exp_year: $('.card-expiry-year').val()
-    }, stripeCB);
+
+    console.log "stripeObj is", stripeObj
+    Stripe.createToken(stripeObj, stripeCB);
+    console.log "tokenCreated"
 
   stripeCB = (status, response) ->
     if response.error 
+        console.log response.error.message
         $("#payStripe .error").text(response.error.message);
         $(".submit-button").removeAttr("disabled");
     else 
-        form$ = $("#payment-form");
+        console.log "hello"
+        console.log response
+        console.log "hello"
+        form$ = $("#new_contribution");
         # // token contains id, last4, and card type
         token = response['id'];
         # // insert the token into the form so it gets submitted to the server
-        form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-        // and submit
-        form$.get(0).submit();
+        form$.find("#payStripe").append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+        # form$.get(0).submit();
     
 
 

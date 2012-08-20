@@ -1,11 +1,11 @@
 <% provide(:title, 'Confirm contribution') %>
 <div class="container">
-  <div class="row">
-    <div class="span12">
+  <%= simple_form_for(@contribution, url: project_contributions_path(@project), validate: true, remote: false) do |f| %>
+    <div class="row">
+      <div class="span12">
 
-      <div class="hero-unit">
-        <div id="stepone">
-          <%= simple_form_for(@contribution, url: project_contributions_path(@project), validate: true, remote: true) do |f| %>
+        <div class="hero-unit">
+          <div id="stepone">
             <h1>Thanks for helping <%= @project.name %><br> <small>You're almost there. Just a few more steps</small></h2>
 
             <h2 class="contributionPaymentHeader"> 1. Confirm your contribution </h2>
@@ -67,39 +67,15 @@
           <div class="instructions">
             Click below to pay. You will be directed to Amazon, where you can sign in with your Amazon account (or create a new one). After confirming your payment with amazon, you'll be redirected here.
           </div>
-          <div id="payAmazon">
-            <div class="center">
-              <%= f.button :submit, "Pay through Amazon", id: "pay-button" %>
-            </div>
-          </div>
 
           <div id="payStripe">
-            <%= f.input "placeholder", as: "string", class: "card-number", label: "Card Number" %>
-            <%= f.input "placeholder", as: "string", class: "card-cvc", label: "CVC" %>
-              <label>Expiration (MM/YYYY)</label>
-              <input type="text" size="2" class="card-expiry-month"/>
-              <span> / </span>
-              <input type="text" size="4" class="card-expiry-year"/>
-            <%#= f.input "placeholder", as: "date", class: "expiry", label: "Expiration (MM/YYYY)" %>
-            <%#= f.input "placeholder", as: "string", class: "card-cvc", label: "CVC" %>
-              <%# f.input :amount, class: "inputContributionAmount", label: false, wrapper: "prepend", input_html: {type: 'number'}  do %>
+            <%= f.input "placeholder", as: "string", input_html: {class: "card-number"}, label: "Card Number", value:"4242424242424242" %>
+            <%= f.input "placeholder", as: "string", input_html: {class: "card-cvc"}, label: "CVC", value: "123" %>
+            <label>Expiration (MM/YYYY)</label>
+            <input type="text" size="2" class="card-expiry-month"/>
+            <span> / </span>
+            <input type="text" size="4" class="card-expiry-year"/>
 
-                <!--
-            <div class="form-row">
-              <label>Card Number</label>
-              <input type="text" size="20" autocomplete="off" class="card-number"/>
-            </div>
-            <div class="form-row">
-              <label>CVC</label>
-              <input type="text" size="4" autocomplete="off" class="card-cvc"/>
-            </div>
-            <div class="form-row">
-              <label>Expiration (MM/YYYY)</label>
-              <input type="text" size="2" class="card-expiry-month"/>
-              <span> / </span>
-              <input type="text" size="4" class="card-expiry-year"/>
-            </div>
-            --->
 
             <div class="error"> </div>
           </div>
@@ -108,9 +84,13 @@
 
 
 
+          <div id="payAmazon">
+            <div class="center">
+              <%= f.button :submit, "Pay through Amazon", id: "pay-button" %>
+            </div>
+          </div>
 
 
-          <% end # form for %> 
 
           <p>
           <%= link_to "Back to #{@project.name}", project_path( @project ) %>
@@ -123,5 +103,6 @@
     </div><!--/span-->
 
 
+    <% end # form for %> 
   </div><!--/.fluid-container-->
 

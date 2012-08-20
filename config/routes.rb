@@ -33,12 +33,12 @@ Communificiency::Application.routes.draw do
     resources :rewards
   end
 
+  match '/contributions/new_stripe', to: "contributions#new_stripe"
   match '/errors/404' => "static_pages#error404"
   match '/errors/500' => "static_pages#error500"
   match '/*e' => 'static_pages#coming_soon'
 
 
-  match '/contributions/new_stripe', to: "contributions#new_stripe"
   resources :contributions
   resources :projects
 
