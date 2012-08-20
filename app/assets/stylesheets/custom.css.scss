@@ -76,7 +76,7 @@ div.footerContainer {
   border: 1px whitesmoke solid;
 }
 
-.container.main {
+body#application.container.main {
   background: white;
   padding: 20px;
   top: -15px;
@@ -86,6 +86,11 @@ div.footerContainer {
   @include
   border-radius( 0px 0px 10px 10px);
 
+}
+
+body#welcome.container.main {
+  width: 100%;
+  border: red 1px solid;
 }
 
 section {
@@ -523,19 +528,47 @@ body.welcome {
   @include opacity(50);
   z-index: 5;
   position: relative;
+  padding-top: 50px;
 }
 
 #welcome-overlay {
   @include border-radius(0px 0px 55px 55px);
   background: lighten(#f5f5f5, 15%);
-  padding: 25px;
-  margin-top: -25px;
-  @extend .span9;
+    padding: 13px 0px;
+  // @extend .span9;
   @include box-shadow(0 0 5px 5px rgba(0, 0, 0, 0.3));
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  height: 50px;
+  // margin-left: auto;
+  // margin-right: auto;
+  z-index: 500;
+  // margin-top: -25px;
+  // position: absolute;
+  // height: 50px;
+  // bottom: 22px;
+  // display: inline-block;
+  position: absolute;
+  // text-align: center;
+  top: -15px;
+  left: 50%;
+  //width: 750px;
+  //margin-left: -350px;
+  $overlaywidth: 780px;
+  width: $overlaywidth;
+  margin-left: -$overlaywidth/2;
+  color: $mediumGray;
+
+}
+#welcome-overlay a {
+
+  font-size: 1.6em;
+  letter-spacing: -.06em;
+  display: inline-block;
+  position: absolute;
+  font-size: 1.6em;
+  letter-spacing: -.06em;
+  bottom: 22px;
+  color: $mediumGray;
+
+
 
 }
 
@@ -550,30 +583,29 @@ body.welcome {
   margin-top: 5px;
 }
 
-#welcome-overlay a {
-  display: inline-block;
-  position: absolute;
-  font-size: 1.6em;
-  letter-spacing: -.06em;
-  bottom: 22px;
-  color: $mediumGray;
-
-}
 
 #link-Projects {
+  bottom: 15px;
   left: 110px;
+  position: absolute;
 }
 
 #link-Blog {
+  bottom: 15px;
   left: 45px;
+  position: absolute;
 }
 
 #link-SignUp {
+  bottom: 15px;
   right: 45px;
+  position: absolute;
 }
 
 #link-About {
+  bottom: 15px;
   right: 132px;
+  position: absolute;
 }
 
 .valueProps {

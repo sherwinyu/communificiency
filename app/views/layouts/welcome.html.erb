@@ -1,115 +1,97 @@
-<!DOCTYPE html>
 <% provide(:title, "Welcome") %>
-<html>
-  <head>
-    <title> <%= full_title(yield(:title)) %> </title>
-    <%= stylesheet_link_tag    "application", media: "all"%>
-    <%= javascript_include_tag "application"%>
-    <%= csrf_meta_tags %>
-    <%= render 'layouts/shim' %>
-    <script type="text/javascript">
+<% provide(:suppress_header, true) %>
+<% provide(:suppress_footer, true) %>
+<% provide(:body_class, "welcome") %>
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-33512576-1']);
-      _gaq.push(['_trackPageview']);
+<%= content_for :header do %>
+    <div id="welcome-overlay">
+      <%= image_tag "communificiency-logo-thick-80.png", id:"welcome-logo"%>
+      <%= link_to "Blog", "http://blog.communificiency.com", id: "link-Blog"%>
+      <%= link_to "Projects", projects_path, id: "link-Projects"%>
+      <%= link_to "Sign up", sign_up_path, id: "link-SignUp" %>
+      <%= link_to "About", about_path, id: "link-About" %>
+    </div>
+<% end %>
+<%= content_for :body do %>
+  <div class="container-fluid div1">
+    <%# render partial: 'shared/flash', locals: {:flash => flash} %>
+    <div class="container">
+      <div class="row valueProps">
+        <div class="span12">
+          <div class="row-fluid">
+            <div class="valuePropBox span4"> 
+              <%= image_tag "gift.png" %> 
+              <h2 class="valuePropBox">
+                Get awesome,<br> exclusive deals
+              </h2>
+            </div>
+            <div class="valuePropBox span4"> 
+              <%= image_tag "clients.png" %> 
+              <h2 class="valuePropBox">
+                Support local businesses
+              </h2>
+            </div>
+            <div class="valuePropBox span4"> 
+              <%= image_tag "world.png" %> 
+              <h2 class="valuePropBox">Build a cleaner tomorrow</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      (function() {
-       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-       })();
+  <div class="container-fluid div2">
+    <div class="container">
+      <div class="row bannerline">
+        <div class="span12">
+          <h1 class="bannerline"> Communificiency lets you <span class="blue"> support your community </span>while <span class="blue">receiving awesome perks </span>and  <span class="yellow"> reducing energy usage.</span> </h1>
+        </div>
+      </div>
+    </div>
+  </div>
 
-     </script>
-   </head>
-   <body class="welcome">
-     <%- render 'layouts/header' %>
-     <div class="container-fluid div1">
-       <div id="welcome-overlay">
-         <%= image_tag "communificiency-logo-thick-80.png", id:"welcome-logo"%>
-         <%= link_to "Blog", "http://blog.communificiency.com", id: "link-Blog"%>
-         <%= link_to "Projects", projects_path, id: "link-Projects"%>
-         <%= link_to "Sign up", sign_up_path, id: "link-SignUp" %>
-         <%= link_to "About", about_path, id: "link-About" %>
-       </div>
-       <%= render partial: 'shared/flash', locals: {:flash => flash}%>
-       <div class="container">
-         <div class="row valueProps">
-           <div class="span12">
-             <div class="row-fluid">
-               <div class="valuePropBox span4"> 
-                 <%= image_tag "gift.png" %> 
-                 <h2 class="valuePropBox">
-                   Get awesome,<br> exclusive deals
-                 </h2>
-               </div>
-               <div class="valuePropBox span4"> 
-                 <%= image_tag "clients.png" %> 
-                 <h2 class="valuePropBox">
-                   Support local businesses
-                 </h2>
-               </div>
-               <div class="valuePropBox span4"> 
-                 <%= image_tag "world.png" %> 
-                 <h2 class="valuePropBox">Build a cleaner tomorrow</h2>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+  <div class="container-fluid div3">
+    <div class="container">
+      <div class="row HowItWorks">
+        <h1 class="HowItWorks"> How does it work? </h1>
+        <ol>
+          <li> Find a Communificiency project at a local business </li>
+          <li> Contribute to help that business go green and reduce its energy usage</li>
+          <li>Receive great rewards from the business in exchange</li>
+          <li> Enjoy your reward, tell your friends, and help us retrofit the entire community </li>
+        </ol>
+        <%= link_to "Learn more", about_path, class: "learn-more" %>
+      </div>
+    </div>
+  </div>
 
-     <div class="container-fluid div2">
-       <div class="container">
-         <div class="row bannerline">
-           <div class="span12">
-             <h1 class="bannerline"> Communificiency lets you <span class="blue"> support your community </span>while <span class="blue">receiving awesome perks </span>and  <span class="yellow"> reducing energy usage.</span> </h1>
-           </div>
-         </div>
-       </div>
-     </div>
+  <div class="container-fluid div4">
+    <div class="container">
+      <h1 class="interested"> Interested? </h1>
+      <div class="row interested">
+        <div class="span12">
+          <div class="row-fluid">
+            <div class="span6">
+              <h2> Check out our <%= link_to "projects", "#" %> </h2>
+              <h2> Like us on <%= link_to "Facebook", "http://www.facebook.com/Communificiency" %> </h2>
+              <h2> Follow us on <%= link_to "Twitter", "http://www.twitter.com/Communificiency" %> </h2>
+            </div>
+            <div class="span6">
+              <h2> Sign up for our mailing list </h2>
+              <%= simple_form_for @user_signup, validate: true do |f|%>
+                <%= f.input :email, wrapper: 'append' , label: false do %>
+                  <%= f.input_field :email, placeholder: "email" %>
+                  <%= f.button :submit, "Sign me up", class: "button btn" %>
+                <% end %>
+              <% end %>
+              <h3> We'll keep you updated when we launch.<br> No spam, we promise.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= render file: 'layouts/application.html.erb', locals: {:derp => 5} %>
 
-     <div class="container-fluid div3">
-       <div class="container">
-         <div class="row HowItWorks">
-           <h1 class="HowItWorks"> How does it work? </h1>
-           <ol>
-             <li> Find a Communificiency project at a local business </li>
-             <li> Contribute to help that business go green and reduce its energy usage</li>
-             <li>Receive great rewards from the business in exchange</li>
-             <li> Enjoy your reward, tell your friends, and help us retrofit the entire community </li>
-           </ol>
-           <%= link_to "Learn more", about_path, class: "learn-more" %>
-         </div>
-       </div>
-     </div>
-
-     <div class="container-fluid div4">
-       <div class="container">
-         <h1 class="interested"> Interested? </h1>
-         <div class="row interested">
-           <div class="span12">
-             <div class="row-fluid">
-               <div class="span6">
-                 <h2> Check out our <%= link_to "projects", "#" %> </h2>
-                 <h2> Like us on <%= link_to "Facebook", "http://www.facebook.com/Communificiency" %> </h2>
-                 <h2> Follow us on <%= link_to "Twitter", "http://www.twitter.com/Communificiency" %> </h2>
-               </div>
-               <div class="span6">
-                 <h2> Sign up for our mailing list </h2>
-                 <%= simple_form_for @user_signup, validate: true do |f|%>
-                   <%= f.input :email, wrapper: 'append' , label: false do %>
-                     <%= f.input_field :email, placeholder: "email" %>
-                     <%= f.button :submit, "Sign me up", class: "button btn" %>
-                   <% end %>
-                 <% end %>
-                 <h3> We'll keep you updated when we launch.<br> No spam, we promise.</h3>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
-  </body>
-</html>

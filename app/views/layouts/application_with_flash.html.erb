@@ -1,0 +1,6 @@
+<%= content_for :flash do %>
+      <%= render partial: 'shared/flash', locals: {:flash => flash}%>
+<% end %>
+
+<%= render file: 'layouts/application.html.erb' %>
+
