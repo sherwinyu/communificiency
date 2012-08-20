@@ -39,6 +39,8 @@ gem 'rails', '3.2.5'
 gem 'jquery-rails', '2.0.0'
 gem 'rest-client', '~> 1.6.7'
 
+gem 'stripe'
+
 gem 'devise'
 gem 'redcarpet' 
 gem 'simple_form'
