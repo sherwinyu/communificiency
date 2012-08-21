@@ -523,7 +523,7 @@ body.welcome {
   @extend .span8;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 45px;
+  margin-top: 40px;
   margin-bottom: -20px;
 }
 
@@ -533,7 +533,7 @@ body.welcome {
   @include opacity(50);
   z-index: 5;
   position: relative;
-  padding-top: 50px;
+  padding-top: 65px;
 }
 
 #welcome-overlay {

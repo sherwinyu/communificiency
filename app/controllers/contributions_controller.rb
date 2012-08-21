@@ -73,7 +73,6 @@ class ContributionsController < ApplicationController
     )
     flash.notice = "Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
     redirect_to @project
-
   end
 
 

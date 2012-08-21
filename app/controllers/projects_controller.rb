@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @contribution = @project.contributions.build
+    render layout: "application_without_flash"
   end
 
   # GET /projects/new
@@ -25,6 +26,7 @@ class ProjectsController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @project }
     end
+
   end
 
   # GET /projects/1/edit

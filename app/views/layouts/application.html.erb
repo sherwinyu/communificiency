@@ -32,9 +32,7 @@ end
      <div class="container main <%= body_class %>">
        <%= content_for?(:header) ? yield(:header) : render( 'layouts/header' )  %>
        <%= render partial: 'shared/help' %>
-       <%
-       %>
-       <%= @suppress_flash ? yield(:flash) : render(partial: 'shared/flash', locals: {flash: flash}) %>
+       <%= @suppress_flash ? "" : render(partial: 'shared/flash', locals: {flash: flash}) %>
        <%= content_for?(:body) ? yield(:body) : yield %>
        <%= render partial: 'shared/debug' %>
      </div>
