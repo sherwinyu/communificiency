@@ -1,8 +1,10 @@
 <% provide(:title, "Welcome") %>
 
+<% @suppress_flash = true 
+%>
 <% content_for :body_class, "welcome" %>
 
-<%= content_for :header do %>
+<% content_for :header do %>
   <div id="welcome-overlay">
     <%= image_tag "communificiency-logo-thick-80.png", id:"welcome-logo"%>
     <%= link_to "Blog", "http://blog.communificiency.com", id: "link-Blog"%>
@@ -12,12 +14,10 @@
   </div>
 <% end %>
 
-<%= content_for :body do %>
+<% content_for :body do %>
   <div class="container-fluid div1">
     <div class="container">
-      <div class="welcome flash">
         <%= render partial: 'shared/flash', locals: {:flash => flash} %>
-      </div>
       <div class="row valueProps">
         <div class="span12">
           <div class="row-fluid">

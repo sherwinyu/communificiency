@@ -27,8 +27,8 @@ describe 'Project pages' do
     it { should have_selector('#contribution_reward_id option', text: project.rewards.first.name) }
     it { should have_selector('#contribution_reward_id option', text: project.rewards.second.name) }
     it { should have_selector('#contribution_reward_id option', text: project.rewards.third.name) }
-    it { should have_selector('div.reward_explanation.visible') }
-    it { should have_selector('div.reward_explanation', text: project.rewards.first.short_description) }
+    # it { should have_selector('div.reward_explanation.visible') }
+    # it { should have_selector('div.reward_explanation', text: project.rewards.first.short_description) }
 
     describe "when not signed in" do
       before do
