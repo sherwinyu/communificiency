@@ -6,7 +6,7 @@ $ ->
   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
 
   stripe$ = $('#payStripe')
-  stripe$.find('input').removeAttr('name')
+  stripe$.find('input.stripe').removeAttr('name')
   stripe$.find('.card-number').val('4242424242424242')
   stripe$.find('.card-cvc').val('123')
   stripe$.find('.card-expiry-month').val('12')
@@ -14,7 +14,8 @@ $ ->
 
   $('#stripePayButton').click (event) ->
     event.preventDefault()
-    $('#new_contribution').attr('action', '/projects/1/contributions/1/new_stripe')
+    $('#transactionProvider').val('STRIPE')
+    # $('#new_contribution').attr('action', '/projects/1/contributions/1/new_stripe')
     console.log '#payButtonOnClick'
     console.log $('#new_contribution').attr('action')
     ret = stripeGeneratePayment()
@@ -39,14 +40,14 @@ $ ->
         $("#payStripe .error").text(response.error.message);
         $(".submit-button").removeAttr("disabled");
     else 
-        console.log "hello"
+        console.log "stripeCB response:"
         console.log response
-        console.log "hello"
         form$ = $("#new_contribution");
         # // token contains id, last4, and card type
         token = response['id'];
         # // insert the token into the form so it gets submitted to the server
         form$.find("#payStripe").append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+        console.log "transActionProviderVal: ", $('#transactionProvider').val()
         form$.get(0).submit();
     
 

@@ -68,27 +68,30 @@
             Click below to pay. You will be directed to Amazon, where you can sign in with your Amazon account (or create a new one). After confirming your payment with amazon, you'll be redirected here.
           </div>
 
+            <%= f.hidden_field :payment_transaction_provider, id: "transactionProvider" , value: "AMAZON" %>
           <div id="payStripe">
-            <%= f.input "placeholder", as: "string", input_html: {class: "card-number"}, label: "Card Number", value:"4242424242424242" %>
-            <%= f.input "placeholder", as: "string", input_html: {class: "card-cvc"}, label: "CVC", value: "123" %>
+            <%= f.input "placeholder", as: "string", input_html: {class: "stripe card-number"}, label: "Card Number", value:"4242424242424242" %>
+            <%= f.input "placeholder", as: "string", input_html: {class: "stripe card-cvc"}, label: "CVC", value: "123" %>
             <label>Expiration (MM/YYYY)</label>
-            <input type="text" size="2" class="card-expiry-month"/>
+            <input type="text" size="2" class="stripe card-expiry-month"/>
             <span> / </span>
-            <input type="text" size="4" class="card-expiry-year"/>
+            <input type="text" size="4" class="stripe card-expiry-year"/>
+
+
 
 
             <div class="error"> </div>
           </div>
-          <%= f.button :submit, "Pay", id: "stripePayButton" %>
+          <%= f.button :submit, "Pay", id: "stripePayButton", class: "btn-primary" %>
 
 
 
 
-          <div id="payAmazon">
+          <!-- div id="payAmazon">
             <div class="center">
               <%= f.button :submit, "Pay through Amazon", id: "pay-button" %>
             </div>
-          </div>
+          </div -->
 
 
 

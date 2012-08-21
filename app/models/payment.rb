@@ -41,6 +41,23 @@ class Payment < ActiveRecord::Base
     cbui_url
   end
 
+  def stripe_pay stripe_token=nil
+    # get the credit card details submitted by the form
+    self.stripe_token ||= stripe_token
+
+    if self.stripe_token.nil?
+      raise 'error, stripe token nil'
+    end
+
+    # create the charge on Stripe's servers - this will charge the user's card
+    charge = Stripe::Charge.create(
+      amount: contribution.amount * 100, # amount in cents
+      currency:  "usd",
+      card:  stripe_token,
+      description: "Communificiency payment"
+    )
+  end
+
   def amazon_get_transaction_status_hash
     fps_status_url = AmazonFPSUtils.get_fps_get_transaction_status_url(self.caller_reference, self.transaction_id)
     # puts fps_status_url

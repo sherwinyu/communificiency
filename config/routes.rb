@@ -30,7 +30,6 @@ Communificiency::Application.routes.draw do
 
   resources :projects do
     resources :contributions do
-      match '/new_stripe', to: "contributions#new_stripe"
     end
       
     resources :rewards

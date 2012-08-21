@@ -41,11 +41,13 @@ class ContributionsController < ApplicationController
     session[:contrib_params] = contrib_params
 
     @contribution = @project.contributions.build(contrib_params)
-
   end
 
   def new_stripe
     puts params
+    Stripe.api_key = STRIPE_API_KEY_TEST
+
+    provider = params[:contribution].delete :payment_transaction_provider
 
     @project = Project.find_by_id params[:project_id] 
     unless @project
@@ -83,28 +85,41 @@ class ContributionsController < ApplicationController
       render action: "new", alert: "Something went wrong. Please try again."
       return
     end
-    contrib_params = session[:contrib_params] || {}
-    contrib_params = contrib_params.with_indifferent_access
+
+
+    provider = params[:contribution].delete :payment_transaction_provider
+
+    contrib_params = (session[:contrib_params] || {}).with_indifferent_access
     contrib_params.merge! params[:contribution] if params[:contribution]
     contrib_params[:user] = current_user
 
     @contribution = @project.contributions.build contrib_params
+    @payment = @contribution.build_payment amount: @contribution.amount
 
-    @payment = @contribution.build_payment amount: @contribution.amount, transaction_provider: 'AMAZON'
+
     @payment.caller_reference = @payment.id
+
+    case provider
+    when "AMAZON"
+      if @contribution.save && @payment.save && @payment.update_attribute( :caller_reference, @payment.id)
+        session[:contrib_params] = nil
+        redirect_to @payment.amazon_cbui_url(@contribution)
+        # TODO(syu) --- what happen when this payment is abandoned? we should def not disiplay this notice then
+
+        # flash.notice = "Payment processed by Amazon."
+        # redirect_to @contribution, notice: "Contribution created."
+      else
+        render action: "new" 
+      end
+    when "STRIPE"
+      puts "STRIPE"
+      @payment.stripe_pay params[:stripeToken]
+      flash.notice = "Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
+      redirect_to @project
+    end
 
     # create a new payment
     # redirect them to the amazon payment page
-    if @contribution.save && @payment.save && @payment.update_attribute( :caller_reference, @payment.id)
-      session[:contrib_params] = nil
-      redirect_to @payment.amazon_cbui_url(@contribution)
-      # TODO(syu) --- what happen when this payment is abandoned? we should def not disiplay this notice then
-
-      # flash.notice = "Payment processed by Amazon."
-      # redirect_to @contribution, notice: "Contribution created."
-    else
-      render action: "new" 
-    end
   end
 
   def amazon_confirm_payment_callback
