@@ -81,6 +81,18 @@ class Payment < ActiveRecord::Base
     pay_result_hash
   end
 
+ 
+# === StripeEvent callbacks
+   def charge_failed!
+     self.transaction_status = STATUS_FAILURE
+     self.save
+   end
+
+   def charge_succeeded!
+     self.transaction_status = STATUS_SUCCESS
+     self.save
+   end
+
 
   private
   def default_values

@@ -40,6 +40,7 @@ gem 'jquery-rails', '2.0.0'
 gem 'rest-client', '~> 1.6.7'
 
 gem 'stripe'
+gem 'stripe_event'
 
 gem 'devise'
 gem 'redcarpet' 

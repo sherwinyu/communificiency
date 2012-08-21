@@ -28,6 +28,8 @@ Communificiency::Application.routes.draw do
   match '/coming_soon' => 'static_pages#coming_soon'
   match 'amazon_confirm_payment_callback/:contribution_id', to: "contributions#amazon_confirm_payment_callback"
 
+  mount StripeEvent::Engine => '/stripe_webhook'
+
   resources :projects do
     resources :contributions do
     end
