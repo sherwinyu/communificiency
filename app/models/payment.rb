@@ -54,8 +54,14 @@ class Payment < ActiveRecord::Base
       amount: contribution.amount * 100, # amount in cents
       currency:  "usd",
       card:  stripe_token,
-      description: "Communificiency payment"
+      description: "Communificiency payment: #{contribution.to_s}"  # make this more descriptive
     )
+    self.stripe_charge_id = charge.id
+  end
+
+  def stripe_pay! stripe_token=nil
+    stripe_pay stripe_token
+    self.save
   end
 
   def amazon_get_transaction_status_hash

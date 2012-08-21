@@ -43,41 +43,6 @@ class ContributionsController < ApplicationController
     @contribution = @project.contributions.build(contrib_params)
   end
 
-  def new_stripe
-    puts params
-    Stripe.api_key = STRIPE_API_KEY_TEST
-
-    provider = params[:contribution].delete :payment_transaction_provider
-
-    @project = Project.find_by_id params[:project_id] 
-    unless @project
-      render action: "new", alert: "Something went wrong. Please try again."
-      return
-    end
-    contrib_params = session[:contrib_params] || {}
-    contrib_params = contrib_params.with_indifferent_access
-    contrib_params.merge! params[:contribution] if params[:contribution]
-    contrib_params[:user] = current_user
-
-    @contribution = @project.contributions.build contrib_params
-    @payment = @contribution.build_payment
-
-    # get the credit card details submitted by the form
-    @payment.stripe_token = params[:stripeToken]
-
-    # create the charge on Stripe's servers - this will charge the user's card
-
-    charge = Stripe::Charge.create(
-      amount: @contribution.amount * 100, # amount in cents
-      currency:  "usd",
-      card:  @payment.stripe_token,
-      description: "Communificiency payment"
-    )
-    flash.notice = "Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
-    redirect_to @project
-  end
-
-
   def create
     puts params
     @project = Project.find_by_id params[:project_id] 
@@ -97,11 +62,15 @@ class ContributionsController < ApplicationController
     @payment = @contribution.build_payment amount: @contribution.amount
 
 
-    @payment.caller_reference = @payment.id
+    unless @contribution.save && @payment.save
+      flash.alert = "There were some problems. Please try again." 
+      render 'new' and return
+    end
 
     case provider
     when "AMAZON"
-      if @contribution.save && @payment.save && @payment.update_attribute( :caller_reference, @payment.id)
+      @payment.caller_reference = @payment.id
+      if @payment.update_attribute( :caller_reference, @payment.id)
         session[:contrib_params] = nil
         redirect_to @payment.amazon_cbui_url(@contribution)
         # TODO(syu) --- what happen when this payment is abandoned? we should def not disiplay this notice then
@@ -111,16 +80,25 @@ class ContributionsController < ApplicationController
       else
         render action: "new" 
       end
+
     when "STRIPE"
       puts "STRIPE"
-      @payment.stripe_pay params[:stripeToken]
+      begin
+        @payment.stripe_pay! params[:stripeToken]
+      rescue => e
+        flash.alert = "There was a problem: #{e.message}. Please check everything and try again." # Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
+        redirect_to new_project_contribution_path(@project) and return
+      end
+
+
       flash.notice = "Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
       redirect_to @project
     end
 
     # create a new payment
-    # redirect them to the amazon payment page
+    # kredirect them to the amazon payment page
   end
+
 
   def amazon_confirm_payment_callback
     @contribution = Contribution.find_by_id params[:contribution_id]

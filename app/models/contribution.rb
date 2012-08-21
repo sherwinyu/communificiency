@@ -28,4 +28,8 @@ class Contribution < ActiveRecord::Base
     errors[:reward] << " '#{reward}' is not available for project '#{project}' " unless project.rewards.include? reward
   end
 
+  def to_s
+    "Contribution of $#{amount} to #{project} for #{reward || "(no reward)"}"
+  end
+
 end
