@@ -131,7 +131,7 @@ describe ContributionsController do
       it { should redirect_to home_path }
     end
 
-    let(:params) {{project_id: project.id}}
+    let(:params) {{project_id: project.id, contribution: {payment_transaction_provider: "AMAZON"} }}
     # before { post :create, params }
 
     # TODO(SYU) fix this test to actually use @contribution.payment.amazon_cbui_url
@@ -153,7 +153,7 @@ describe ContributionsController do
     end
 
     describe "when POST params differ from session params" do
-      let(:params) {{ project_id: project.id, contribution: {reward_id: project.rewards.second.id, amount: project.rewards.second.minimum_contribution} }}
+      let(:params) {{ project_id: project.id, contribution: {payment_transaction_provider: "AMAZON", reward_id: project.rewards.second.id, amount: project.rewards.second.minimum_contribution} }}
       before { post :create, params }
 
       it "creates the contribution with the POST params" do
@@ -164,7 +164,7 @@ describe ContributionsController do
 
     describe "when params are invalid" do
       before { post :create, params }
-      let(:params) {{ project_id: project.id, contribution: {amount: -1 }}}
+      let(:params) {{ project_id: project.id, contribution: {payment_transaction_provider: "AMAZON", amount: -1 }}}
       it { should render_template("new") }
 
       describe "when project_id is inalid" do
