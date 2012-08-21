@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816010313) do
+ActiveRecord::Schema.define(:version => 20120820160742) do
 
   create_table "contributions", :force => true do |t|
     t.integer  "user_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120816010313) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "amount"
+    t.string   "status"
   end
 
   create_table "payments", :force => true do |t|
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20120816010313) do
     t.string   "token_id"
     t.string   "amazon_fps_status_code"
     t.string   "amazon_fps_transaction_status"
+    t.string   "stripe_token"
   end
 
   create_table "projects", :force => true do |t|
