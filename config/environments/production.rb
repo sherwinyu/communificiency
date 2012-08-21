@@ -66,11 +66,13 @@ Communificiency::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  
+
   # Added per Devise install 
   config.action_mailer.default_url_options = { :host => 'communificiency.com' }
 
   config.host_address = "http://communificiency.com"
   config.cbui_endpoint = "https://authorize.payments.amazon.com/cobranded-ui/actions/start"
   config.fps_endpoint = "https://fps.amazonaws.com/"
-end
+
+  config.STRIPE_API_KEY =  config.STRIPE_API_KEY_PROD
+  config.STRIPE_API_KEY_PUBLIC =  config.STRIPE_API_KEY_PROD_PUBLIC end
