@@ -1,21 +1,23 @@
 <% provide(:title, "Welcome") %>
-<% provide(:suppress_header, true) %>
-<% provide(:suppress_footer, true) %>
-<% provide(:body_class, "welcome") %>
+
+<% content_for :body_class, "welcome" %>
 
 <%= content_for :header do %>
-    <div id="welcome-overlay">
-      <%= image_tag "communificiency-logo-thick-80.png", id:"welcome-logo"%>
-      <%= link_to "Blog", "http://blog.communificiency.com", id: "link-Blog"%>
-      <%= link_to "Projects", projects_path, id: "link-Projects"%>
-      <%= link_to "Sign up", sign_up_path, id: "link-SignUp" %>
-      <%= link_to "About", about_path, id: "link-About" %>
-    </div>
+  <div id="welcome-overlay">
+    <%= image_tag "communificiency-logo-thick-80.png", id:"welcome-logo"%>
+    <%= link_to "Blog", "http://blog.communificiency.com", id: "link-Blog"%>
+    <%= link_to "Projects", projects_path, id: "link-Projects"%>
+    <%= link_to "Sign up", sign_up_path, id: "link-SignUp" %>
+    <%= link_to "About", about_path, id: "link-About" %>
+  </div>
 <% end %>
+
 <%= content_for :body do %>
   <div class="container-fluid div1">
-    <%# render partial: 'shared/flash', locals: {:flash => flash} %>
     <div class="container">
+      <div class="welcome flash">
+        <%= render partial: 'shared/flash', locals: {:flash => flash} %>
+      </div>
       <div class="row valueProps">
         <div class="span12">
           <div class="row-fluid">
@@ -93,5 +95,6 @@
     </div>
   </div>
 <% end %>
-<%= render file: 'layouts/application.html.erb', locals: {:derp => 5} %>
+
+<%= render file: 'layouts/application' %>
 

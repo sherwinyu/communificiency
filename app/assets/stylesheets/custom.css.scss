@@ -76,7 +76,7 @@ div.footerContainer {
   border: 1px whitesmoke solid;
 }
 
-body#application.container.main {
+body.application .container.main.application {
   background: white;
   padding: 20px;
   top: -15px;
@@ -88,10 +88,7 @@ body#application.container.main {
 
 }
 
-body#welcome.container.main {
-  width: 100%;
-  border: red 1px solid;
-}
+
 
 section {
   overflow: auto;
@@ -266,9 +263,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.7em;
   text-transform: uppercase;
   color: $skyblue;
+  height: 45px;
   font-weight: bold;
-  height: 100%;
-  height: $navBarHeight;
   max-width: none;
 }
 
@@ -517,9 +513,18 @@ body.welcome {
   background: $cfblue;
 }
 
+
 .container.welcome{
   width: 100%;
-  background: red;
+}
+
+
+.welcome .flash {
+  @extend .span8;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 45px;
+  margin-bottom: -20px;
 }
 
 .div1 {
@@ -719,13 +724,6 @@ h1.interested {
   color: white;
 }
 
-#welcome-overlay + .flash {
-  @extend .span8;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 15px;
-  margin-bottom: -40px;
-}
 
 .interested a {
   color: lighten($darkGray, 60%);

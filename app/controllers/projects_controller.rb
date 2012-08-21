@@ -14,7 +14,6 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @contribution = @project.contributions.build
-    # render layout: "main_without_flash"
   end
 
   # GET /projects/new

@@ -4,7 +4,7 @@
 
     <div class="nav-collapse">
       <ul class="nav">
-        <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), home_path %>
+        <%= link_to image_tag("logo-60.png", alt: "Communificiency", id: 'logo' ), home_path %>
         <%= nav_li_tag(home_path) { '<i class="icon-home icon-black"></i> Home'} %>
         <%= nav_li_tag('Projects', :projects)  %>
         <%= nav_li_tag('About', about_path)  %>
@@ -39,27 +39,6 @@
     </div><!--/.nav-collapse -->
 
 
-    <% if false -%>
-      <div class="row-fluid">
-        <%= link_to image_tag("logo.png", alt: "Communificiency", id: 'logo' ), home_path %>
-        <nav> 
-        <div class='span6 offset8'>
-          <div class="nav-group pull-right"> 
-            <ul class="nav mini-nav">
-              <li> <%= link_to 'Home', home_path %><li>
-              <li><%= link_to 'About', about_path %><li>
-              <li><%= link_to 'Projects', about_path %><li>
-            </ul>
-            <ul class="nav mini-nav user-nav">
-              <li><%= link_to current_user %> </li>
-              <li><%= current_user_signed_in? ? link_to( current_user ) : link_to( 'Sign in', sign_in_path) %></li>
-              <li><%= current_user_signed_in? ? link_to('Sign out', sign_out_path) : '' %></li>
-            </ul>
-          </div>
-        </div>
-        </nav>
-      </div>
-    <% end %>
   </div>
 </div>
 </header>
