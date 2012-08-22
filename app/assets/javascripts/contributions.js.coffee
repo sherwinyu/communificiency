@@ -7,10 +7,10 @@ $ ->
 
   stripe$ = $('#payStripe')
   stripe$.find('input.stripe').removeAttr('name')
-  stripe$.find('.card-number').val('4242424242424242')
-  stripe$.find('.card-cvc').val('123')
-  stripe$.find('.card-expiry-month').val('12')
-  stripe$.find('.card-expiry-year').val('2013')
+  # stripe$.find('.card-number').val('4242424242424242')
+  # stripe$.find('.card-cvc').val('123')
+  # stripe$.find('.card-expiry-month').val('12')
+  # stripe$.find('.card-expiry-year').val('2013')
 
   $('#stripePayButton').click (event) ->
     event.preventDefault()
@@ -50,25 +50,23 @@ $ ->
         console.log "transActionProviderVal: ", $('#transactionProvider').val()
         form$.get(0).submit();
     
+  # UI BINDINGS
+$ ->
+
+  $('a#aboutStripe').popover
+    placement: 'top'
+    trigger: 'click'
+    content:  ->
+      "Your payments are <a href='http://www.stripe.com'> safely and securely processed</a>. We will never share your credit card information with others."
+    title: "Secure payments    <a class='close' id='popoverclose' data-dismiss='popover'>&#215;</a>"
+    offset: 10
+
+  $('a#aboutStripe').click (e) ->
+    e.preventDefault()
+    $('a#aboutStripe').popover 'toggle'
+  $('a#popoverclose').live 'click', (e) ->
+    $('a#aboutStripe').popover 'toggle'
 
 
 
 
-    ###
-$(document).ready(function() {
-  $("#payment-form").submit(function(event) {
-    // disable the submit button to prevent repeated clicks
-    $('.submit-button').attr("disabled", "disabled");
-
-    Stripe.createToken({
-        number: $('.card-number').val(),
-        cvc: $('.card-cvc').val(),
-        exp_month: $('.card-expiry-month').val(),
-        exp_year: $('.card-expiry-year').val()
-    }, stripeResponseHandler);
-
-    // prevent the form from submitting with the default action
-    return false;
-  });
-});
-###

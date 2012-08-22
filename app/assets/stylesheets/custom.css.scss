@@ -386,6 +386,12 @@ footer ul li {
   font-style: normal;
 }
 
+#payStripe {
+  // @extend .span2;
+  margin-left: 38%;
+  width: 20%;
+
+}
 .card-expiry-month {
   width: auto;
 }
@@ -398,8 +404,8 @@ footer ul li {
   @extend .btn-large;
   @extend .btn-primary;
   // @extend .center;
-  // margin-left: auto;
-  // margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
   margin: 2em auto;
   // display: block;
 }

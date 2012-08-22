@@ -1,7 +1,10 @@
 <div id="helpDiv" class="modal fade">
   <a class="close" data-dismiss="modal">&#215;</a>
   <h2> Need help? </h2>
-  <p> If you need any help or have any questions, please <%= mail_to("team@communificiency.com", "email us", subject: "Communificiency help", body: "I have a question about communificiency...", target: "_blank")  %>. We'll get back to you within the day. </p>
+  <p> If you need any help or have any questions, please email us at
+  <%= mail_to(
+    "team@communificiency.com",
+    "team@communificiency.com", subject: "Communificiency help", body: "I have a question about communificiency...", target: "_blank")  %>. We'll get back to you within the day. </p>
 
   <p> In particular, if you have any questions about our <%= link_to "first project", project_path(1) %>, or the rewards being offered, don't hesitate to ask us!</p>
 
