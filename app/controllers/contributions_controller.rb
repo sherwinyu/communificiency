@@ -51,7 +51,6 @@ class ContributionsController < ApplicationController
       return
     end
 
-
     provider = params[:contribution].delete :payment_transaction_provider
 
     contrib_params = (session[:contrib_params] || {}).with_indifferent_access
@@ -82,21 +81,17 @@ class ContributionsController < ApplicationController
       end
 
     when "STRIPE"
-      puts "STRIPE"
       begin
         @payment.stripe_pay! params[:stripeToken]
       rescue => e
-        flash.alert = "There was a problem: #{e.message}. Please check everything and try again." # Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
+        flash.alert = "There was a problem: #{e.message}. Please check everything and try again."
         redirect_to new_project_contribution_path(@project) and return
       end
 
-
       flash.notice = "Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
+      UserMailer.contribution_confirmation(@contribution).deliver
       redirect_to @project
     end
-
-    # create a new payment
-    # kredirect them to the amazon payment page
   end
 
 
