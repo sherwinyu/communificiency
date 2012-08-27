@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
     self.name
   end
 
+  def to_debug
+    "User #{self.id}: #{self.name} #{self.email}"
+  end
+
   def decorated_name
     glyph = admin? ? '^' : ''
     glyph << self.name 

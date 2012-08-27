@@ -4,6 +4,7 @@ class ContributionsController < ApplicationController
   # GET /contributions.json
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
   before_filter :require_confirmed!, only: [:new, :create, :edit, :update]
+  before_filter :require_admin!, only: [:index, :show]
 
   def index
     @contributions = Contribution.all
