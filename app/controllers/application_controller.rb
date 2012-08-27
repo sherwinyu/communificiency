@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
   private
   def store_location
     session[:return_to] = request.fullpath
-    puts "Location stored:" , session[:return_to]
+    puts "Location stored:" , session[:return_to] if Rails.env.development?
   end
 
   def clear_stored_location

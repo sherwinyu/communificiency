@@ -26,8 +26,10 @@ describe ContributionsController do
   # Contribution. As you add validations to Contribution, be sure to
   # update the return value of this method accordingly.
   let(:project) { FactoryGirl.create :project_with_rewards }
+  let(:contribution) { FactoryGirl.create :contribution }
   let(:reward) { project.rewards.first }
   let(:user) { FactoryGirl.create(:user) }
+  let(:admin) { FactoryGirl.create(:user, :admin) }
   let(:unconfirmed_user) { FactoryGirl.create(:unconfirmed_user) }
 
   before do
@@ -175,6 +177,66 @@ describe ContributionsController do
     end
 
   end
+  describe "GET index" do
+    let(:params) { {project_id: project.id} }
+    let(:prepare_session) do
+      sign_in user 
+    end
+    before do 
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      prepare_session
+      get :index, params
+    end
+
+    describe "when not signed in" do
+      let(:prepare_session) { sign_out user }
+      # should throw an error because Devise requires us to be signed in
+      it {should raise_error}
+    end
+
+    describe "when signed in with non admin user" do
+      it { should redirect_to home_path }
+      it { should set_the_flash[:alert].to("Sorry, you don't have access to that.") }
+    end
+
+    describe "when signed in with admin" do
+      let(:prepare_session) { sign_in admin }
+      it { should render_template 'contributions/index' }
+    end
+
+
+  end
+
+  describe "GET show" do
+    let(:params) { {project_id: project.id, id: contribution.id} }
+    let(:prepare_session) do
+      sign_in user 
+    end
+
+    before do 
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      prepare_session
+      get :show, params
+    end
+
+    describe "when not signed in" do
+      let(:prepare_session) { sign_out user }
+      # should throw an error because Devise requires us to be signed in
+      it {should raise_error}
+    end
+
+    describe "when signed in with non admin user" do
+      it { should redirect_to home_path }
+      it { should set_the_flash[:alert].to("Sorry, you don't have access to that.") }
+    end
+
+    describe "when signed in with admin" do
+      let(:prepare_session) { sign_in admin }
+      it { should render_template 'contributions/show' }
+    end
+
+
+  end
 
 =begin
 
@@ -272,36 +334,36 @@ end
         put :update, {:id => contribution.to_param, :contribution => {'these' => 'params'}}, valid_session
       end
 
-      it "assigns the requested contribution as @contribution" do
-        contribution = Contribution.create! valid_attributes
-        put :update, {:id => contribution.to_param, :contribution => valid_attributes}, valid_session
-        assigns(:contribution).should eq(contribution)
-      end
+it "assigns the requested contribution as @contribution" do
+  contribution = Contribution.create! valid_attributes
+  put :update, {:id => contribution.to_param, :contribution => valid_attributes}, valid_session
+  assigns(:contribution).should eq(contribution)
+end
 
-      it "redirects to the contribution" do
-        contribution = Contribution.create! valid_attributes
-        put :update, {:id => contribution.to_param, :contribution => valid_attributes}, valid_session
-        response.should redirect_to(contribution)
-      end
-    end
+it "redirects to the contribution" do
+  contribution = Contribution.create! valid_attributes
+  put :update, {:id => contribution.to_param, :contribution => valid_attributes}, valid_session
+  response.should redirect_to(contribution)
+end
+end
 
-    describe "with invalid params" do
-      it "assigns the contribution as @contribution" do
-        contribution = Contribution.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Contribution.any_instance.stub(:save).and_return(false)
-        put :update, {:id => contribution.to_param, :contribution => {}}, valid_session
-        assigns(:contribution).should eq(contribution)
-      end
+describe "with invalid params" do
+  it "assigns the contribution as @contribution" do
+    contribution = Contribution.create! valid_attributes
+    # Trigger the behavior that occurs when invalid params are submitted
+    Contribution.any_instance.stub(:save).and_return(false)
+    put :update, {:id => contribution.to_param, :contribution => {}}, valid_session
+    assigns(:contribution).should eq(contribution)
+  end
 
-      it "re-renders the 'edit' template" do
-        contribution = Contribution.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Contribution.any_instance.stub(:save).and_return(false)
-        put :update, {:id => contribution.to_param, :contribution => {}}, valid_session
-        response.should render_template("edit")
-      end
-    end
+  it "re-renders the 'edit' template" do
+    contribution = Contribution.create! valid_attributes
+    # Trigger the behavior that occurs when invalid params are submitted
+    Contribution.any_instance.stub(:save).and_return(false)
+    put :update, {:id => contribution.to_param, :contribution => {}}, valid_session
+    response.should render_template("edit")
+  end
+end
   end
 
   describe "DELETE destroy" do
@@ -318,6 +380,7 @@ end
       response.should redirect_to(contributions_url)
     end
   end
+
 
 end
 =end

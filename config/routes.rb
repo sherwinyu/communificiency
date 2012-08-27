@@ -12,7 +12,6 @@ Communificiency::Application.routes.draw do
   resources :user_signups, only: [:create]
   match '/home', to:"static_pages#home"
   match "/sign_up_old", to: "users#new"
-  # match "/users", to: "users#create"
   match '/about', to: "static_pages#about"
   match "/users/:id", to: "users#show"
 
@@ -42,6 +41,7 @@ Communificiency::Application.routes.draw do
   match '/*e' => 'static_pages#coming_soon'
 
 
+=begin
   resources :contributions
   resources :projects
 
@@ -70,6 +70,7 @@ Communificiency::Application.routes.draw do
   match '/projects/1/pay', to: "static_pages#pay"
 
   match '/confirm_payment_cbui', to: "payments#confirm_payment_cbui"
+=end
 
 
   # The priority is based upon order of creation:
