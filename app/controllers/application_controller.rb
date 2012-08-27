@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     rescue_from ActionController::RoutingError, with: :render_404
     rescue_from ActionController::UnknownController, with: :render_404
     rescue_from ActionController::UnknownAction, with: :render_404
+    rescue_from AbstractController::ActionNotFound, with: :render_500
     rescue_from ActiveRecord::RecordNotFound, with: :render_404
   end
 
@@ -36,7 +37,6 @@ class ApplicationController < ActionController::Base
     redirect_back_or home_path, notice: "Please confirm your email first. #{link}.".html_safe unless current_user.confirmed?
   end
 
-  after_filter :store_location
 
   def redirect_to(options = {}, response_status = {})
     ::Rails.logger.error("Redirected by #{caller(1).first rescue "unknown"}")
@@ -52,9 +52,13 @@ class ApplicationController < ActionController::Base
     params.merge(p).delete_if{ |k,v| v.blank?}
   end
 
+  after_filter :store_location
+  skip_after_filter :store_location, only: :create
+
   private
   def store_location
     session[:return_to] = request.fullpath
+    puts "Location stored:" , session[:return_to]
   end
 
   def clear_stored_location

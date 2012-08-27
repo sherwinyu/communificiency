@@ -43,6 +43,7 @@ class ContributionsController < ApplicationController
     @contribution = @project.contributions.build(contrib_params)
   end
 
+  skip_after_filter :store_location, only: :create
   def create
     puts params
     @project = Project.find_by_id params[:project_id] 
@@ -146,6 +147,13 @@ class ContributionsController < ApplicationController
       redirect_to new_project_contribution_path(@contribution.project || 1)
     end
 
+
+
+  end
+
+  def require_confirmed!
+    link = '<a href="/users/confirmation/new">More information</a>'
+    redirect_to projects_path, notice: "Please confirm your email first. #{link}.".html_safe unless current_user.confirmed?
   end
 
   # PUT /contributions/1

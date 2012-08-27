@@ -12,7 +12,7 @@ Communificiency::Application.routes.draw do
   resources :user_signups, only: [:create]
   match '/home', to:"static_pages#home"
   match "/sign_up_old", to: "users#new"
-  match "/users", to: "users#create"
+  # match "/users", to: "users#create"
   match '/about', to: "static_pages#about"
   match "/users/:id", to: "users#show"
 

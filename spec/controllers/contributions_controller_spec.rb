@@ -99,7 +99,7 @@ describe ContributionsController do
 
     describe "when signed in with unconfirmed user" do
       let(:prepare_session) { sign_in unconfirmed_user }
-      it { should redirect_to home_path }
+      it { should redirect_to projects_path }
     end
 
     specify { session[:contrib_params].with_indifferent_access.should == {amount: 0, project_id: project.id}.with_indifferent_access }
@@ -128,7 +128,7 @@ describe ContributionsController do
     describe "when signed in with unconfirmed user" do
       let(:prepare_session) { sign_in unconfirmed_user }
       before { post :create, params }
-      it { should redirect_to home_path }
+      it { should redirect_to projects_path }
     end
 
     let(:params) {{project_id: project.id, contribution: {payment_transaction_provider: "AMAZON"} }}
