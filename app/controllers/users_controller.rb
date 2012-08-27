@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   # before_filter :require_signed_in, only: [:edit, :update]
   # before_filter :require_correct_user, only: [:edit, :update]
   before_filter :authenticate_user!, only: [:edit, :update]
+  before_filter :require_admin!, only: [:index]
 
   def index
     @users = User.paginate( page: params[ :page ])
@@ -12,10 +13,10 @@ class UsersController < ApplicationController
     render 
   end
 
-  def new
-    @user = User.new
-    render 'sign_up'
-  end
+  # def new
+    # @user = User.new
+    # render 'sign_up'
+  # end
 
 
 =begin

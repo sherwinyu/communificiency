@@ -32,9 +32,11 @@ Communificiency::Application.routes.draw do
   resources :projects do
     resources :contributions do
     end
-      
     resources :rewards
   end
+
+  resources :users, only: [:show, :index]
+
 
   match '/errors/404' => "static_pages#error404"
   match '/errors/500' => "static_pages#error500"

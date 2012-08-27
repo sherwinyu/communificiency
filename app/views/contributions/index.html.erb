@@ -22,9 +22,7 @@
         <td><%= contribution.project %></td>
         <td><%= contribution.reward %></td>
         <td><%= contribution.payment %></td>
-        <td><%= link_to 'Show', contribution %></td>
-        <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
-        <td><%= link_to 'Destroy', contribution, confirm: 'Are you sure?', method: :delete %></td>
+        <td><%= link_to 'Show', project_contribution_path(contribution.project, contribution) if contribution.project%></td>
       </tr>
     <% end %>
   <% end %>
@@ -32,4 +30,3 @@
 
 <br />
 
-<%= link_to 'New Contribution', new_contribution_path %>

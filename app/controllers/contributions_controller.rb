@@ -10,9 +10,10 @@ class ContributionsController < ApplicationController
     @contributions = Contribution.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render layout: false }
       format.json { render json: @contributions }
     end
+
   end
 
   # GET /contributions/1
