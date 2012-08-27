@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+
+Hi <%= @user.name  %>,
+
+  <p>Thanks for supporting Communificiency with your contribution  to <%= @contribution.project.name %> .</p>
+
+  <p>Here are the details of your contribution:</p>
+  <ul>
+  <li>project: <%= @contribution.project  %></li>
+  <li>reward: <%= @contribution.reward ? @contribution.reward.name : "(no reward)"  %></li>
+  <li>amount: <%= number_to_currency @contribution.amount %></li>
+  </ul>
+
+  <p>
+  <% if @contribution.reward  %>
+    You'll receive follow up information about how to redeem your reward later.
+  <% end %>
+  If you have any questions, feel free to email us at <%= mail_to 'team@communificiency.com', 'team@communificiency.com'  %>
+  </p>
+
+  <p>Thanks,<br>
+  Sherwin and Max,<br>
+  Communificiency</p>
+
+  </body>
+  </html>

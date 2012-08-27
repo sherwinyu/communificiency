@@ -1,0 +1,17 @@
+Hi <%= @user.name  %>,
+
+  Thanks for contributing to <%= @contribution.project.name %>.
+
+  Here are the details of your contribution:
+    project: <%= @contribution.project  %>
+    reward: <%= @contribution.reward ? @contribution.reward.name : "(no reward)"  %>
+    amount: <%= number_to_currency @contribution.amount %>
+  
+  <% if @contribution.reward  %>
+    You'll receive follow up information about how to redeem your reward later. <% end %>
+
+  If you have any questions, feel free to email us at team@communificiency.com.
+
+Thanks,
+Sherwin and Max,
+Communificiency
