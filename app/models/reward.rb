@@ -1,7 +1,7 @@
 include ActionView::Helpers::NumberHelper
 
 class Reward < ActiveRecord::Base
-  attr_accessible :long_description, :name, :project_id, :short_description, :minimum_contribution, :limited_quantity 
+  attr_accessible :long_description, :name, :project_id, :short_description, :minimum_contribution , :limited_quantity
   belongs_to :project, inverse_of: :rewards
   has_many :contributions, inverse_of: :reward
 
@@ -38,8 +38,20 @@ class Reward < ActiveRecord::Base
     number_to_currency(self.minimum_contribution, precision: 0)
   end
 
+  def quantity_remaining
+    if limited_quantity 
+      [limited_quantity - self.contributions.size, 0].max
+    else
+      nil
+    end
+  end
+
+  def limited_quantity?
+    !!limited_quantity
+  end
+
   def as_json(options={})
-    super(methods: :minimum_contribution_dollars)
+    super(methods: [:minimum_contribution_dollars, :limited_quantity?, :quantity_remaining] )
   end
 
 end

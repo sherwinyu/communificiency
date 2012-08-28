@@ -3,11 +3,12 @@ require 'spec_helper'
 describe Contribution do
   let(:project) { FactoryGirl.create :project_with_rewards }
   let(:reward) { project.rewards.first }
+  let(:user) { FactoryGirl.create :user }
 
   let (:contribution) do
     c = Contribution.new
     c.payment = FactoryGirl.build :payment
-    c.user = FactoryGirl.create :user
+    c.user = user
     c.project = project
     c.amount = 15
     c
@@ -57,6 +58,25 @@ describe Contribution do
         before { @other_project = FactoryGirl.create :project_with_rewards }
         it { should_not allow_value(*@other_project.rewards).for(:reward).with_message(/not available for project/) }
       end
+
+      describe "when limited_quantity is specified" do
+        before do
+          reward.limited_quantity = 3
+        end
+
+        describe "and limited_quantity is insufficient" do
+          before do
+            b = reward.contributions.create(user: user, project: project, amount: reward.minimum_contribution, payment: Payment.new)
+            b2 = reward.contributions.create(user: user, project: project, amount: reward.minimum_contribution, payment: Payment.new)
+            b3 = reward.contributions.create(user: user, project: project, amount: reward.minimum_contribution, payment: Payment.new)
+          end
+          it { should_not be_valid }
+          it { should have(1).errors_on(:reward) }
+        end
+        it { should be_valid }
+      end
+
+
 
     end # end non nil rewards
 

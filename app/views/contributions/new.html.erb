@@ -53,61 +53,63 @@
                 </div>
               </div>
             </div>
-            <div class="center">
-              <p>Choose reward: <%= f.association :reward, collection:  [Reward.new(name: "No reward -- I just want to contribute")] + @project.rewards,  validate: true, selected: @contribution.reward ? @contribution.reward.id : nil, label: false,  %> </p>
-            </div>
+            <div id="chooseReward">
+              <p>Choose reward: <%= f.association :reward, collection:  [Reward.new(name: "No reward -- I just want to contribute")] + @project.rewards,  validate: true, selected: @contribution.reward ? @contribution.reward.id : nil, label: false,  %> 
+                If the reward you want has already been claimed (grayed out), and you really want it, email us at <%= mail_to "team@communificiency.com", "team@communificiency.com" %> and we'll see if there's anything we can do.
+            </p>
           </div>
-          <br>
-
-
-
-
-
-          <h2 class="contributionPaymentHeader"> 3. Pay </h2>
-          <div class="instructions">
-            Fill our your credit card information (<%= link_to '?', '#', id: "aboutStripe" %>) below and click pay. <% "You will be directed to Amazon, where you can sign in with your Amazon account (or create a new one). After confirming your payment with amazon, you'll be redirected here. " %>
         </div>
-
-        <%= f.hidden_field :payment_transaction_provider, id: "transactionProvider" , value: "AMAZON" %>
-        <div id="payStripe">
-          <%= f.input "placeholder", as: "string", input_html: {class: "stripe card-number"}, label: "Card Number", value:"4242424242424242" %>
-          <%# cvc_link = link_to ' %>
-          <%= f.input "placeholder", as: "string", input_html: {class: "stripe card-cvc"}, label: "CVC", value: "123" %>
-          <label>Expiration (MM/YYYY)</label>
-          <input type="text" size="2" class="stripe card-expiry-month"/>
-          <span> / </span>
-          <input type="text" size="4" class="stripe card-expiry-year"/>
+        <br>
 
 
 
 
-          <div class="error"> </div>
-        </div>
-        <div class="center">
-          <%= f.button :submit, "Pay", id: "stripePayButton", class: "btn-primary" %>
-        </div>
 
-
-
-
-        <!-- div id="payAmazon">
-        <div class="center">
-        </div>
-        </div -->
-
-
-
-        <p>
-        <%= link_to "Back to #{@project.name}", project_path( @project ) %>
-        </p>
-
-
+        <h2 class="contributionPaymentHeader"> 3. Pay </h2>
+        <div class="instructions">
+          Fill our your credit card information (<%= link_to '?', '#', id: "aboutStripe" %>) below and click pay. <% "You will be directed to Amazon, where you can sign in with your Amazon account (or create a new one). After confirming your payment with amazon, you'll be redirected here. " %>
       </div>
 
-    </div><!--/span-->
+      <%= f.hidden_field :payment_transaction_provider, id: "transactionProvider" , value: "AMAZON" %>
+      <div id="payStripe">
+        <%= f.input "placeholder", as: "string", input_html: {class: "stripe card-number"}, label: "Card Number", value:"4242424242424242" %>
+        <%# cvc_link = link_to ' %>
+        <%= f.input "placeholder", as: "string", input_html: {class: "stripe card-cvc"}, label: "CVC", value: "123" %>
+        <label>Expiration (MM/YYYY)</label>
+        <input type="text" size="2" class="stripe card-expiry-month"/>
+        <span> / </span>
+        <input type="text" size="4" class="stripe card-expiry-year"/>
+
+
+
+
+        <div class="error"> </div>
+      </div>
+      <div class="center">
+        <%= f.button :submit, "Pay", id: "stripePayButton", class: "btn-primary" %>
+      </div>
+
+
+
+
+      <!-- div id="payAmazon">
+      <div class="center">
+      </div>
+      </div -->
+
+
+
+      <p>
+      <%= link_to "Back to #{@project.name}", project_path( @project ) %>
+      </p>
+
+
+    </div>
+
   </div><!--/span-->
+</div><!--/span-->
 
 
-  <% end # form for %> 
+<% end # form for %> 
 </div><!--/.fluid-container-->
 

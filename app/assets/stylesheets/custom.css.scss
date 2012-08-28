@@ -368,6 +368,12 @@ footer ul li {
   color: red;
 }
 
+#chooseReward {
+  @extend .center;
+  width: 45%;
+  margin: 0 auto;
+}
+
 #contribution_reward_id {
   width: auto;
   display: inline;
@@ -377,6 +383,9 @@ footer ul li {
 }
 #steptwo option.invalid  {
   color: red;
+}
+#steptwo option.unavailable, #steptwo option.invalid.unavailable {
+  @extend .muted;
 }
 #steptwo option.invalid:after {
   content: "  --  minimum contribution not met"
@@ -498,16 +507,6 @@ a.toggle {
 
 // ----------- new 
 
-.derp   .radio {
-  border: 1px;
-}
-
-.derp .radio:selected
-
-.derp .radio_buttons:checked {
-  background: green;
-  margin-top: 5px;
-}
 
 
 ////--------------------------------------------------------------------

@@ -19,6 +19,7 @@
       <%= f.input_field :minimum_contribution %>
       <%= content_tag :span, ".00", class: "add-on" %>
     <% end %>
+    <%= f.input :limited_quantity, label: "You can cap the number of times a reward is redeemed; leave blank for unlimited" %>
   </div>
 
 </div>

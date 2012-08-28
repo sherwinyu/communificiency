@@ -132,6 +132,36 @@ div.markdown > blockquote > p {
   margin-bottom: 15px;
 }
 
+.rewards-bar .reward.rewardUnavailable {
+  background: whitesmoke;
+  @extend .muted;
+  border: 1px darken(gray, 5%) dashed;
+  .reward-header .reward-dollars {
+    @extend .muted;
+}
+}
+
+.rewards-bar .reward.rewardUnavailable > .reward-btn {
+  @extend .muted;
+  background: lighten(gray, 30%);
+  pointer-events: none;
+  cursor: default;
+}
+
+.reward > .reward-btn:hover {
+  @extend .span2;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  display: block;
+  background: darken($goldenLight, 8%);
+}
+
+.rewards-bar .reward.rewardUnavailable:hover {
+  background: whitesmoke;
+  @extend .muted;
+}
+
 .rewards-bar .reward:hover {
   background: darken($reallyLightBlue, 10%);
   background: darken($reallyLightBlue, 0%);

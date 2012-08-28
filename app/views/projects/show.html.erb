@@ -45,36 +45,39 @@
         <div class="statistic row-fluid">
           <div class="statistic-num span6">41</div><div class="statistic-caption span6">days to go</div>
         </div>
-      <div class="divider">  </div>
-      <h3 class="contribution-Ask"> Contribute to <%= @project.name%> <small> and get one of the following rewards! </small> </h3>
-      <%= simple_form_for(@contribution, url: new_project_contribution_path(@project), method: 'GET', id: "contributionForm") do |f| %>
+        <div class="divider">  </div>
+        <h3 class="contribution-Ask"> Contribute to <%= @project.name%> <small> and get one of the following rewards! </small> </h3>
+        <%= simple_form_for(@contribution, url: new_project_contribution_path(@project), method: 'GET', id: "contributionForm") do |f| %>
 
-        <div class="center">
-        <%= f.input :amount, wrapper: 'prepend', label: false do %>
-          <%= content_tag :span, "$", class: "add-on" %> <%= f.input_field :amount, size: 5, class: 'span2' %>
-          <%= f.button :submit, "Contribute", class: "btn", id: "okButton" %>
+          <div class="center">
+            <%= f.input :amount, wrapper: 'prepend', label: false do %>
+              <%= content_tag :span, "$", class: "add-on" %> <%= f.input_field :amount, size: 5, class: 'span2' %>
+              <%= f.button :submit, "Contribute", class: "btn", id: "okButton" %>
 
-        <% end %>
-      </div>
-      <h3 class="contribution-Ask"> <small> Enter your contribution above, or click on one of the rewards below. </small>  </h3>
-    </div>
-    <h3 class="rewardBarHeader"> Rewards </h3>
-    <% @project.rewards.each do |reward| %>
-      <div class="reward">
-        <div class="reward-header row-fluid">
-          <div class="span9 reward-name">
-            <p><%= reward.name %>  </p>
-          </div> 
-          <div class="span3 reward-dollars">
-            $<%= reward.minimum_contribution.to_i -%>
+            <% end %>
           </div>
-      </div>
-        <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn remote", "data-submit" => "#contribution_amount" %>
-        <%# f.button :submit  reward_id: reward),  class: "btn reward-btn" %>
-        <p class="projectDescription"> <%= reward.long_description %> </p>
-      </div>
-    <% end %>
+          <h3 class="contribution-Ask"> <small> Enter your contribution above, or click on one of the rewards below. </small>  </h3>
+        </div>
+        <h3 class="rewardBarHeader"> Rewards </h3>
+        <% @project.rewards.each do |reward| %>
+          <div class="reward <%= "rewardUnavailable" if reward.limited_quantity && reward.quantity_remaining == 0 %>" >
+            <div class="reward-header row-fluid">
+              <div class="span9 reward-name">
+                <p><%= reward.name %>  </p>
+              </div> 
+              <div class="span3 reward-dollars">
+                $<%= reward.minimum_contribution.to_i -%>
+            </div>
+          </div>
+          <%= link_to 'Contribute', new_project_contribution_path(@project, reward_id: reward),  class: "btn reward-btn remote", "data-submit" => "#contribution_amount" %>
+          <%# f.button :submit  reward_id: reward),  class: "btn reward-btn" %>
+          <p class="projectDescription"> <%= reward.long_description %> </p>
+          <% if reward.limited_quantity? %>
+            <p class="projectLimited"> Limited quantity: <%= reward.quantity_remaining > 0 ? "#{reward.quantity_remaining} remaining" : "no rewards remaining"%> </p>
+          <% end %>
+        </div>
       <% end %>
+    <% end %>
 
   </div>
 </div><!--/span-->

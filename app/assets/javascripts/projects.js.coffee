@@ -7,7 +7,7 @@ jQuery ->
   if rewards?
     $("#inputContributionAmount").change (event)->
       updateDropDown()
-      id =  parseInt $('#contribution_reward_id').val()
+      id = parseInt $('#contribution_reward_id').val()
       reward = (reward for reward in rewards when reward.id == id)[0]
       updateRewardDescription(reward)
 
@@ -61,6 +61,16 @@ jQuery ->
         option.text("#{reward.name} (#{reward.minimum_contribution_dollars})")
         console.log option
       updateDropDownOption(reward) for reward in rewards
+      console.log rewards
+      unavailableRewards = (reward for reward in rewards when reward["limited_quantity?"]  && reward.quantity_remaining == 0)
+      console.log unavailableRewards
+      console.log 'unavail rewards: ', unavailableRewards #, unavailableRewards.length
+      for reward in unavailableRewards 
+        console.log reward, "disabled"
+        $("#steptwo option[value=\"#{reward.id}\"]").attr('disabled', 'disabled')
+        $("#steptwo option[value=\"#{reward.id}\"]").addClass('unavailable')
+      console.log 'unavail rewards: ', unavailableRewards
+
 
     updateDropDown()
     updateRewardDescription(reward)
