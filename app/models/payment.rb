@@ -87,6 +87,12 @@ class Payment < ActiveRecord::Base
     pay_result_hash
   end
 
+  def to_debug
+    "Payment#{self.id} $#{self.amount} #{self.transaction_provider} #{self.transaction_status}"
+    
+
+  end
+
  
 # === StripeEvent callbacks
    def charge_failed!

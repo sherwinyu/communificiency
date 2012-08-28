@@ -1,32 +1,51 @@
-<h1>Listing contributions</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> <%= full_title(yield(:title)) %> </title>
+    <%= stylesheet_link_tag    "application", media: "all"%>
+    <%= javascript_include_tag "https://js.stripe.com/v1/" %>
+    <%= javascript_include_tag "application"%>
+    <%= csrf_meta_tags %>
+    <%= tag :meta, :name => "stripe-key", content: Communificiency::Application.config.STRIPE_API_KEY_PUBLIC %>
+    <%= render 'layouts/shim' %>
+  </head>
 
-<table>
-  <tr>
-    <th>User id</th>
-    <th>User name</th>
-    <th>User email</th>
-    <th>Project</th>
-    <th>Reward</th>
-    <th>Payment</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <body>
+    <h1>Listing contributions</h1>
 
-  <% @contributions.each do |contribution| %>
-    <% if contribution %>
+    <table class="table">
       <tr>
-        <td><%= contribution.user_id %></td>
-        <td><%= contribution.user.name if contribution.user%></td>
-        <td><%= contribution.user.email if contribution.user%></td>
-        <td><%= contribution.project %></td>
-        <td><%= contribution.reward %></td>
-        <td><%= contribution.payment %></td>
-        <td><%= link_to 'Show', project_contribution_path(contribution.project, contribution) if contribution.project%></td>
+        <th>ctrbtn id</th>
+        <th> ctrbtn amount </th>
+        <th>User id</th>
+        <th>User name</th>
+        <th>User email</th>
+        <th>Project</th>
+        <th>Reward</th>
+        <th>Payment</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  <% end %>
-</table>
 
-<br />
+      <% @contributions.each do |contribution| %>
+        <% if contribution %>
+          <tr>
+            <td><%= contribution.id %></td>
+            <td><%= contribution.amount %></td>
+            <td><%= contribution.user_id %></td>
+            <td><%= contribution.user.name if contribution.user%></td>
+            <td><%= contribution.user.email if contribution.user%></td>
+            <td><%= contribution.project %></td>
+            <td><%= contribution.reward %></td>
+            <td><%= contribution.payment ? contribution.payment.to_debug : nil %></td>
+            <td><%= link_to 'Show', project_contribution_path(contribution.project, contribution) if contribution.project%></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+
+    <br />
+  </body>
+</html>
 

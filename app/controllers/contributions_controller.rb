@@ -10,7 +10,7 @@ class ContributionsController < ApplicationController
     @contributions = Contribution.all
 
     respond_to do |format|
-      format.html { render layout: false }
+      format.html { render }
       format.json { render json: @contributions }
     end
 
