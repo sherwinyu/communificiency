@@ -1,7 +1,11 @@
 require 'spec_helper'
+include Devise::TestHelpers
 
 describe UsersController do
   render_views
+
+  let(:user) { FactoryGirl.create(:user) }
+  let(:admin) { FactoryGirl.create(:user, :admin) }
 
   before :each do
     @user_attr = { name: 'Namey User', 
@@ -10,6 +14,30 @@ describe UsersController do
                    password_confirmation: 'p4ssw0rd',
     }
   end
+  describe 'GET users/1' do
+    let(:params) { {id: 1} }
+
+    before do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+
+    end
+
+    it 'should raise error when not logged in' do
+      # before {}
+      expect { get :show, id: 1 }.to raise_error
+    end
+
+    describe "when logged in as non admin" do
+      before do
+        sign_in user
+        get :show, id: 1 
+      end
+      it { should_not assign_to(:user) }
+
+      # it { should_not raise_error }
+    end
+  end
+
 
 =begin
   describe 'POST users#create' do
