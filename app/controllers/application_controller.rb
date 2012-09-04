@@ -16,6 +16,13 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, with: :render_404
   end
 
+  def check_domain
+    if Rails.env.production? and request.host.downcase != 'communificiency.com'
+      redirect_to request.protocol + 'communificiency.com' + request.fullpath, :status => 301
+    end
+  end
+
+
   def render_404 exception
     @not_found_path = exception.message
     respond_to do |format|
