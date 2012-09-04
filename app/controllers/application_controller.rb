@@ -18,7 +18,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_domain
   def check_domain
+    puts request.host.downcase, 'communificiency.com'
     if Rails.env.production? and request.host.downcase != 'communificiency.com'
+      puts 'redirecting...'
       redirect_to request.protocol + 'communificiency.com' + request.fullpath, :status => 301
     end
   end
