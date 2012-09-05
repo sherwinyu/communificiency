@@ -1,4 +1,12 @@
 <% provide(:title, @project.name) %>
+<% set_meta_tags :open_graph => {
+  type: "communificiency:project",
+  url:  "http://communificiency.com/caseus",
+  description: @project.short_description
+}
+%>
+<% title @project.name %>
+
 <div class="container">
   <div class="row">
     <div class="span8">
