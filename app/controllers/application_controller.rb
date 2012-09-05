@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_domain
   def check_domain
-    puts request.host.downcase, 'communificiency.com'
     if Rails.env.production? and request.host.downcase != 'communificiency.com'
       puts 'redirecting...'
       redirect_to request.protocol + 'communificiency.com' + request.fullpath, :status => 301
@@ -68,7 +67,6 @@ class ApplicationController < ActionController::Base
   private
   def store_location
     session[:return_to] = request.fullpath
-    puts "Location stored:" , session[:return_to] if Rails.env.development?
   end
 
   def clear_stored_location
