@@ -20,7 +20,7 @@
 //= require rails.validations.simple_form
 //
 //= require cocoon
-//
+//= require sharrre/jquery.sharrre-1.3.3
 
 
 
