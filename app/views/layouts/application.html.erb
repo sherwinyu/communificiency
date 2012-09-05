@@ -16,6 +16,7 @@ end
     <%= tag :meta, :name => "stripe-key", content: Communificiency::Application.config.STRIPE_API_KEY_PUBLIC %>
     <%= render 'layouts/shim' %>
 
+
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-33512576-1']);
@@ -31,12 +32,12 @@ end
 
      <div class="container main <%= body_class %>">
        <%= content_for?(:header) ? yield(:header) : render( 'layouts/header' )  %>
-       <%= render partial: 'shared/help' %>
        <%= @suppress_flash ? "" : render(partial: 'shared/flash', locals: {flash: flash}) %>
        <%= content_for?(:body) ? yield(:body) : yield %>
        <%= render partial: 'shared/debug' %>
      </div>
      <%= render 'layouts/footer' %>
+       <%= render partial: 'shared/help' %>
    </body>
 
  </html>

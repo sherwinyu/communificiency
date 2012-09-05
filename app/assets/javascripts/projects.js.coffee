@@ -4,6 +4,22 @@ jQuery ->
   # console.log $('#rewards').data( "url" )
   # TODO (syu) on inputContribution change, update SELECTED tag
 
+  $('#sharrre').sharrre
+    share: 
+      facebook: true,
+      twitter: true
+      googlePlus: true,
+    enableHover: false,
+    enableCounter: false,
+    enableTracking: true
+    buttons: {
+        googlePlus: {size: 'tall'},
+        facebook: {layout: 'box_count'},
+        twitter: {count: 'vertical', via: 'communificiency'},
+        digg: {type: 'DiggMedium'},
+        delicious: {size: 'tall'},
+      }
+
   if rewards?
     $("#inputContributionAmount").change (event)->
       updateDropDown()

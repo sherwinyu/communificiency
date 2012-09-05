@@ -290,3 +290,35 @@ div.statistic-caption {
 }
 
 
+
+// --- SHAREEEEEEEEEEEEEEEEEEEEEEEEEEE
+
+#share {
+  height: 120px;
+  display: block;
+  @extend .well;
+  background: whitesmoke;
+  padding: 25px;
+}
+
+#sharrre {
+
+}
+
+.sharrre .box{
+  float:left;
+  background: red;
+}
+.sharrre .buttons {
+  margin: 0 10%;
+  z-index:10;
+  background-color:transparent;
+}
+.sharrre .button:first-child {
+  margin-left:0px;
+}
+.sharrre .button {
+  float:left;
+  max-width:50px;
+  margin-left:10px;
+}

@@ -58,6 +58,14 @@
           </div>
           <h3 class="contribution-Ask"> <small> Enter your contribution above, or click on one of the rewards below. </small>  </h3>
         </div>
+        <h3 class="rewardBarHeader"> Spread the word </h3>
+        <div id="share">
+          <p>Help Caseus accomplish its Communificiency project by telling your friends! </p>
+          <div id="sharrre" data-url="http://communificiency.com/caseus" data-text="Help Caseus go green!" data-title="share"></div>
+        </div>
+
+
+
         <h3 class="rewardBarHeader"> Rewards </h3>
         <% @project.rewards.each do |reward| %>
           <div class="reward <%= "rewardUnavailable" if reward.limited_quantity && reward.quantity_remaining == 0 %>" >
