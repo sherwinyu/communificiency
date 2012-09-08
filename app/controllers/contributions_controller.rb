@@ -1,4 +1,3 @@
-
 class ContributionsController < ApplicationController
   # GET /contributions
   # GET /contributions.json
@@ -6,6 +5,7 @@ class ContributionsController < ApplicationController
   before_filter :require_confirmed!, only: [:new, :create, :edit, :update]
   before_filter :require_admin!, only: [:index, :show]
 
+  force_ssl only: [:new, :create]
   def index
     @contributions = Contribution.all
 
