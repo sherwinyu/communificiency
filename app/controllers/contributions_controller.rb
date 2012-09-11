@@ -1,4 +1,3 @@
-
 class ContributionsController < ApplicationController
   # GET /contributions
   # GET /contributions.json
@@ -7,6 +6,7 @@ class ContributionsController < ApplicationController
   before_filter :require_admin!, only: [:index, :show]
   force_ssl :only => [:new, :create] if Rails.env.production?
 
+  force_ssl only: [:new, :create]
   def index
     @contributions = Contribution.all
 
