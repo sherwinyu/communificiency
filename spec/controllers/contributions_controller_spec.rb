@@ -87,7 +87,8 @@ describe ContributionsController do
       sign_in user 
     end
     before do 
-      @request.env["devise.mapping"] = Devise.mappings[:user]
+      request.env['HTTPS'] = 'on'
+      request.env["devise.mapping"] = Devise.mappings[:user]
       prepare_session
       get :new, params
     end
@@ -119,9 +120,9 @@ describe ContributionsController do
 
 
   describe "POST create" do
-
     let(:prepare_session) { sign_in user }
     before do
+      request.env['HTTPS'] = 'on'
       session[:contrib_params] = {reward_id: reward.id, amount: reward.minimum_contribution }
       prepare_session
     end
@@ -175,8 +176,8 @@ describe ContributionsController do
         it { should render_template("new") }
       end
     end
-
   end
+
   describe "GET index" do
     let(:params) { {project_id: project.id} }
     let(:prepare_session) do
@@ -235,6 +236,21 @@ describe ContributionsController do
       it { should render_template 'contributions/show' }
     end
 
+
+  end
+
+  describe "redirects to HTTPS" do
+    describe "when GET new" do
+      let(:params) { {project_id: project.id} }
+      before { get :new, params }
+      it { should respond_with :redirect }
+    end
+
+    describe "when POST create" do
+      let(:params) {{project_id: project.id, contribution: {payment_transaction_provider: "AMAZON"} }}
+      before { post :create, params }
+      it { should respond_with :redirect }
+    end
 
   end
 
