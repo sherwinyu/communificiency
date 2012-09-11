@@ -8,9 +8,14 @@ Hi <%= @user.name  %>,
     amount: <%= number_to_currency @contribution.amount %>
   
   <% if @contribution.reward  %>
-    You'll receive follow up information about how to redeem your reward later. <% end %>
+  You'll receive follow up information about how to redeem your reward later. <% end %>
+
+  Please help <%= @contribution.project.name %> by spreading the word to your friends!
+    * Share on Facebook: http://www.facebook.com/share.php?u=http://communificiency.com/caseus
+    * Share on Twitter: http://twitter.com/intent/tweet?url=http://communificiency.com/caseus&amp;text=<%=h "I'm helping Caseus go green! via @communificiency http://communificiency.com/caseus"%>
 
   If you have any questions, feel free to email us at team@communificiency.com.
+
 
 Thanks,
 Sherwin and Max,

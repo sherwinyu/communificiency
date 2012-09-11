@@ -1,5 +1,6 @@
 class UserMailer < ActionMailer::Base
-  default from: "team@communificiency.com"
+  default from: "Communificiency Team <team@communificiency.com>",
+          reply_to: "Communificiency Team <team@communificiency.com>"
 
   def welcome_email(user)
     @user = user
@@ -15,7 +16,9 @@ class UserMailer < ActionMailer::Base
     email_with_name = "#{@user.name} <#{@user.email}>"
     mail(to: email_with_name,
          from: "Communificiency Team <team@communificiency.com>",
-         subject: "Communificiency contribution confirmation: #{@contribution.project.name}") do |format|
+         subject: "Communificiency contribution confirmation: #{@contribution.project.name}",
+         reply_to: "Communificiency Team <team@communificiency.com>"
+         ) do |format|
       format.text
       format.html
     end
