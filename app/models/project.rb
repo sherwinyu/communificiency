@@ -45,4 +45,9 @@ class Project < ActiveRecord::Base
     "#{(current_funding / funding_needed.to_f * 100).round(0)}%"
   end
 
+  #TODO fix this
+  def num_days_remaining
+   ((Time.at(1349627578) - Time.now) / 1.day).to_i
+  end
+
 end

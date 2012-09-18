@@ -20,6 +20,11 @@ Hi <%= @user.name  %>,
   <% if @contribution.reward  %>
     You'll receive follow up information about how to redeem your reward later.
   <% end %>
+
+
+  <p> Please help <%= @contribution.project.name %> by spreading the word to your friends! <a title="Share this on Facebook" href='http://www.facebook.com/share.php?u=http://communificiency.com/caseus'>Share on Facebook</a> | <a title="Share on Twitter" href="http://twitter.com/intent/tweet?<%=h "url=http://communificiency.com/caseus&text=I'm helping Caseus go green! http://communificiency.com/caseus&via=communificiency"%>">Share on Twitter</a>
+
+  <p>
   If you have any questions, feel free to email us at <%= mail_to 'team@communificiency.com', 'team@communificiency.com'  %>
   </p>
 

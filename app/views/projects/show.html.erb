@@ -6,6 +6,8 @@
   description: @project.short_description
 }
 %>
+<% set_meta_tags :canonical => "http://communificiency.com/caseus" %>
+
 <% title @project.name %>
 
 <div class="container">
@@ -64,7 +66,7 @@
           <div class="statistic-num span6"><%=  @project.valid_contributions.size %> </div><div class="statistic-caption span6">contributors</div>
         </div>
         <div class="statistic row-fluid">
-          <div class="statistic-num span6">36</div><div class="statistic-caption span6">days to go</div>
+          <div class="statistic-num span6"> <%= @project.num_days_remaining %> </div><div class="statistic-caption span6">days to go</div>
         </div>
         <div class="divider">  </div>
         <h3 class="contribution-Ask"> Contribute to <%= @project.name%> <small> and get one of the following rewards! </small> </h3>
