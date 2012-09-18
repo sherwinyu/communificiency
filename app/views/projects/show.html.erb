@@ -14,6 +14,18 @@
       <%= render partial: 'shared/flash', locals: {:flash => flash}%>
       <div class="hero-unit">
         <div class="group">
+
+          <div id="myCarousel" class="carousel slide">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+              <div class="active item">…</div>
+              <div class="item">…</div>
+              <div class="item">…</div>
+            </div>
+            <!-- Carousel nav -->
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          </div>
           <%# image_tag(@project.picture, alt: @project.name, class: "project-banner") %>
           <%= image_tag(@project.picture, alt: @project.name, class: "project-banner") if @project.picture and find_asset @project.picture %>
           <div class="black-mask project-banner"></div>
