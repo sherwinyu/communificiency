@@ -20,6 +20,10 @@ $darkGray: rgb(47, 47, 47);
 $darkerGray: rgb(35, 35, 35);
 $mediumGray: #666666;
 
+.alertAnnouncement {
+  background: $goldenLight;
+  color: $darkGray;
+}
 .well {
   background: whitesmoke;
   background: $reallyLightBlue;

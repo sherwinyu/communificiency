@@ -13,6 +13,13 @@
 <div class="container">
   <div class="row">
     <div class="span8">
+    <div class="alert alertAnnouncement alert-block">
+      <%# content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+      <h3> New reward: photo collage </h3>
+      <p>
+      We're announcing a new reward for our Communificiency project: If we raise at least $3000 for this project, then you can have your photo included collage of all the contributors. We will hang the final collage prominently in our restaurant. Every time you come for dinner, you’ll see your face on the wall! But we need to get to $3000 to release this reward, so tell your friends! A contribution of any amount qualifies you.
+      </p>
+    </div>
       <%= render partial: 'shared/flash', locals: {:flash => flash}%>
       <div class="hero-unit">
         <div class="group">
