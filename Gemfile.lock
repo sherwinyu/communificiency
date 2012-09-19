@@ -91,6 +91,7 @@ GEM
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.7.5)
+    libnotify (0.5.9)
     libwebsocket (0.1.5)
       addressable
     listen (0.5.0)
@@ -136,6 +137,8 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (0.9.2.2)
+    rb-inotify (0.8.8)
+      ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.1.1)
@@ -220,11 +223,13 @@ DEPENDENCIES
   guard-rspec (= 0.5.5)
   guard-spork (= 0.3.2)
   jquery-rails (~> 2.0.0)
+  libnotify (= 0.5.9)
   meta-tags
   pg (= 0.12.2)
   pry (~> 0.9.9.6)
   pry-rails
   rails (= 3.2.5)
+  rb-inotify (= 0.8.8)
   redcarpet
   rest-client (~> 1.6.7)
   rspec-rails (= 2.10.0)

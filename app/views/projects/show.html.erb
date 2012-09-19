@@ -27,25 +27,19 @@
             <!-- Carousel items -->
             <div class="carousel-inner">
               <div class="active item">
-                <div class="carouselPadding">
-                  <div class="projectBanner">
                     <%= image_tag(@project.picture, alt: @project.name) if @project.picture and find_asset @project.picture %>
-                  </div>
+              </div>
+              <div class="item">
+                <a href="#image2" data-toggle="modal"> <img src="http://placehold.it/400x250"/> <a>
+                <div class="modal fade" id="image2">
+                  <img src="http://placehold.it/400x250"/>
                 </div>
               </div>
               <div class="item">
-                <div class="carouselPadding">
-                  <%# image_tag(@project.picture, alt: @project.name, class: "projectBanner") if @project.picture and find_asset @project.picture %>
-                  <img src="http://placehold.it/350x150"/>
-                </div>
+                <img src="http://placehold.it/350x150" />
               </div>
               <div class="item">
-                <div class="carouselPadding">
-                  <%# image_tag(@project.picture, alt: @project.name, class: "projectBanner") if @project.picture and find_asset @project.picture %>
-                  <div class="projectBanner">
-                    <img src="http://placehold.it/350x150" />
-                  </div>
-                </div>
+                <img src="http://placehold.it/1000x1000" />
               </div>
             </div>
             <!-- Carousel nav -->
