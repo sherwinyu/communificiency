@@ -58,27 +58,34 @@ h1#project-banner {
 }
 
 $carouselHeight: 250px;
-.projectBanner {
-  // width: 100%;
-  text-align: middle;
-  max-height: $carouselHeight;
-
-  display: table-cell;
-  vertical-align: middle;
-  border: 1px red solid;
-}
-
-.projectBanner img {
-  border: 1px blue solid;
-  margin: 0 auto;
-  max-height: 100%;
-
-}
 
 .carouselPadding {
   height: $carouselHeight;
-  margin: 0 auto;
+  width: 500px;
   display: table;
+}
+
+.projectBanner {
+  text-align: middle;
+  max-height: $carouselHeight;
+  margin: 0 auto;
+  display: block; //-cell;
+  vertical-align: middle;
+  border: 1px red solid;
+  width: 500px;
+}
+
+
+.item {
+  height: 300px;
+}
+
+.item img {
+  margin: 0 auto;
+  width: auto;
+  // max-width: 600px;
+  // max-height: 250px;
+  max-width:100%; max-height:100%;
 }
 
 @mixin color-mask($opacity: .5, $color: black) {

@@ -1,4 +1,15 @@
 jQuery ->
+  filepicker.setKey('AoihJ1shDSAWocXhG7tOHz')
+
+  ###filepicker.getFile('image/*', 
+    multiple: true,
+    container: 'window',
+    services: [filepicker.SERVICES.COMPUTER]
+  , ->
+    $('#multiResult').html(JSON.stringify(response))
+  )
+  ###
+
   # alert rewardsURL
   # alert $('#rewards').data('url')
   # console.log $('#rewards').data( "url" )
