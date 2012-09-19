@@ -94,7 +94,7 @@ class ContributionsController < ApplicationController
 
       flash.notice = "Your contribution to #{@project.name} for $#{@contribution.amount} was successfully received! Look out for an email from us for details of your reward within the day. Thanks!"
       UserMailer.contribution_confirmation(@contribution).deliver
-      redirect_to @project
+      redirect_to project_path(@project, status: 'success')
     end
   end
 
