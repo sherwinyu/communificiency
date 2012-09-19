@@ -23,31 +23,40 @@
       <div class="hero-unit">
         <div class="group">
 
-          <div id="myCarousel" class="carousel slide" data-interval="0">
+          <div id="carouselBanner" class="carousel slide" data-interval="0">
             <!-- Carousel items -->
             <div class="carousel-inner">
-              <div class="active item">
-                    <%= image_tag(@project.picture, alt: @project.name) if @project.picture and find_asset @project.picture %>
-              </div>
-              <div class="item">
-                <a href="#image2" data-toggle="modal"> <img src="http://placehold.it/400x250"/> <a>
-                <div class="modal fade" id="image2">
-                  <img src="http://placehold.it/400x250"/>
+              <div class="item active">
+                <a href="#image0" data-toggle="modal">
+                  <%= image_tag("caseusBanner0.jpg", alt: @project.name) if @project.picture and find_asset @project.picture %>
+                </a>
+                <div class="modal fade" id="image0">
+                  <%= image_tag("caseusBanner0.jpg", alt: @project.name) if @project.picture and find_asset @project.picture %>
                 </div>
               </div>
               <div class="item">
-                <img src="http://placehold.it/350x150" />
+                <a href="#image1" data-toggle="modal">
+                  <%= image_tag("caseusBanner1.jpg", alt: @project.name) if @project.picture and find_asset @project.picture %>
+                </a>
+                <div class="modal fade" id="image1">
+                  <%= image_tag("caseusBanner1.jpg", alt: @project.name) if @project.picture and find_asset @project.picture %>
+                </div>
               </div>
               <div class="item">
-                <img src="http://placehold.it/1000x1000" />
+                <a href="#image2" data-toggle="modal">
+                  <%= image_tag("caseusBanner2.jpg", alt: @project.name) if @project.picture and find_asset @project.picture %>
+                </a>
+                <div class="modal fade" id="image2">
+                  <%= image_tag("caseusBanner2.jpg", alt: @project.name) if @project.picture and find_asset @project.picture %>
+                </div>
               </div>
             </div>
             <!-- Carousel nav -->
-            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            <a class="carousel-control left" href="#carouselBanner" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#carouselBanner" data-slide="next">&rsaquo;</a>
           </div>
           <%# image_tag(@project.picture, alt: @project.name, class: "project-banner") %>
-          <%= image_tag(@project.picture, alt: @project.name, class: "project-banner") if @project.picture and find_asset @project.picture %>
+          <%# image_tag(@project.picture, alt: @project.name, class: "project-banner") if @project.picture and find_asset @project.picture %>
           <div class="black-mask project-banner"></div>
           <h1 class="overlay" id="project-banner"><%# @project.name %></h1>
         </div>
