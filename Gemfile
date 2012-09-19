@@ -14,6 +14,7 @@ group :development, :test do
   gem 'rspec-rails', '2.10.0'
   gem 'guard-rspec', '0.5.5'
   gem 'pry', '~> 0.9.9.6'
+  gem 'pry-rails'
 end
 
 group :production do

@@ -17,12 +17,30 @@
       <div class="hero-unit">
         <div class="group">
 
-          <div id="myCarousel" class="carousel slide">
+          <div id="myCarousel" class="carousel slide" data-interval="0">
             <!-- Carousel items -->
             <div class="carousel-inner">
-              <div class="active item">…</div>
-              <div class="item">…</div>
-              <div class="item">…</div>
+              <div class="active item">
+                <div class="carouselPadding">
+                  <div class="projectBanner">
+                    <%= image_tag(@project.picture, alt: @project.name) if @project.picture and find_asset @project.picture %>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="carouselPadding">
+                  <%# image_tag(@project.picture, alt: @project.name, class: "projectBanner") if @project.picture and find_asset @project.picture %>
+                  <img src="http://placehold.it/350x150"/>
+                </div>
+              </div>
+              <div class="item">
+                <div class="carouselPadding">
+                  <%# image_tag(@project.picture, alt: @project.name, class: "projectBanner") if @project.picture and find_asset @project.picture %>
+                  <div class="projectBanner">
+                    <img src="http://placehold.it/350x150" />
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Carousel nav -->
             <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>

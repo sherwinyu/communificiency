@@ -57,8 +57,28 @@ h1#project-banner {
   height: 100%;
 }
 
-.project-banner {
-  width: 100%;
+$carouselHeight: 250px;
+.projectBanner {
+  // width: 100%;
+  text-align: middle;
+  max-height: $carouselHeight;
+
+  display: table-cell;
+  vertical-align: middle;
+  border: 1px red solid;
+}
+
+.projectBanner img {
+  border: 1px blue solid;
+  margin: 0 auto;
+  max-height: 100%;
+
+}
+
+.carouselPadding {
+  height: $carouselHeight;
+  margin: 0 auto;
+  display: table;
 }
 
 @mixin color-mask($opacity: .5, $color: black) {
