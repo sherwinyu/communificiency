@@ -4,6 +4,8 @@ jQuery ->
   # console.log $('#rewards').data( "url" )
   # TODO (syu) on inputContribution change, update SELECTED tag
 
+  $(".collapse").collapse('hide')
+
   $('#sharrre').sharrre
     share: 
       facebook: true,
