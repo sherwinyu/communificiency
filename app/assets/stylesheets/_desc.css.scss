@@ -12,6 +12,7 @@ $skyblue: #1a8bcb;
 $rewardsBarBG: #F4EAC6;
 $rewardsBarBG: $reallyLightYellow;
 $rewardsBarBG: white;
+$darkerGray: rgb(35, 35, 35);
 
 @mixin rounded($radius: 10px) {
   @include rounded-side(top, $radius);
@@ -76,16 +77,25 @@ $carouselHeight: 250px;
 }
 
 
+#carouselBanner {
+  padding: 15px;
+  background: $darkerGray;
+  @include border-radius(5px);
+}
+.carousel-inner {
+}
 .item {
   height: 300px;
+  // inline:
 }
 
 .item img {
+  display: block;
   margin: 0 auto;
   width: auto;
-  // max-width: 600px;
-  // max-height: 250px;
-  max-width:100%; max-height:100%;
+  @include border-radius(5px);
+  max-width:100%;
+  max-height:100%;
 }
 
 @mixin color-mask($opacity: .5, $color: black) {
