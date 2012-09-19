@@ -112,8 +112,6 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.7.1)
       slop (>= 2.4.4, < 3)
-    pry-rails (0.2.0)
-      pry
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -227,7 +225,6 @@ DEPENDENCIES
   meta-tags
   pg (= 0.12.2)
   pry (~> 0.9.9.6)
-  pry-rails
   rails (= 3.2.5)
   rb-inotify (= 0.8.8)
   redcarpet

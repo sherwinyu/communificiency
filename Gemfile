@@ -6,15 +6,13 @@ if File.file?(local_gemfile)
 end
 
 
-group :development do
-end
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.10.0'
   gem 'guard-rspec', '0.5.5'
   gem 'pry', '~> 0.9.9.6'
-  gem 'pry-rails'
+  # gem 'pry-rails'
 end
 
 group :production do
