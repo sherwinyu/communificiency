@@ -8,7 +8,7 @@ end
 
 
 group :development, :test do
-  gem 'sqlite3', '1.3.5'
+  gem 'sqlite3', '~>1.3.5'
   gem 'rspec-rails', '2.10.0'
   gem 'guard-rspec', '0.5.5'
   gem 'pry', '~> 0.9.9.6'
@@ -25,8 +25,8 @@ group :test do
   gem 'spork', '0.9.0'
   gem 'factory_girl_rails', '1.4.0'
   gem 'shoulda'
-  gem 'rb-inotify', '0.8.8'
-  gem 'libnotify', '0.5.9'
+  # gem 'rb-inotify', '0.8.8'
+  # gem 'libnotify', '0.5.9'
 end
 
 
