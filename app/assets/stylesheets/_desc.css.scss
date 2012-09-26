@@ -107,8 +107,14 @@ $carouselHeight: 250px;
 }
 
 
-.modal {
+.group .modal {
   z-index: -5;
+}
+
+.group .modal.in {
+  z-index: 10002;
+  width: 700px;
+  margin-left: -350px;
 }
 
 @mixin color-mask($opacity: .5, $color: black) {

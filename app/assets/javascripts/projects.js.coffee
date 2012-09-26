@@ -1,5 +1,5 @@
 jQuery ->
-  filepicker.setKey('AoihJ1shDSAWocXhG7tOHz')
+  # filepicker.setKey('AoihJ1shDSAWocXhG7tOHz')
 
   ###filepicker.getFile('image/*', 
     multiple: true,
