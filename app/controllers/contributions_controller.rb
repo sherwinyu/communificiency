@@ -2,7 +2,7 @@ class ContributionsController < ApplicationController
   # GET /contributions
   # GET /contributions.json
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_filter :require_confirmed!, only: [:new, :create, :edit, :update]
+  # before_filter :require_confirmed!, only: [:new, :create, :edit, :update]
   before_filter :require_admin!, only: [:index, :show]
   force_ssl :only => [:new, :create] if Rails.env.production?
 
