@@ -47,7 +47,7 @@ class Project < ActiveRecord::Base
 
   #TODO fix this
   def num_days_remaining
-   ((Time.at(1349627578) - Time.now) / 1.day).to_i
+   ((Time.at(1349627578) + 5.days - Time.now) / 1.day).to_i
   end
 
 end
