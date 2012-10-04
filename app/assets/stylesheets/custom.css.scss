@@ -311,7 +311,8 @@ footer ul li {
   display: inline;
   padding: 10px 5px 9px;
 }
-.step1 {
+
+#stepone .form {
   @extend .center;
   margin-top: 25px;
 }
@@ -428,6 +429,10 @@ footer ul li {
   // display: block;
 }
 
+#stepfour .form {
+  margin-left: 38%;
+  width: 20%;
+}
 
 
 
