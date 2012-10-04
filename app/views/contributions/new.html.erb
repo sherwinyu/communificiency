@@ -90,6 +90,15 @@
         <%= f.button :submit, "Pay", id: "stripePayButton", class: "btn-primary" %>
       </div>
 
+      <% unless current_user_signed_in? %>
+      <%= f.simple_fields_for User.new do |nested| %>
+        <%= nested.input :name %>
+        <%= nested.input :email %>
+        <%= nested.input :password %>
+        <%= nested.input :password_confirmation %>
+    <% end %>
+    <%end%>
+
 
 
 

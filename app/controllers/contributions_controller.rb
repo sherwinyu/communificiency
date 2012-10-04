@@ -1,7 +1,7 @@
 class ContributionsController < ApplicationController
   # GET /contributions
   # GET /contributions.json
-  before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_filter :authenticate_user!, only: [:edit, :update]
   # before_filter :require_confirmed!, only: [:new, :create, :edit, :update]
   before_filter :require_admin!, only: [:index, :show]
   force_ssl :only => [:new, :create] if Rails.env.production?
@@ -59,10 +59,17 @@ class ContributionsController < ApplicationController
 
     contrib_params = (session[:contrib_params] || {}).with_indifferent_access
     contrib_params.merge! params[:contribution] if params[:contribution]
+
+    unless current_user_signed_in?
+      @user = User.create params[:user]
+      
+    end
+
     contrib_params[:user] = current_user
 
     @contribution = @project.contributions.build contrib_params
     @payment = @contribution.build_payment amount: @contribution.amount
+
 
 
     unless @contribution.save && @payment.save

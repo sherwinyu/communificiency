@@ -6,6 +6,8 @@ class Contribution < ActiveRecord::Base
   belongs_to :project, inverse_of: :contributions
   belongs_to :reward, inverse_of: :contributions
 
+  accepts_nested_attributes_for :user
+
   validates :user, presence: true
 
   validates :project, presence: true
