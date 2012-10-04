@@ -61,8 +61,8 @@ class ContributionsController < ApplicationController
     contrib_params.merge! params[:contribution] if params[:contribution]
 
     unless current_user_signed_in?
-      @user = User.create params[:user]
-      
+      @user = User.create params[:contribution][:user]
+      sign_in @user
     end
 
     contrib_params[:user] = current_user
