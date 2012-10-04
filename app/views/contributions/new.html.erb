@@ -93,7 +93,7 @@
 
 
           <div class="form">
-          <%= f.simple_fields_for User.new do |nested| %>
+          <%= f.simple_fields_for @user do |nested| %>
             <%= nested.input :name %>
             <%= nested.input :email %>
             <%= nested.input :password %>

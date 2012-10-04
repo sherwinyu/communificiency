@@ -44,6 +44,8 @@ class ContributionsController < ApplicationController
     session[:contrib_params] = contrib_params
 
     @contribution = @project.contributions.build(contrib_params)
+    @user = current_user || User.new
+
   end
 
   skip_after_filter :store_location, only: :create
@@ -56,19 +58,20 @@ class ContributionsController < ApplicationController
     end
 
     provider = params[:contribution].delete :payment_transaction_provider
-
+    user_params = params[:contribution].delete :user
     contrib_params = (session[:contrib_params] || {}).with_indifferent_access
     contrib_params.merge! params[:contribution] if params[:contribution]
 
+    @contribution = @project.contributions.build contrib_params
+    @payment = @contribution.build_payment amount: @contribution.amount
+
     unless current_user_signed_in?
-      @user = User.create params[:contribution][:user]
+      @user = User.new user_params
+      render 'new' and return unless @user.save
       sign_in @user
     end
 
-    contrib_params[:user] = current_user
-
-    @contribution = @project.contributions.build contrib_params
-    @payment = @contribution.build_payment amount: @contribution.amount
+    @contribution.user = current_user
 
 
 
