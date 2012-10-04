@@ -85,7 +85,7 @@ FactoryGirl.define do
     short_description { FactoryGirl.generate :reward_short_description }
     long_description { FactoryGirl.generate :reward_long_description }
     minimum_contribution  { FactoryGirl.generate :reward_minimum_contribution }
-    limited_quantity 3
+    # limited_quantity 3
   end
 
   factory :contribution do

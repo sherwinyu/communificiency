@@ -6,8 +6,6 @@ class Contribution < ActiveRecord::Base
   belongs_to :project, inverse_of: :contributions
   belongs_to :reward, inverse_of: :contributions
 
-  accepts_nested_attributes_for :user
-
   validates :user, presence: true
 
   validates :project, presence: true
@@ -34,7 +32,7 @@ class Contribution < ActiveRecord::Base
   end
 
   def reward_quantity_sufficient
-    errors[:reward] << " '#{reward}' is no longer available!" unless reward && reward.limited_quantity && reward.quantity_remaining > 0
+    errors[:reward] << " '#{reward}' is no longer available!" if (reward && reward.limited_quantity? && reward.quantity_remaining == 0)
 
   end
 
