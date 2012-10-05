@@ -102,7 +102,7 @@ describe ContributionsController do
 
     describe "when signed in with unconfirmed user" do
       let(:prepare_session) { sign_in unconfirmed_user }
-      it { should redirect_to projects_path }
+      it { should respond_with :success }
     end
 
     specify { session[:contrib_params].with_indifferent_access.should == {amount: 0, project_id: project.id}.with_indifferent_access }
@@ -130,14 +130,18 @@ describe ContributionsController do
 
     describe "when signed in with unconfirmed user" do
       let(:prepare_session) { sign_in unconfirmed_user }
-      before { post :create, params }
-      it { should redirect_to projects_path }
+      it "should create a contribution and reward" do
+        Payment.any_instance.stub(:stripe_pay!).and_return(nil)
+        expect { post :create, params}.to  change(Contribution, :count).by(1)
+        expect { post :create, params}.to redirect_to project_path(project, status: 'success')
+      end
     end
 
-    let(:params) {{project_id: project.id, contribution: {payment_transaction_provider: "AMAZON"} }}
+    let(:params) {{project_id: project.id, contribution: {payment_transaction_provider: "STRIPE"} }}
     # before { post :create, params }
 
     # TODO(SYU) fix this test to actually use @contribution.payment.amazon_cbui_url
+=begin
     it "should redirect to the payment url" do
       post :create, params
       payment = Payment.new amount: reward.minimum_contribution
@@ -145,13 +149,13 @@ describe ContributionsController do
       url = payment.amazon_cbui_url Contribution.last
       response.should redirect_to url
     end
+=end
 
     describe "with valid params" do
       it "should create a contribution and reward" do
+        Payment.any_instance.stub(:stripe_pay!).and_return(nil)
         expect { post :create, params}.to  change(Contribution, :count).by(1)
-      end
-      it "should create a contribution and reward" do
-        expect { post :create, params}.to  change(Payment, :count).by(1)
+        expect { post :create, params}.to redirect_to project_path(project, status: 'success')
       end
     end
 
