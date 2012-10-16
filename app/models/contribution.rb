@@ -32,7 +32,7 @@ class Contribution < ActiveRecord::Base
   end
 
   def reward_quantity_sufficient
-    errors[:reward] << " '#{reward}' is no longer available!" if (reward && reward.limited_quantity? && reward.quantity_remaining == 0)
+    errors[:reward] << " '#{reward}' is no longer available!" if (reward && reward.limited_quantity? && reward.quantity_remaining < 0)
 
   end
 
