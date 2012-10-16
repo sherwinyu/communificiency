@@ -50,4 +50,8 @@ class Project < ActiveRecord::Base
    ((Time.at(1349627578) + 5.days - Time.now) / 1.day).to_i
   end
 
+  def active?
+    return num_days_remaining > 0
+  end
+
 end

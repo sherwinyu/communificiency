@@ -93,7 +93,11 @@
             <div class="statistic-num span6"><%=  @project.valid_contributions.size %> </div><div class="statistic-caption span6">contributors</div>
           </div>
           <div class="statistic row-fluid">
-            <div class="statistic-num span6"> <%= @project.num_days_remaining %> </div><div class="statistic-caption span6">days to go</div>
+            <% if @project.active? %>
+              <div class="statistic-num span6"> <%= @project.num_days_remaining %> </div><div class="statistic-caption span6">days to go</div>
+            <% else %>
+              <div class="statistic-num span6"> <%= @project.num_days_remaining %> </div><div class="statistic-caption span6">days to go. Project closed!</div>
+            <% end %>
           </div>
           <div class="divider">  </div>
           <h3 class="contribution-Ask"> Contribute to <%= @project.name%> <small> and get one of the following rewards! </small> </h3>
