@@ -2,7 +2,6 @@
   <fieldset>
     <legend> <%= @project %> </legend>
     <h3> Basic Info </h3>
-    <input type="filepicker" name="myName"/>
     <div class="projectBasicInfo">
       <%=  f.input :name                                     %>
       <%=  f.input :short_description, input_html: {class: "span8"}, hint: "A short description of your project" %>
