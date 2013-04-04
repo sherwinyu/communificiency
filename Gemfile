@@ -5,8 +5,6 @@ if File.file?(local_gemfile)
   self.instance_eval(Bundler.read_file(local_gemfile))
 end
 
-
-
 group :development, :test do
   gem 'sqlite3', '~>1.3.5'
   gem 'rspec-rails', '2.10.0'
@@ -40,7 +38,7 @@ group :assets do
 end
 
 gem 'bootstrap-sass', '~> 2.0.3'
-gem 'rails', '3.2.5'
+gem 'rails', '3.2.13'
 gem 'jquery-rails', '~> 2.0.0'
 gem 'rest-client', '~> 1.6.7'
 

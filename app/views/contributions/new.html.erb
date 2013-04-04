@@ -55,7 +55,7 @@
               </div>
             </div>
             <div id="chooseReward">
-              <p>Choose reward: <%= f.association :reward, collection:  [Reward.new(name: "No reward -- I just want to contribute")] + @project.rewards,  validate: true, selected: @contribution.reward ? @contribution.reward.id : nil, label: false,  %> 
+              <p>Choose reward: <%= f.association :reward, collection: @project.rewards,  validate: true, selected: @contribution.reward ? @contribution.reward.id : nil, label: false  %> 
             If the reward you want has already been claimed (grayed out), and you really want it, email us at <%= mail_to "team@communificiency.com", "team@communificiency.com" %> and we'll see if there's anything we can do.
             </p>
           </div>
