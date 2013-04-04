@@ -4,6 +4,7 @@ class ContributionsController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update]
   # before_filter :require_confirmed!, only: [:new, :create, :edit, :update]
   before_filter :require_admin!, only: [:index, :show]
+  before_filter :only_active_projects, only: [:new]
   force_ssl :only => [:new, :create] if Rails.env.production?
 
   force_ssl only: [:new, :create]
@@ -167,6 +168,11 @@ class ContributionsController < ApplicationController
   def require_confirmed!
     link = '<a href="/users/confirmation/new">More information</a>'
     redirect_to projects_path, notice: "Please confirm your email first. #{link}.".html_safe unless current_user.confirmed?
+  end
+
+  def only_active_projects
+    flash.alert = "Sorry, that project is no longer active. If you have any questions please contact team@communificiency.com"
+    redirect_to :root
   end
 
   # PUT /contributions/1
